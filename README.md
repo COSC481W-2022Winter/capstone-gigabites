@@ -14,9 +14,9 @@ Meeting Time: Saturday 1300 (1pm)
 
 This is my junior year at EMU, I am majoring in computer science. I spend most of my time coding, playing video games, biking and hiking.
 
-##### Sean Mick - Deputy Team Lead
+##### Brendan Klein - Deputy Team Lead
 
-Hey, I'm Sean. I'm a Senior at EMU with only a few more semesters left to go. I'm very excited to be working on this project and with my team! Most of my time outside of my studies are spent playing video games, reading, or painting. 
+Hello!  My name is Brendan and I am a senior here at Eastern Michigan University.  This is my last semester here and I am very excited to work with my group this semester to work through this project to gain more knowledge for my future endeavors.
 
 ##### Megan Griffin - Team Member 
 
@@ -25,10 +25,6 @@ This is my last semester at EMU. I will be graduating with a bachelor’s in dat
 ##### Mallory Dawes - Team Member
 
 I am a Junior at EMU and I am majoring in Computer Science. I spend most of my time outdoors and I enjoy hiking, traveling, and eating.
-
-##### Brendan Klein - Team Member
-
-Hello!  My name is Brendan and I am a senior here at Eastern Michigan University.  This is my last semester here and I am very excited to work with my group this semester to work through this project to gain more knowledge for my future endeavors.
 
 ##### Abdullah Najid - Team Member
 
