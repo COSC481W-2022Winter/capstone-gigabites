@@ -1,4 +1,4 @@
-# The Meal Preppers
+# Team Name: The Meal Preppers
 
 ### Project Description:
 
