@@ -1,0 +1,4 @@
+{
+    "getUsers": "http://63.250.42.252:3001/getUsers",
+    "createUsers": "http://63.250.42.252:3001/createUser"
+}
