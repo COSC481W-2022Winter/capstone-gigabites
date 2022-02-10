@@ -1,3 +1,6 @@
+//Credit to Code Base URL: https://www.youtube.com/watch?v=I7EDAR2GRVo
+//Modified By: Brendan Klein (bdk99)
+
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";

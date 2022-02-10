@@ -1,3 +1,5 @@
+//Credit to Code Base URL: https://www.youtube.com/watch?v=I7EDAR2GRVo
+
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
