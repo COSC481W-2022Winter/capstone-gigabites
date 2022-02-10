@@ -1,4 +1,0 @@
-{
-    "port": "3001",
-    "db": "mongodb+srv://group4:TheMealPrEppers!$@cluster0.f0q05.mongodb.net/merntutorial?retryWrites=true&w=majority"
-}
