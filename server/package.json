@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "mongoose": "^6.1.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "spellchecker": "^3.7.1"
   },
   "description": ""
 }
