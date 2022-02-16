@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "client": "cd ~/TechStackSetup/client && npm start",
+    "client": "cd ~/capstone-gigabites/client && npm start",
     "dev": "concurrently -n 'Server,Client' -c 'red,green' \"npm run start\" \"npm run client\""
   },
   "keywords": [],
