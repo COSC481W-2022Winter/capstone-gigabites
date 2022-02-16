@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.table
+{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  border:2px solid black;
+}
+
+tr
+{
+  border:1px solid black;
+}
+
+th
+{
+  border:1px solid black;
+  padding-left:15px;
+  padding-right:15px;
+}
