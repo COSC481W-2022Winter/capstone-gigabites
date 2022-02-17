@@ -24,7 +24,6 @@ function App() {
 
   const createUser = () => {
     Axios.post((`${createUsers}`), {
-
       name,
       username,
       email,
@@ -46,7 +45,25 @@ function App() {
     });
   };
 
-  return (
+
+function validation()
+{
+  var name = document.getElementById("name").value;
+  var username = document.getElementById("username").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var question = document.getElementById("question").value;
+  var answer = document.getElementById("answer").value;
+
+  if(name=='' || username=='' || email=='' || password=='' || question=='' || answer=='')
+  { return; }
+  else 
+  { 
+      createUser(); 
+  }
+} 
+
+  return ( 
     
     // { This DIV displays a list of users one by one from the database until there are no more document records left. }
    /*<div className="App">
@@ -67,34 +84,70 @@ function App() {
 
       </div>
     */
-      <div className="App">
-      <div class ="header">
-        <h1>User Registration</h1>
-      </div>
+      <form>
+        <div className="App" >
+          <div class ="header">
+            <h1>Sign Up</h1>
+            <h3>Prepare to Enter a World Full of Delicious Bites</h3>
+          </div>
  
-      <app>
-        {/*Name*/}
-        <label className="label">Name</label>
-        <input type="text" onChange={(event) => {setName(event.target.value);}} />
-        {/*Username*/}
-        <label className="label">Username</label>
-        <input type="text" onChange={(event) => {setUsername(event.target.value);}} />
-        {/*Email*/}
-        <label className="label">Email</label>
-        <input type="text" onChange={(event) => {setEmail(event.target.value);}} />
-        {/*Password*/}
-        <label className="label">Password</label>
-        <input type="text" onChange={(event) => {setPassword(event.target.value);}} />
-        {/*Security Question*/}
-        <label className="label">Security Question</label>
-        <input type="text" onChange={(event) => {setQuestion(event.target.value);}} />
-        {/*Security Question Answer */}
-        <label className="label">Security Question Answer</label>
-        <input type="text" onChange={(event) => {setAnswer(event.target.value);}} />
-        
-        <button onClick={createUser} className="btn"> Submit </button>
-      </app>
-    </div>
+          <div className="border">
+            <table>
+              <tr>
+                <td>
+                  {/*Name*/}
+                  <label className="label">Name</label>
+                  <input type="text" id='name' onChange={(event) => {setName(event.target.value);}} required/>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  {/*Username*/}
+                  <label className="label">Username</label>
+                  <input type="text" id='username' onChange={(event) => {setUsername(event.target.value);}} required/>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  {/*Email*/}
+                  <label className="label">Email</label>
+                  <input type="text" id='email' onChange={(event) => {setEmail(event.target.value);}} required/>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  {/*Password*/}
+                  <label className="label">Password</label>
+                  <input type="text" id='password' onChange={(event) => {setPassword(event.target.value);}} required/>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  {/*Security Question*/}
+                  <label className="label">Security Question</label>
+                  <input type="text" id='question' onChange={(event) => {setQuestion(event.target.value);}} required/>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  {/*Security Question Answer */}
+                  <label className="label">Security Question Answer</label>
+                  <input type="text" id='answer' onChange={(event) => {setAnswer(event.target.value);}} required/>
+                </td>
+              </tr>
+
+            </table>
+
+            <button onClick={validation} className="btn"> Submit </button>
+            </div>
+
+        </div>
+      </form>
   );
 }
 
