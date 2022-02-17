@@ -6,28 +6,35 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   username: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
-    required: true,
+    match: /(?=.*[a-zA-Z])(?=.*[0-9]+).*/,
   },
   question: {
     type: String,
-    required: true,
   },
   answer: {
     type: String,
-    required: true,
   },
+  bio: {
+    type: String,
+    default:'This is my awesome default bio',
+  },
+  profilePicture: {
+    type: String,
+    default: '/root/capstone-gigabites/client/public/A.png',
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 const UserModel = mongoose.model("users", UserSchema);
