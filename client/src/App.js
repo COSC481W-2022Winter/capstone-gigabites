@@ -49,9 +49,9 @@ function App() {
   return (
     
     // { This DIV displays a list of users one by one from the database until there are no more document records left. }
-    <div className="App">
+   /*<div className="App">
       <div className="usersDisplay">
-        {listOfUsers.map((user) => {
+         {listOfUsers.map((user) => {
           return (
             <div>
               <h1>Name: {user.name}</h1>
@@ -64,38 +64,36 @@ function App() {
             </div>
           );
         })}
+
       </div>
-      <table className="table">
-        <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Password</th>
-          <th>Security Question</th>
-          <th>Security Question Answer</th>
-        </tr>
-        <tr>
-          <td> {/*Name*/}
-            <input type="text" onChange={(event) => {setName(event.target.value);}} />
-          </td> 
-          <td> {/*Username*/}
-            <input type="text" onChange={(event) => {setUsername(event.target.value);}} />
-          </td>
-          <td> {/*Email*/}
-            <input type="text" onChange={(event) => {setEmail(event.target.value);}} />
-          </td>
-          <td> {/*Password*/}
-            <input type="text" onChange={(event) => {setPassword(event.target.value);}} />
-          </td>
-          <td> {/*Security Question*/}
-            <input type="text" onChange={(event) => {setQuestion(event.target.value);}} />
-          </td>
-          <td> {/*Security Question Answer */}
-            <input type="text" onChange={(event) => {setAnswer(event.target.value);}} />
-          </td>
-        </tr>
-      </table>
-        <button onClick={createUser}> Create User </button>
+    */
+      <div className="App">
+      <div class ="header">
+        <h1>User Registration</h1>
+      </div>
+ 
+      <app>
+        {/*Name*/}
+        <label className="label">Name</label>
+        <input type="text" onChange={(event) => {setName(event.target.value);}} />
+        {/*Username*/}
+        <label className="label">Username</label>
+        <input type="text" onChange={(event) => {setUsername(event.target.value);}} />
+        {/*Email*/}
+        <label className="label">Email</label>
+        <input type="text" onChange={(event) => {setEmail(event.target.value);}} />
+        {/*Password*/}
+        <label className="label">Password</label>
+        <input type="text" onChange={(event) => {setPassword(event.target.value);}} />
+        {/*Security Question*/}
+        <label className="label">Security Question</label>
+        <input type="text" onChange={(event) => {setQuestion(event.target.value);}} />
+        {/*Security Question Answer */}
+        <label className="label">Security Question Answer</label>
+        <input type="text" onChange={(event) => {setAnswer(event.target.value);}} />
+        
+        <button onClick={createUser} className="btn"> Submit </button>
+      </app>
     </div>
   );
 }
