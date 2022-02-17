@@ -24,10 +24,16 @@ app.get("/getUsers", (req, res) => {
 
 app.post("/createUser", async (req, res) => {
   const user = req.body;
+  //function to check if username exists 
+  const existUsername = await UserModel.findOne({ username: req.body.username})
+  if (existUsername){
+    console.log('username taken')
+  }
+  else{
   const newUser = new UserModel(user);
   await newUser.save();
-
   res.json(user);
+  }
 });
 
 app.listen(`${port}`, () => {
