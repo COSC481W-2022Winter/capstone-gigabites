@@ -4,7 +4,3 @@ client/node_modules/
 client/node_modules/*
 client/src/config.json
 server/config.json
-client/package.json
-client/package-lock.json
-server/package.json
-server/package-lock.json
