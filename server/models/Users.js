@@ -15,7 +15,6 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    match: /(?=.*[a-zA-Z])(?=.*[0-9]+).*/,
   },
   question: {
     type: String,
