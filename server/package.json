@@ -16,7 +16,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "mongoose": "^6.1.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "react-router-dom": "^6.2.1",
+    "styled-components": "^5.3.3"
   },
   "description": ""
 }

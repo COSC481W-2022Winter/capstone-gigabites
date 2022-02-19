@@ -1,20 +1,39 @@
 //Credit to Code Base URL: https://www.youtube.com/watch?v=I7EDAR2GRVo
 
+//A model used to keep the document records in the database consistent
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
-  },
-  age: {
-    type: Number,
-    required: true,
   },
   username: {
     type: String,
-    required: true,
   },
+  email: {
+    type: String,
+  },
+  password: {
+    type: String,
+  },
+  question: {
+    type: String,
+  },
+  answer: {
+    type: String,
+  },
+  bio: {
+    type: String,
+    default:'This is my awesome default bio',
+  },
+  profilePicture: {
+    type: String,
+    default: '/root/capstone-gigabites/client/public/A.png',
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 const UserModel = mongoose.model("users", UserSchema);
