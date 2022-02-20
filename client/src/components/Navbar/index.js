@@ -9,6 +9,9 @@ const navbar= () =>{
 	  <li className ="right">
 		<Link to="/signup">Sign Up</Link>
 	  </li>
+      <li class ="right">
+          <Link to="/login">Login</Link>
+      </li>
 	  <li>
 		<Link to="/profile">Profile</Link>
 	  </li>
