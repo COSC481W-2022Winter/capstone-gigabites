@@ -84,7 +84,7 @@ function SignUp() {
       */
         <form>
           <div className="App" >
-            <div class ="header">
+            <div className ="header">
               <h1>Sign Up</h1>
               <h3>Prepare to Enter a World Full of Delicious Bites</h3>
             </div>
