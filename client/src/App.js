@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route}
 import Home from './pages';
 import Profile from './pages/profile';
 import SignUp from './pages/signup';
+import Login from './pages/login';
 
   
 function App() {
@@ -16,6 +17,7 @@ return (
         <Route exact path='/' exact element={<Home />} />
         <Route path='/signup' element={<SignUp/>} />
         <Route path='/profile' element={<Profile/>} />
+        <Route path='/login' element={<Login/>} />
     </Routes>
     </Router>
 );
