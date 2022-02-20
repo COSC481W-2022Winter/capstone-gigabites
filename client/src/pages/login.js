@@ -6,7 +6,7 @@ function login() {
     <form>
       <div className="App" >
         <div class="header">
-          <h1>Sign In</h1>
+          <h1>Login</h1>
           <h3>Welcome Back</h3>
         </div>
 
