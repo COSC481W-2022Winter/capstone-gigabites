@@ -29,7 +29,7 @@ function login() {
             </tr>
           </table>
 
-          <button className="btn"> Submit </button>
+          <button className="btn"> Login </button>
         </div>
 
       </div>
