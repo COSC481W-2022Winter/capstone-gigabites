@@ -30,6 +30,8 @@ function login() {
           </table>
 
           <button className="btn"> Login </button>
+
+          <button className="btn"> Forgot Password </button>
         </div>
 
       </div>
