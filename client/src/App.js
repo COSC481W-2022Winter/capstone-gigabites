@@ -13,7 +13,7 @@ return (
     <Router>
     <Navbar />
     <Routes>
-        <Route exact path='/' exact element={<Home />} />
+        <Route path='/' exact element={<Home />} />
         <Route path='/signup' element={<SignUp/>} />
         <Route path='/profile' element={<Profile/>} />
     </Routes>
