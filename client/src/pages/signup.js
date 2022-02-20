@@ -54,7 +54,7 @@ function SignUp() {
     var question = document.getElementById("question").value;
     var answer = document.getElementById("answer").value;
   
-    if(name=='' || username=='' || email=='' || password=='' || question=='' || answer=='')
+    if(name==='' || username==='' || email==='' || password==='' || question==='' || answer==='')
     { return; }
     else 
     { 
