@@ -91,53 +91,65 @@ function SignUp() {
    
             <div className="border">
               <table>
-                <tr>
-                  <td>
-                    {/*Name*/}
-                    <label className="label">Name</label>
-                    <input type="text" id='name' onChange={(event) => {setName(event.target.value);}} required/>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>
+                      {/*Name*/}
+                      <label className="label">Name</label>
+                      <input type="text" id='name' onChange={(event) => {setName(event.target.value);}} required/>
+                    </td>
+                  </tr>
+                </tbody>
   
-                <tr>
-                  <td>
-                    {/*Username*/}
-                    <label className="label">Username</label>
-                    <input type="text" id='username' onChange={(event) => {setUsername(event.target.value);}} required/>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>
+                      {/*Username*/}
+                      <label className="label">Username</label>
+                      <input type="text" id='username' onChange={(event) => {setUsername(event.target.value);}} required/>
+                    </td>
+                  </tr>
+                </tbody>
   
-                <tr>
-                  <td>
-                    {/*Email*/}
-                    <label className="label">Email</label>
-                    <input type="text" id='email' onChange={(event) => {setEmail(event.target.value);}} required/>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>
+                      {/*Email*/}
+                      <label className="label">Email</label>
+                      <input type="text" id='email' onChange={(event) => {setEmail(event.target.value);}} required/>
+                    </td>
+                  </tr>
+                </tbody>
   
-                <tr>
-                  <td>
-                    {/*Password*/}
-                    <label className="label">Password</label>
-                    <input type="text" id='password' onChange={(event) => {setPassword(event.target.value);}} required/>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>
+                      {/*Password*/}
+                      <label className="label">Password</label>
+                      <input type="text" id='password' onChange={(event) => {setPassword(event.target.value);}} required/>
+                    </td>
+                  </tr>
+                </tbody>
   
-                <tr>
-                  <td>
-                    {/*Security Question*/}
-                    <label className="label">Security Question</label>
-                    <input type="text" id='question' onChange={(event) => {setQuestion(event.target.value);}} required/>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>
+                      {/*Security Question*/}
+                      <label className="label">Security Question</label>
+                      <input type="text" id='question' onChange={(event) => {setQuestion(event.target.value);}} required/>
+                    </td>
+                  </tr>
+                </tbody>
   
-                <tr>
-                  <td>
-                    {/*Security Question Answer */}
-                    <label className="label">Security Question Answer</label>
-                    <input type="text" id='answer' onChange={(event) => {setAnswer(event.target.value);}} required/>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>
+                      {/*Security Question Answer */}
+                      <label className="label">Security Question Answer</label>
+                      <input type="text" id='answer' onChange={(event) => {setAnswer(event.target.value);}} required/>
+                    </td>
+                  </tr>
+                </tbody>
   
               </table>
   
