@@ -2,6 +2,7 @@
 
 //A model used to keep the document records in the database consistent
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -33,6 +34,17 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  }
+});
+
+UserSchema.pre('save', async function (next) {
+  try{
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+    next();
+  } catch (error) {
+    next(error);
   }
 });
 
