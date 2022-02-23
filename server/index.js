@@ -18,34 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 mongoose.connect(`${db}`);
+var compareResult;
 
-var hash;
-
-
-
-
-
-// const User = mongoose.model('users', 'UserModel');
-// User.find(function (err, user) {
-//   if (err) return handleError(err);
-//   console.log(user);
-// } )
-
-
-// var info = UserModel.findOne({username: 'bklein'});
-// console.log("***************start***************");
-// console.log(info);
-// console.log("***************end***************");
-
-app.get("/getUsers", (req, res) => {
-  UserModel.find({}, (err, result) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(result);
-    }
-  });
-});
 
 app.post("/createUser", async (req, res) => {
   const user = req.body;
@@ -61,37 +35,31 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
-router.post('/passwordValidation', (req, res) => {
+app.post("/passwordValidation", (req, res) => {
   console.log("Calling function");
   const output = req.body;
   console.log(output.password);
+  console.log(output);
 
-  var user_name = req.body.username;
-  var password = req.body.password;
-  console.log("User name = "+user_name+", password is " + password);
-  res.end("yes");
+  UserModel.findOne({ username: output.username }, function (err, user) {  //Handle error if user does not exist in database
+    if (err) return handleError(err);
+    console.log('%s', user.password);
+    hash = user.password;
+
+    var password = output.password;
+    bcrypt.compare(password, hash, function(err, result) {
+      if (err) return handleError(err);
+      console.log('passwordMatch: ' + result);
+
+      compareResult = result;
+    });
+  });
 });
-
-// app.post("/passwordValidation", (req, res) => {
-//   console.log("Calling function");
-//   const output = req.body;
-//   console.log(output.password);
-
-//   UserModel.findOne({ username: output.username }, function (err, user) {
-//     if (err) return handleError(err);
-//     console.log('%s', user.password);
-//     hash = user.password;
-
-//     var password = output.password;
-//     bcrypt.compare(password, hash, function(err, result) {
-//       console.log('passwordMatch: ' + result);
-
-//       res("Hello");
-//       res.send
-//     });
-//   });
-
   
+
+app.get("/getPassStatus", (req, res) => {
+  res.send(compareResult);
+});
 
   
   //function to check if username exists 
@@ -104,7 +72,6 @@ router.post('/passwordValidation', (req, res) => {
   // await newUser.save();
   // res.json(user);
   // }
-// });
 
 app.listen(`${port}`, () => {
   console.log("SERVER RUNS PERFECTLY!");

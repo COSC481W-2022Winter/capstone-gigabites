@@ -1,12 +1,8 @@
 import "../App.css";
-import React, { useState } from "react";
-// import Axios from "axios";
-const {passwordCompare} = require('./config.json');
-// const bcrypt = require('bcrypt');
+import React, { useEffect, useState } from "react";
+const {passwordCompare, getPassStatus} = require('./config.json');
 
 const axios = require('axios')
-
-
 
 function Login() {
 
@@ -20,11 +16,22 @@ function Login() {
       password
     })
     .then(function (data) {
-      if(data === 'yes') {
+      console.log('Displaying Data on Client'+data);
+      if(data === true) {
         alert("login success");
       }
     })
-};
+  };
+
+  useEffect(() => {
+    axios.get(`${getPassStatus}`).then((response) => {
+      console.log(response.data);
+      if(response.data === true) {
+        alert("login success");
+      }
+    });
+
+  }, []);
 
   // const passwordValidation = () => {
   //   Axios.post(`${passwordCompare}`, {
@@ -79,7 +86,7 @@ function Login() {
               <td>
                   {/*Password*/}
                   <label className="label">Password</label>
-                  <input type="text" id='password' onChange={(event) => {setPassword(event.target.value);}} required/>
+                  <input type="password" id='password' onChange={(event) => {setPassword(event.target.value);}} required/>
                 </td>
               </tr>
             </tbody>
@@ -88,7 +95,7 @@ function Login() {
 
           <button onClick={validation} className="btn"> Login </button>
 
-          <button  className="btn"> Forgot Password </button>
+          <button className="btn"> Forgot Password </button>
         </div>
 
       </div>
