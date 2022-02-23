@@ -42,7 +42,12 @@ app.post("/passwordValidation", (req, res) => {
   console.log(output);
 
   UserModel.findOne({ username: output.username }, function (err, user) {  //Handle error if user does not exist in database
-    if (err) return handleError(err);
+    
+    if (err) {
+      compareResult = false;
+      return compareResult;
+    }
+
     console.log('%s', user.password);
     hash = user.password;
 
