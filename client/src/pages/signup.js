@@ -1,8 +1,8 @@
 //Credit to Code Base URL: https://www.youtube.com/watch?v=I7EDAR2GRVo
 import "../App.css";
 import React,{ useState, useEffect } from "react";
-import Axios from "axios";
-const {getUsers, createUsers} = require('./config.json');
+import axios from "axios";
+const {getUnique, createUsers} = require('./config.json');
 
 function SignUp() 
 {
@@ -16,14 +16,8 @@ function SignUp()
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
   
-    useEffect(() => {
-      Axios.get(`${getUsers}`).then((response) => {
-        setListOfUsers(response.data);
-      });
-    }, []);
-  
     const createUser = () => {
-      Axios.post((`${createUsers}`), {
+      axios.post((`${createUsers}`), {
         name,
         username,
         email,
@@ -44,6 +38,21 @@ function SignUp()
         ]);
       });
     };
+
+    useEffect(() => {
+      axios.get(`${getUnique}`).then((response) => {
+        console.log(response.data);
+
+        if(response.data === true) {
+          console.log('Signup successful!');
+          alert("Signup successful!");
+        }
+        else if(response.data === false) {
+          console.log("Username already taken!  Please try another username!");
+          alert ("Username already taken!  Please try another username!");
+        }
+      });
+    }, []);
 
     function checkEmail(email)
     {

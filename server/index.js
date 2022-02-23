@@ -19,20 +19,30 @@ app.use(bodyParser.json());
 
 mongoose.connect(`${db}`);
 var compareResult;
+var uniqueUser;
 
 
 app.post("/createUser", async (req, res) => {
   const user = req.body;
+  
+  if(user.password == '')
+    return;
   //function to check if username exists 
   const existUsername = await UserModel.findOne({ username: req.body.username })
   if (existUsername) {
-    console.log('username taken')
+    console.log(`Username ${user.username} already in use!  Rejecting user entry`)
+    uniqueUser=false;
   }
   else {
     const newUser = new UserModel(user);
     await newUser.save();
-    res.json(user);
+    uniqueUser=true;
+
   }
+});
+
+app.get("/getUnique", (req, res) => {
+  res.send(uniqueUser);
 });
 
 app.post("/passwordValidation", (req, res) => {
@@ -66,17 +76,6 @@ app.get("/getPassStatus", (req, res) => {
   res.send(compareResult);
 });
 
-  
-  //function to check if username exists 
-  // const existUsername = await UserModel.findOne({ username: req.body.username})
-  // if (existUsername){
-  //   console.log('username taken')
-  // }
-  // else{
-  // const newUser = new UserModel(user);
-  // await newUser.save();
-  // res.json(user);
-  // }
 
 app.listen(`${port}`, () => {
   console.log("SERVER RUNS PERFECTLY!");
