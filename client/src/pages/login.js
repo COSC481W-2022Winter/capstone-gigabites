@@ -21,9 +21,10 @@ function Login() {
   useEffect(() => {
     axios.get(`${getPassStatus}`).then((response) => {
       console.log(response.data);
-      if(response.data === true) {
+      if(response.data === true) 
         alert("login success");
-      }
+      else if(response.data === false)
+        alert ("Your username does not match this passcode. Try again");
     });
 
   }, []);
@@ -39,18 +40,6 @@ function Login() {
       passwordValidation(); 
     }
   }
-// creates alerts
-function userpasswordMatch() { 
-  if (passwordMatch == false)  
-  {
-    alert ("Your username does not match this passcode. Try again");
-  }
-  else if (passwordMatch == true)
-  {
-    alert('Login Success');
-  }
-}
-
 
   return (
     
