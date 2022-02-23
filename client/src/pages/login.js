@@ -1,7 +1,6 @@
 import "../App.css";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-var passwordMatch = false;
 const {passwordCompare, getPassStatus} = require('./config.json');
 
 const axios = require('axios')
