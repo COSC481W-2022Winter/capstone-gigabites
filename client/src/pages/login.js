@@ -1,42 +1,85 @@
 import "../App.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+var passwordMatch = false;
+const {passwordCompare, getPassStatus} = require('./config.json');
 
-function login() {
+const axios = require('axios')
+
+function Login() {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  var passwordValidation = () => {
+    axios.post(`${passwordCompare}`, {
+      username,
+      password
+    })
+  };
+
+  useEffect(() => {
+    axios.get(`${getPassStatus}`).then((response) => {
+      console.log(response.data);
+      if(response.data === true) 
+        alert("login success");
+      else if(response.data === false)
+        alert ("Your username does not match this passcode. Try again");
+    });
+
+  }, []);
+
+  function validation() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    if(username==='' || password==='')
+    { return; }
+    else 
+    { 
+      passwordValidation(); 
+    }
+  }
+
   return (
-    <form>
+    
       <div className="App" >
-        <div class="header">
+        <div className="header">
           <h1>Login</h1>
           <h3>Welcome Back</h3>
         </div>
 
         <div className="border">
-          <table>
-            <tr>
-              <td>
-                {/*Username*/}
-                <label className="label">Username</label>
-                <input type="text" id='username'/>
-              </td>
-            </tr>
+          <form>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    {/*Username*/}
+                    <label className="label">Username</label>
+                    <input type="text" id='username' onChange={(event) => {setUsername(event.target.value);}} required/>
+                  </td>
+                </tr>
+              </tbody>
 
-            <tr>
-              <td>
-                {/*Password*/}
-                <label className="label">Password</label>
-                <input type="text" id='password' />
-              </td>
-            </tr>
-          </table>
+              <tbody>
+              <tr>
+                <td>
+                    {/*Password*/}
+                    <label className="label">Password</label>
+                    <input type="password" id='password' onChange={(event) => {setPassword(event.target.value);}} required/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          
 
-          <button className="btn"> Login </button>
-
-          <button className="btn"> Forgot Password </button>
+            <button onClick={validation} className="btn"> Login </button>
+            <Link to="/resetPassword" className="btn">Forgot Password</Link>
+          </form>
         </div>
-
       </div>
-    </form>
   );
 }
 
-export default login;
+export default Login;
