@@ -5,36 +5,73 @@ const app = express();
 const mongoose = require("mongoose");
 const UserModel = require("./models/Users");
 const cors = require("cors");
-const {port, db} = require('./config.json');
+const { port, db } = require('./config.json');
+const bcrypt = require('bcrypt');
+const bodyParser = require("body-parser");
+const router = express.Router();
+app.use("/",router);
 
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(`${db}`);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get("/getUsers", (req, res) => {
-  UserModel.find({}, (err, result) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(result);
-    }
-  });
-});
+mongoose.connect(`${db}`);
+var compareResult;
+
 
 app.post("/createUser", async (req, res) => {
   const user = req.body;
   //function to check if username exists 
-  const existUsername = await UserModel.findOne({ username: req.body.username})
-  if (existUsername){
+  const existUsername = await UserModel.findOne({ username: req.body.username })
+  if (existUsername) {
     console.log('username taken')
   }
-  else{
-  const newUser = new UserModel(user);
-  await newUser.save();
-  res.json(user);
+  else {
+    const newUser = new UserModel(user);
+    await newUser.save();
+    res.json(user);
   }
 });
+
+app.post("/passwordValidation", (req, res) => {
+  console.log("Calling function");
+  const output = req.body;
+  console.log(output.password);
+  console.log(output);
+
+  UserModel.findOne({ username: output.username }, function (err, user) {  //Handle error if user does not exist in database
+    if (err) return handleError(err);
+    console.log('%s', user.password);
+    hash = user.password;
+
+    var password = output.password;
+    bcrypt.compare(password, hash, function(err, result) {
+      if (err) return handleError(err);
+      console.log('passwordMatch: ' + result);
+
+      compareResult = result;
+    });
+  });
+});
+  
+
+app.get("/getPassStatus", (req, res) => {
+  res.send(compareResult);
+});
+
+  
+  //function to check if username exists 
+  // const existUsername = await UserModel.findOne({ username: req.body.username})
+  // if (existUsername){
+  //   console.log('username taken')
+  // }
+  // else{
+  // const newUser = new UserModel(user);
+  // await newUser.save();
+  // res.json(user);
+  // }
 
 app.listen(`${port}`, () => {
   console.log("SERVER RUNS PERFECTLY!");
