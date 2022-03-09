@@ -46,19 +46,18 @@ app.get("/getUnique", (req, res) => {
 });
 
 app.post("/passwordValidation", (req, res) => {
-  console.log("Calling function");
   const output = req.body;
   console.log(output.password);
   console.log(output);
 
-  UserModel.findOne({ username: output.username }, function (err, user) {  //Handle error if user does not exist in database
+  UserModel.findOne({ username: output.username }, function (err, user) {
     
-    if (err) {
+    console.log(user);
+    if (err || user == null) {
       compareResult = false;
-      return compareResult;
+      res.send(compareResult);
     }
-
-    console.log('%s', user.password);
+    else{
     hash = user.password;
 
     var password = output.password;
@@ -67,15 +66,11 @@ app.post("/passwordValidation", (req, res) => {
       console.log('passwordMatch: ' + result);
 
       compareResult = result;
+      res.send(compareResult);
     });
+  }
   });
 });
-  
-
-app.get("/getPassStatus", (req, res) => {
-  res.send(compareResult);
-});
-
 
 app.listen(`${port}`, () => {
   console.log("SERVER RUNS PERFECTLY!");
