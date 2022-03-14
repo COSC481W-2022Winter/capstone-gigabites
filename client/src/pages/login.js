@@ -62,6 +62,7 @@ class Login extends React.Component {
     {
       return (
         <div className="App">
+          	{/*Imports navbar to the top of the page*/}
           	<Navbar />
           <div className="header">
             <h1>Login</h1>

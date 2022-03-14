@@ -12,16 +12,16 @@ class logout extends React.Component {
       this.state = { redir: false };
     }
 
+    //Removes username from session variables... Effectively logging user out
     LogoutClick() {
         alert('You logged out!');
         ReactSession.remove("username");
         this.setState({redir: true});
-        
     }
 
     render(){
         return(
-           
+           //Creates the logout button object and styles it to the right side of the navbar
         <li className="right">
              { this.state.redir  ? (<Navigate  to="../" />) : null }
             <input type="submit" value="Logout" onClick={this.LogoutClick.bind(this)} />
