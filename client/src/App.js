@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
 
@@ -15,14 +14,13 @@ class App extends Component {
     render () {
         return (
             <Router>
-            <Navbar />
-            <Routes>
-                <Route path='/' exact element={<Home />} />
-                <Route path='/signup' element={<SignUp/>} />
-                <Route path='/profile' element={<Profile/>} />
-                <Route path='/login' element={<Login/>} />
-                <Route path='/passwordReset' element={<PasswordReset/>} />
-            </Routes>
+                <Routes>
+                    <Route path='/' exact element={<Home />} />
+                    <Route path='/signup' element={<SignUp/>} />
+                    <Route path='/profile' element={<Profile/>} />
+                    <Route path='/login' element={<Login/>} />
+                    <Route path='/passwordReset' element={<PasswordReset/>} />
+                </Routes>
             </Router>
         );
     }

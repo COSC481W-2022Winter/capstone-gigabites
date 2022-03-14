@@ -2,6 +2,7 @@
 import "../App.css";
 import React,{ useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from '../components/Navbar';
 const {getUnique, createUsers} = require('./config.json');
 
 function SignUp() 
@@ -146,6 +147,7 @@ function SignUp()
 
     return ( 
         <form>
+          <Navbar />
           <div className="App" >
             <div className ="header">
               <h1>Sign Up</h1>
