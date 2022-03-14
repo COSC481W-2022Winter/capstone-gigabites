@@ -9,6 +9,7 @@ import Profile from './pages/profile';
 import SignUp from './pages/signup';
 import Login from './pages/login';
 import PasswordReset from './pages/passwordReset';
+import CreateRecipe from './pages/createRecipe';
 
 ReactSession.setStoreType('localStorage');
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
                 <Route path='/profile' element={<Profile/>} />
                 <Route path='/login' element={<Login/>} />
                 <Route path='/passwordReset' element={<PasswordReset/>} />
+                <Route path='/createRecipe' element={<CreateRecipe/>} />
             </Routes>
             </Router>
         );
