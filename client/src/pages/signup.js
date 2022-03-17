@@ -162,7 +162,7 @@ function SignUp()
                     <td>
                       {/*Name*/}
                       <label className="label">Name</label>
-                      <input type="text" id='name' onChange={(event) => {setName(event.target.value);}} required/>
+                      <input className="textbox" type="text" id='name' onChange={(event) => {setName(event.target.value);}} required/>
                     </td>
                   </tr>
                 </tbody>
@@ -172,7 +172,7 @@ function SignUp()
                     <td>
                       {/*Username*/}
                       <label className="label">Username</label>
-                      <input type="text" id='username' onChange={(event) => {setUsername(event.target.value);}} required/>
+                      <input className="textbox" type="text" id='username' onChange={(event) => {setUsername(event.target.value);}} required/>
                     </td>
                   </tr>
                 </tbody>
@@ -182,7 +182,7 @@ function SignUp()
                     <td>
                       {/*Email*/}
                       <label className="label">Email</label>
-                      <input type="text" id='email' onChange={(event) => {setEmail(event.target.value);}} required/>
+                      <input className="textbox" type="text" id='email' onChange={(event) => {setEmail(event.target.value);}} required/>
                     </td>
                   </tr>
                 </tbody>
@@ -192,7 +192,7 @@ function SignUp()
                     <td>
                       {/*Password*/}
                       <label className="label">Password</label>
-                      <input type="password" id='password' onChange={(event) => {setPassword(event.target.value);}} required/>
+                      <input className="textbox" type="password" id='password' onChange={(event) => {setPassword(event.target.value);}} required/>
                     </td>
                   </tr>
                 </tbody>
@@ -202,7 +202,7 @@ function SignUp()
                     <td>
                       {/*Security Question*/}
                       <label className="label">Security Question</label>
-                      <input type="text" id='question' onChange={(event) => {setQuestion(event.target.value);}} required/>
+                      <input className="textbox" type="text" id='question' onChange={(event) => {setQuestion(event.target.value);}} required/>
                     </td>
                   </tr>
                 </tbody>
@@ -212,7 +212,7 @@ function SignUp()
                     <td>
                       {/*Security Question Answer */}
                       <label className="label">Security Question Answer</label>
-                      <input type="text" id='answer' onChange={(event) => {setAnswer(event.target.value);}} required/>
+                      <input className="textbox" type="text" id='answer' onChange={(event) => {setAnswer(event.target.value);}} required/>
                     </td>
                   </tr>
                 </tbody>

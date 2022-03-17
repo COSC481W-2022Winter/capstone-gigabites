@@ -78,7 +78,7 @@ class Login extends React.Component {
                     <td>
                       {/*Username*/}
                       <label className="label">Username</label>
-                      <input type="text" id='username' value={this.state.username} onChange={this.handleUsernameChange}/>
+                      <input type="text" className="textbox" id='username' value={this.state.username} onChange={this.handleUsernameChange}/>
                     </td>
                   </tr>
                 </tbody>
@@ -88,7 +88,7 @@ class Login extends React.Component {
                   <td>
                       {/*Password*/}
                       <label className="label">Password</label>
-                      <input type="password" id='password' value={this.state.password} onChange={this.handlePasswordChange}/>
+                      <input type="password" className="textbox" id='password' value={this.state.password} onChange={this.handlePasswordChange}/>
                     </td>
                   </tr>
                 </tbody>

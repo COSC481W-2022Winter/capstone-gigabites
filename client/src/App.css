@@ -57,13 +57,13 @@
     color: #e6e6e6;
     padding: 10px;
     }
-    
-  input{
-    font-size: larger;
-    padding: 5px;
-    margin: 2px;
-    width:20em;
-    }
+
+    input.textbox{
+      font-size: larger;
+      padding: 5px;
+      margin: 2px;
+      width:20em;
+      }
   
   .btn{
   color: #e6e6e6;
@@ -116,5 +116,4 @@
   ul.topnav li a.active {background-color: #ff8552;}
   
   ul.topnav li.right {float: right;}
-  
   
