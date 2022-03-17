@@ -19,7 +19,7 @@
     pointer-events: none;
   }
   
-  table
+  table.normal
   {
     text-align:left;
     margin-left:auto;
@@ -60,9 +60,9 @@
 
     input.textbox{
       font-size: larger;
-      padding: 5px;
-      margin: 2px;
-      width:20em;
+    padding: 1%;
+    margin: 1%;
+    width:80%;
       }
   
   .btn{
@@ -85,12 +85,41 @@
     background-color:#ff8552;
     color: white;
   }
+  
+  a.forgotpass
+  {
+    color: #e6e6e6;
+    background-color: #39393a;
+    border: 3px solid white;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-align:center;
+    margin: 20px 35%;
+  }
+
+  a.forgotpass:hover{
+    background-color:#ff8552;
+    color: white;
+  }
 
   body
   {
     background-color:#39393a;
   }
-/*navigation bar*/
+  
+  div.centered{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+/*All NAVBAR styles below*/
   ul.topnav {
     list-style-type: none;
     margin: 0;

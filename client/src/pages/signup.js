@@ -156,7 +156,7 @@ function SignUp()
             </div>
    
             <div className="border">
-              <table>
+              <table className="normal">
                 <tbody>
                   <tr>
                     <td>
