@@ -56,29 +56,29 @@
     font-weight:bold;
     color: #e6e6e6;
     padding: 10px;
-    }
+  }
 
-    input.textbox{
-      font-size: larger;
+  input.textbox{
+    font-size: larger;
     padding: 1%;
     margin: 1%;
     width:80%;
-      }
-  
+  }
+
   .btn{
-  color: #e6e6e6;
-  background-color: #39393a;
-  border: 3px solid white;
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: bold;
-  display: block;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  text-align:center;
-  margin: 20px auto;
+    color: #e6e6e6;
+    background-color: #39393a;
+    border: 3px solid white;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-align:center;
+    margin: 20px auto;
   }
 
   .btn:hover{
@@ -112,7 +112,7 @@
   {
     background-color:#39393a;
   }
-  
+
   div.centered{
     text-align:center;
     margin-left:auto;
@@ -146,3 +146,22 @@
   
   ul.topnav li.right {float: right;}
   
+  input.logout
+  {
+    color: #e6e6e6;
+    font-family:system-ui;
+    font-weight:bold;
+    text-align:center;
+    padding:14px 16px;
+    text-decoration:none;
+    background-color:#297373;
+    float:right;
+    border:none;
+    overflow: hidden;
+  }
+
+  input.logout:hover{background-color: #ff8552;}
+
+  input.logout:hover:not(.active) {background-color: #ff8552;}
+  
+  input.logout.active {background-color: #ff8552;}
