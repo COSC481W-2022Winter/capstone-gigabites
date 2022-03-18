@@ -119,6 +119,21 @@
     margin-right:auto;
   }
 
+  .followingfollows{
+    border: 0.2em solid black;
+    background-color:#297373;
+    margin:10%;
+    color:white; 
+    padding:0.25%;
+    text-decoration:none;
+    font-weight:bold;
+    text-align:center;
+  }
+
+  .followingfollows:hover:not(.active) {background-color: #ff8552;}
+  
+  .followingfollows.active {background-color: #ff8552;}
+
 /*All NAVBAR styles below*/
   ul.topnav {
     list-style-type: none;
