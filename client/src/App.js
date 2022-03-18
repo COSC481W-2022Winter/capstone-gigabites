@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
+
+//Imports pages to allow BrowserRouter to access them
 import Home from './pages';
 import Profile from './pages/profile';
 import SignUp from './pages/signup';
@@ -16,15 +17,14 @@ import Followers from './pages/followers';
 import Following from './pages/following';
 import IngredientSearch from './pages/ingredientSearch';
 
-
+//Sets storage type for session variables
 ReactSession.setStoreType('localStorage');
+
 class App extends Component {
     render () {
         return (
             <Router>
-            <Navbar />
             <Routes>
-
                 <Route path='/' exact element={<Home />} />
                 <Route path='/signup' element={<SignUp/>} />
                 <Route path='/profile' element={<Profile/>} />
@@ -37,7 +37,6 @@ class App extends Component {
                 <Route path='/following' element={<Following/>} />
                 <Route path='/editProfile' element={<EditProfile/>} />
                 <Route path='/ingredientSeacrh' element={<IngredientSearch/>} />
-
             </Routes>
             </Router>
         );
