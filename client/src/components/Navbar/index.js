@@ -21,6 +21,12 @@ const navbar= () =>{
 		<li>
 			<Link to="/profile">Profile</Link>
 		</li>
+		<li className ="right">
+			<Link to="/logout">Logout</Link>
+		</li>
+		<li>
+			<Link to="/ingredientSearch">Ingredient Search</Link>
+		</li>
 		</ul>
 	</div>
 	);
