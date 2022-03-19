@@ -51,10 +51,11 @@ class Login extends React.Component {
   render(){
     //Alerts user of successful login, and redirects to user profile
     if(this.state.redirect){
+      {/*Updates profile page URL based on users username*/}
+      let finalURL = '../profile/'+ReactSession.get('username');
       return(
         <div>
-          {alert('Successfully logged in!')}
-          <Navigate to="../profile" />
+          <Navigate to={finalURL} />
         </div>
       );
     }
