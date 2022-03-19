@@ -4,6 +4,9 @@ import { ReactSession } from 'react-client-session';
 import Logout from '../logout';
 import "../../App.css";
 
+{/*Updates profile page URL based on users username*/}
+let finalURL = '/profile/'+ReactSession.get('username');
+
 const navbar= () =>{
 	return (
 	<div>
@@ -25,7 +28,7 @@ const navbar= () =>{
 			</li>}
 
 			<li>
-				<Link to="/profile">Profile</Link>
+				<Link to={finalURL}>Profile</Link>
 			</li>
 			{/*Makes the navbar dynamic, displays the logout button if the user is signed in*/}
 			{(ReactSession.get('username') !== undefined) &&
