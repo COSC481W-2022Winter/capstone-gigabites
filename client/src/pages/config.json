@@ -1,6 +1,4 @@
 {
-    "getUnique": "http://63.250.42.252:3006/getUnique",
-    "createUsers": "http://63.250.42.252:3006/createUser",
-    "passwordCompare": "http://63.250.42.252:3006/passwordValidation",
-    "getPassStatus": "http://63.250.42.252:3006/getPassStatus"
+"getUsers": "http://63.250.42.252:3006/getUsers",
+"createUsers": "http://63.250.42.252:3006/createUser"
 }

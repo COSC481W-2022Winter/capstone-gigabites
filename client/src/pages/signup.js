@@ -147,9 +147,9 @@ function SignUp()
 
     return ( 
         <form>
-          <div className="App">
-          	{/*Imports navbar to the top of the page*/}
-          	<Navbar />
+          {/*Imports navbar to the top of the page*/}
+          <Navbar />
+          <div className="App" >
             <div className ="header">
               <h1>Sign Up</h1>
               <h3>Prepare to Enter a World Full of Delicious Bites</h3>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {  Link } from "react-router-dom";
 import { ReactSession } from 'react-client-session';
-
+import Logout from '../logout';
+import "../../App.css";
 
 const navbar= () =>{
 	return (
@@ -12,18 +13,28 @@ const navbar= () =>{
 			<li>
 				<Link to="/">Home</Link>
 			</li>
+      <li>
+        <Link to="/ingredientSearch">Ingredient Search</Link>
+      </li>
+			{/*Makes the navbar dynamic, displays the login and signup buttons if the user is not signed in*/}
+			{(ReactSession.get('username') === undefined) &&
 			<li className ="right">
 				<Link to="/signup">Sign Up</Link>
-			</li>
+			</li>}
+
+			{(ReactSession.get('username') === undefined) &&
 			<li className ="right">
 				<Link to="/login">Login</Link>
-			</li>
+			</li>}
+
 			<li>
 				<Link to="/profile">Profile</Link>
 			</li>
-			<li>
-				<Link to="/ingredientSearch">Ingredient Search</Link>
-			</li>
+       
+			{/*Makes the navbar dynamic, displays the logout button if the user is signed in*/}
+			{(ReactSession.get('username') !== undefined) &&
+				<Logout />
+			}
 		</ul>
 	</div>
 	);

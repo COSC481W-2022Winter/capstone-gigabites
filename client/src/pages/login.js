@@ -7,7 +7,6 @@ import Navbar from '../components/Navbar';
 const { passwordCompare } = require('./config.json');
 
 
-
 class Login extends React.Component {
   constructor(val) {
     super(val);
@@ -53,10 +52,14 @@ class Login extends React.Component {
   render(){
     //Alerts user of successful login, and redirects to user profile
     if(this.state.redirect){
-      alert('Successfully logged in!');
-      return(<Navigate to="../profile" />);
+      return(
+        <div>
+          {alert('Successfully logged in!')}
+          <Navigate to="../profile" />
+        </div>
+      );
     }
-    else 
+    else
     {
       return (
         <div className="App">
