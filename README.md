@@ -34,5 +34,7 @@ I'm a senior at EMU and completing a bachelor's in Computer Science and a minor 
 
 I am a Senior at EMU completing my last semester to become a bachelor in Computer Science Applied. I am very happy to be working on my capstone class with my group. I enjoy video games, studying my religion, and being a kind person, helpful to others.
 
+###### Execute the following command in the server folder in order to run 
+npm run dev
 
 ###### CREDIT FOR THE CODE BASE GIVEN TO https://www.youtube.com/watch?v=I7EDAR2GRVo
