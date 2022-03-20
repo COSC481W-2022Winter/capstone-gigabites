@@ -57,6 +57,13 @@
     color: #e6e6e6;
     padding: 10px;
     }
+  
+  .label-no-align{
+    font-size: larger;
+    font-weight:bold;
+    color: #e6e6e6;
+    padding: 10px;
+  }
     
   input{
     font-size: larger;
@@ -116,5 +123,4 @@
   ul.topnav li a.active {background-color: #ff8552;}
   
   ul.topnav li.right {float: right;}
-  
   
