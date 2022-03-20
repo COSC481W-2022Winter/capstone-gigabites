@@ -12,8 +12,10 @@ import PasswordReset from './pages/passwordReset';
 //Sets storage type for session variables
 ReactSession.setStoreType('localStorage');
 
-{/*Updates profile page URL based on users username*/}
-let finalURL = '/profile/'+ReactSession.get('username');
+/*Updates profile page URL based on users username*/
+function User() {
+    return ReactSession.get('username');
+  }
 
 class App extends Component {
     render () {
@@ -23,7 +25,7 @@ class App extends Component {
                 <Routes>
                     <Route path='/' exact element={<Home />} />
                     <Route path='/signup' element={<SignUp/>} />
-                    <Route path={finalURL} element={<Profile/>} />
+                    <Route path='profile/:username' component={User} element={<Profile/>} />
                     <Route path='/login' element={<Login/>} />
                     <Route path='/passwordReset' element={<PasswordReset/>} />
                 </Routes>

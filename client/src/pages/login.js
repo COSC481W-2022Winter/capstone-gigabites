@@ -52,7 +52,7 @@ class Login extends React.Component {
   render(){
     //Alerts user of successful login, and redirects to user profile
     if(this.state.redirect){
-      {/*Updates profile page URL based on users username*/}
+      /*Updates profile page URL based on users username*/
       let finalURL = '../profile/'+ReactSession.get('username');
       return(
         <div>
@@ -80,7 +80,7 @@ class Login extends React.Component {
                         <div className="centered">
                           {/*Username*/}
                           <label className="label">Username</label>
-                          <input type="text" className="textbox" id='username' autofocus value={this.state.username} onChange={this.handleUsernameChange}/>
+                          <input type="text" className="textbox" id='username' value={this.state.username} onChange={this.handleUsernameChange}/>
                         </div>
                       </td>
                     </tr>

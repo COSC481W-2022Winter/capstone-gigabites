@@ -4,7 +4,7 @@ import { ReactSession } from 'react-client-session';
 import Logout from '../logout';
 import "../../App.css";
 
-{/*Updates profile page URL based on users username*/}
+/*Updates profile page URL based on users username*/
 let finalURL = '/profile/'+ReactSession.get('username');
 
 const navbar= () =>{
