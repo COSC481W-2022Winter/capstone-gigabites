@@ -6,6 +6,7 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 const { passwordCompare } = require('./config.json');
 
+
 class Login extends React.Component {
   constructor(val) {
     super(val);
