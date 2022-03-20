@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
+import Navbar from '../components/Navbar';
 
 const Following = () => {
 return (
-	<div>
-	<h1>Following Page</h1>
+  <div className="App">
+          	{/*Imports navbar to the top of the page*/}
+          	<Navbar />
+	<h1>Welcome to the follwoing page</h1>
 	</div>
 );
 };

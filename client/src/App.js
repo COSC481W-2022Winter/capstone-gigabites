@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
 import Home from './pages';
@@ -21,9 +20,7 @@ class App extends Component {
     render () {
         return (
             <Router>
-            <Navbar />
             <Routes>
-
                 <Route path='/' exact element={<Home />} />
                 <Route path='/signup' element={<SignUp/>} />
                 <Route path='/profile' element={<Profile/>} />
@@ -35,7 +32,6 @@ class App extends Component {
                 <Route path='/following' element={<Following/>} />
                 <Route path='/editProfile' element={<EditProfile/>} />
                 <Route path='/ingredientSearch' element={<IngredientSearch/>} />
-
             </Routes>
             </Router>
         );

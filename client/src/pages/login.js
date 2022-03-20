@@ -3,7 +3,9 @@ import React from "react";
 import { ReactSession } from 'react-client-session';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../components/Navbar';
 const { passwordCompare } = require('./config.json');
+
 
 
 class Login extends React.Component {
@@ -58,6 +60,8 @@ class Login extends React.Component {
     {
       return (
         <div className="App">
+          	{/*Imports navbar to the top of the page*/}
+          	<Navbar />
           <div className="header">
             <h1>Login</h1>
             <h3>Welcome Back</h3>
