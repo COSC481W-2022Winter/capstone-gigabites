@@ -163,11 +163,12 @@
   
   input.logout
   {
+    display: block;
     color: #e6e6e6;
     font-family:system-ui;
     font-weight:bold;
     text-align:center;
-    padding:14px 16px;
+    padding:16px 16px;
     text-decoration:none;
     background-color:#297373;
     float:right;

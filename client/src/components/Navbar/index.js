@@ -4,10 +4,10 @@ import { ReactSession } from 'react-client-session';
 import Logout from '../logout';
 import "../../App.css";
 
-/*Updates profile page URL based on users username*/
-let finalURL = '/profile/'+ReactSession.get('username');
-
 const navbar= () =>{
+	/*Updates profile page URL based on users username*/
+	var finalURL = '/profile/'+ReactSession.get('username');
+	
 	return (
 	<div>
 		{/* Shows the logged in session username above the NAVBAR for temporary testing and debugging purposes */}
