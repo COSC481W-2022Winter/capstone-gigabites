@@ -16,7 +16,15 @@ class Profile extends React.Component {
      
         {/*Imports navbar to the top of the page*/}
         <Navbar />
-        
+
+        {/*If coming from Login page, display successfully logged in alert!  (Also resets ReactSession fromlogin variable)*/}
+        {(ReactSession.get('fromlogin') === true) &&
+        <div>
+          <Alert severity="success">Successfully logged in!  Welcome back <strong>{ReactSession.get('username')}!</strong></Alert>
+          {ReactSession.remove("fromlogin")}
+        </div>
+        }
+
         {/*If the user is logged in, display the profile page*/}
         {(ReactSession.get('username') !== undefined) &&
           <div>

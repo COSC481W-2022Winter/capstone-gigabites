@@ -39,6 +39,7 @@ class Login extends React.Component {
     }).then((res) => {
       if(res.data === true){
         ReactSession.set("username", this.state.username);
+        ReactSession.set("fromlogin", true);
         this.setState({redirect: true});
       }
       else  //Incorrect username/password information
