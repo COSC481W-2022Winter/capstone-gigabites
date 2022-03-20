@@ -3,6 +3,7 @@ import React from "react";
 import { ReactSession } from 'react-client-session';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../components/Navbar';
 const { passwordCompare } = require('./config.json');
 
 
@@ -51,13 +52,19 @@ class Login extends React.Component {
   render(){
     //Alerts user of successful login, and redirects to user profile
     if(this.state.redirect){
-      alert('Successfully logged in!');
-      return(<Navigate to="../profile" />);
+      return(
+        <div>
+          {alert('Successfully logged in!')}
+          <Navigate to="../profile" />
+        </div>
+      );
     }
-    else 
+    else
     {
       return (
         <div className="App">
+          	{/*Imports navbar to the top of the page*/}
+          	<Navbar />
           <div className="header">
             <h1>Login</h1>
             <h3>Welcome Back</h3>
