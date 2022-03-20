@@ -10,19 +10,19 @@ const navbar= () =>{
 		<p>You are logged in as: {ReactSession.get('username')}</p>
 		<ul className="topnav">
 			<li>
-			<Link to="/">Home</Link>
+				<Link to="/">Home</Link>
 			</li>
 			<li className ="right">
-			<Link to="/signup">Sign Up</Link>
+				<Link to="/signup">Sign Up</Link>
 			</li>
 			<li className ="right">
-			<Link to="/login">Login</Link>
+				<Link to="/login">Login</Link>
 			</li>
 			<li>
-			<Link to="/profile">Profile</Link>
+				<Link to="/profile">Profile</Link>
 			</li>
 			<li>
-			<Link to="/ingredientSearch">Ingredient Search</Link>
+				<Link to="/ingredientSearch">Ingredient Search</Link>
 			</li>
 		</ul>
 	</div>
