@@ -101,7 +101,7 @@ class Login extends React.Component {
                 </table>
             
                 <button type="submit" value="Login" className="btn"> Login </button>
-                <Link to="/resetPassword" className="forgotpass">Forgot Password</Link>
+                <Link to="/passwordReset" className="forgotpass">Forgot Password</Link>
               </form>
           </div>
         </div>
