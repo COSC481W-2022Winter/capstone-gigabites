@@ -25,5 +25,15 @@ const RecipeSchema = new mongoose.Schema({
   }
 });
 
+//function to calculate total time 
+// UserSchema.pre('save', async function (next) {
+//   try{
+//       this.totalTime = (this.preptime + this.bakingtime);
+//       next();
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 const RecipeModel = mongoose.model("recipes", RecipeSchema);
 module.exports = RecipeModel;
