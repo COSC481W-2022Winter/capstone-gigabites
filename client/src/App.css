@@ -133,7 +133,33 @@
   
   .followingfollows.active {background-color: #ff8552;}
 
-/*All NAVBAR styles below*/
+  a.profilebuttons
+  {
+    color: #e6e6e6;
+    background-color: #39393a;
+    border: 3px solid white;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-align:center;
+    margin: 20px 40%;
+  }
+
+  a.profilebuttons:hover{
+    background-color:#ff8552;
+    color: white;
+  }
+  .textcenter{
+    text-align:center;
+  }
+  div.right {float: right; padding-right:10%}
+  
+/*navigation bar*/
   ul.topnav {
     list-style-type: none;
     margin: 0;

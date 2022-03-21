@@ -27,16 +27,19 @@ class Profile extends React.Component {
 
         {/*If the user is logged in, display the profile page*/}
         {(ReactSession.get('username') !== undefined) &&
-          <div>
+          <div className="centered">
+            
             <br/><br/>
+            <h1 className="textcenter">{ReactSession.get('username')}</h1>
             <buttonStyle>
               <Link to="/following" className="followingfollows">Following: 0</Link>
             </buttonStyle>
-              <br/><br/><br/>
+              <br/><br/>
             <buttonStyle>
               <Link to="/followers" className="followingfollows">Followers: 0</Link>
             </buttonStyle>
-            
+            <Link to="/recipes/create" className="profilebuttons">Create a Recipe</Link>
+            <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
           </div>
         }
 
