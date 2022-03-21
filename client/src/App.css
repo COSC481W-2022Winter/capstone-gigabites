@@ -147,13 +147,17 @@
     padding-top: 7px;
     padding-bottom: 7px;
     text-align:center;
-    margin: 20px 35%;
+    margin: 20px 40%;
   }
 
   a.profilebuttons:hover{
     background-color:#ff8552;
     color: white;
   }
+  .textcenter{
+    text-align:center;
+  }
+  div.right {float: right; padding-right:10%}
   
 /*navigation bar*/
   ul.topnav {
