@@ -40,6 +40,7 @@ class Login extends React.Component {
     }).then((res) => {
       if(res.data === true){
         ReactSession.set("username", this.state.username);
+        ReactSession.set("fromlogin", true);
         this.setState({redirect: true});
       }
       else  //Incorrect username/password information
@@ -52,10 +53,11 @@ class Login extends React.Component {
   render(){
     //Alerts user of successful login, and redirects to user profile
     if(this.state.redirect){
+      /*Updates profile page URL based on users username*/
+      let finalURL = '../profile/'+ReactSession.get('username');
       return(
         <div>
-          {alert('Successfully logged in!')}
-          <Navigate to="../profile" />
+          <Navigate to={finalURL} />
         </div>
       );
     }
@@ -69,35 +71,38 @@ class Login extends React.Component {
             <h1>Login</h1>
             <h3>Welcome Back</h3>
           </div>
+            <div className="border">
+              {/* On submit, validate username and password and compare user entry to records in database */}
+              <form onSubmit={this.handleSubmit}>
+                <table className="normal">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div className="centered">
+                          {/*Username*/}
+                          <label className="label">Username</label>
+                          <input type="text" className="textbox" id='username' value={this.state.username} onChange={this.handleUsernameChange}/>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
 
-          <div className="border">
-            {/* On submit, validate username and password and compare user entry to records in database */}
-            <form onSubmit={this.handleSubmit}>
-              <table>
-                <tbody>
+                  <tbody>
                   <tr>
                     <td>
-                      {/*Username*/}
-                      <label className="label">Username</label>
-                      <input type="text" id='username' value={this.state.username} onChange={this.handleUsernameChange}/>
-                    </td>
-                  </tr>
-                </tbody>
-
-                <tbody>
-                <tr>
-                  <td>
-                      {/*Password*/}
-                      <label className="label">Password</label>
-                      <input type="password" id='password' value={this.state.password} onChange={this.handlePasswordChange}/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-          
-              <button type="submit" value="Login" className="btn"> Login </button>
-              <Link to="/resetPassword" className="btn">Forgot Password</Link>
-            </form>
+                      <div className="centered">
+                          {/*Password*/}
+                          <label className="label">Password</label>
+                          <input type="password" className="textbox" id='password' value={this.state.password} onChange={this.handlePasswordChange}/>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            
+                <button type="submit" value="Login" className="btn"> Login </button>
+                <Link to="/resetPassword" className="forgotpass">Forgot Password</Link>
+              </form>
           </div>
         </div>
       )

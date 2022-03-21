@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './App.css';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
 
@@ -19,6 +18,11 @@ import IngredientSearch from './pages/ingredientSearch';
 //Sets storage type for session variables
 ReactSession.setStoreType('localStorage');
 
+/*Updates profile page URL based on users username*/
+function User() {
+    return ReactSession.get('username');
+  }
+
 class App extends Component {
     render () {
         return (
@@ -26,7 +30,7 @@ class App extends Component {
                 <Routes>
                     <Route path='/' exact element={<Home />} />
                     <Route path='/signup' element={<SignUp/>} />
-                    <Route path='/profile' element={<Profile/>} />
+                    <Route path='profile/:username' component={User} element={<Profile/>} />
                     <Route path='/login' element={<Login/>} />
                     <Route path='/passwordReset' element={<PasswordReset/>} />
                     <Route path='/searchResults' element={<SearchResults/>} />

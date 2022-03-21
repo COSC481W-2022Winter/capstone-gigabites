@@ -3,8 +3,8 @@ import React from 'react';
 import { ReactSession } from 'react-client-session';
 import { Navigate } from "react-router-dom";
 import "../App.css";
-ReactSession.setStoreType('localStorage');
 
+ReactSession.setStoreType('localStorage');
 
 class logout extends React.Component {
     constructor(props) {
@@ -22,10 +22,11 @@ class logout extends React.Component {
     render(){
         return(
            //Creates the logout button object and styles it to the right side of the navbar
-        <li className="right">
-             { this.state.redir  ? (<Navigate  to="../" />) : null }
-            <input type="submit" value="Logout" onClick={this.LogoutClick.bind(this)} />
-        </li>
+            <li className="right">
+                { this.state.redir  ? (<Navigate  to="../" />) : null }
+                <input className="logout" type="submit" value="Logout" onClick={this.LogoutClick.bind(this)} />
+            </li>
+
         )
     }
 }
