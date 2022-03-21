@@ -6,7 +6,7 @@ const Following = () => {
 		<div className="App">
 			{/*Imports navbar to the top of the page*/}
 			<Navbar />
-			<h1>Welcome to the follwoing page</h1>
+			<h1>Welcome to the following page</h1>
 		</div>
 	);
 };

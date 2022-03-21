@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const UserModel = require("./models/Users");
+const RecipeModel = require("./models/Recipes");
 const cors = require("cors");
 const { port, db } = require('./config.json');
 const bcrypt = require('bcrypt');
@@ -46,6 +47,18 @@ app.post("/createUser", async (req, res) => {
 {/*Verification response from server based on the unique state of username*/}
 app.get("/getUnique", (req, res) => {
   res.send(uniqueUser);
+});
+
+{/*Adds recipe to database*/}
+app.post("/addRecipes", async (req, res) => {
+  const recipe = req.body;
+
+  console.log(req.body);
+  const newRecipe = new RecipeModel(recipe);
+  console.log('Saving recipe....');
+  await newRecipe.save();
+  console.log('Recipe saved');
+  
 });
 
 {/*Function to see if the password entered on the login page actually matches the encrypted username in the database*/}

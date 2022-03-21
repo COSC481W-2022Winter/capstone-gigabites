@@ -10,6 +10,7 @@ import Login from './pages/login';
 import PasswordReset from './pages/passwordReset';
 import EditProfile from './pages/editProfile';
 import SearchResults from './pages/searchResults';
+import CreateRecipe from './pages/createRecipe';
 import Recipe from './pages/recipe';
 import Followers from './pages/followers';
 import Following from './pages/following';
@@ -34,6 +35,7 @@ class App extends Component {
                     <Route path='/login' element={<Login/>} />
                     <Route path='/passwordReset' element={<PasswordReset/>} />
                     <Route path='/searchResults' element={<SearchResults/>} />
+                    <Route path='/recipe/create' element={<CreateRecipe/>} />
                     <Route path='/recipe' element={<Recipe/>} />
                     <Route path='/followers' element={<Followers/>} />
                     <Route path='/following' element={<Following/>} />

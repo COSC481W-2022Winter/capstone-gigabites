@@ -1,5 +1,6 @@
+
  .App {
-  font-family: system-ui;
+    font-family: system-ui;
   }
 
   h3
@@ -56,6 +57,13 @@
     color: #e6e6e6;
     padding: 10px;
   }
+  
+  .label-no-align{
+    font-size: larger;
+    font-weight:bold;
+    color: #e6e6e6;
+    padding: 10px;
+  }
 
   input.textbox{
     font-size: larger;
@@ -64,6 +72,23 @@
     width:80%;
   }
 
+  input.createrecipeSmall{
+    font-size: larger;
+    padding: 1%;
+    margin: 1%;
+    width:30%;
+  }
+
+  input.ingredients{
+    font-size: larger;
+    width:60%;
+  }
+
+  input.measurmentsandunits{
+    font-size: larger;
+    width:60%;
+  }
+    
   .btn{
     color: #e6e6e6;
     background-color: #39393a;
@@ -112,6 +137,11 @@
     background-color:#39393a;
   }
 
+  table.centered{
+    margin-left:auto;
+    margin-right:auto;
+  }
+    
   div.centered{
     text-align:center;
     margin-left:auto;
@@ -159,7 +189,6 @@
   }
   div.right {float: right; padding-right:10%}
   
-/*navigation bar*/
   ul.topnav {
     list-style-type: none;
     margin: 0;
