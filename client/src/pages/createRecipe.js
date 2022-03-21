@@ -21,7 +21,6 @@ const [name, setName] = useState("");
 const [description, setDescription] = useState("");
 const [directions, setDirections] = useState("");
 const [servingsize, setServingSize] = useState("");
-const [totaltime, setTotalTime] = useState("");
 const [preptime, setPrepTime] = useState("");
 const [bakingtime, setBakingTime] = useState("");
 
@@ -32,7 +31,6 @@ const addNewRecipe = () => {
     description,
     directions,
     servingsize,
-    totaltime,
     preptime,
     bakingtime,
     
@@ -44,7 +42,6 @@ const addNewRecipe = () => {
         description,
         directions,
         servingsize,
-        totaltime,
         preptime,
         bakingtime,
       },
@@ -115,7 +112,7 @@ const addNewRecipe = () => {
           <textarea 
             name="directions"
             rows="5" cols="80"
-            placeholder="Directions"
+            placeholder="Directions/Ingredients"
             onChange={(event) => {setDirections(event.target.value);}}
             required />
           <br />
@@ -141,15 +138,13 @@ const addNewRecipe = () => {
                 <th>Total Time</th>
                   <th>
                     <input 
-                      name="totalTime"
+
                       type="number"
                       placeholder="?" className="createrecipeSmall"
-                      onChange={(event) => {setTotalTime(event.target.value);}}
                       required />
                   </th>
               </tr>
             </tbody>
-
             <tbody>
               <tr>
                 <th>Prep Time</th>

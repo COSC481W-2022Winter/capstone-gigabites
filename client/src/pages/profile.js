@@ -38,7 +38,7 @@ class Profile extends React.Component {
             <buttonStyle>
               <Link to="/followers" className="followingfollows">Followers: 0</Link>
             </buttonStyle>
-            <Link to="/recipes/create" className="profilebuttons">Create a Recipe</Link>
+            <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
             <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
           </div>
         }
