@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String,
-    default: '/root/capstone-gigabites/client/public/A.png',
+    default: '~/capstone-gigabites/client/public/A.png',
   },
   date: {
     type: Date,
