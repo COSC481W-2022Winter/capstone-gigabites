@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Navbar from '../components/Navbar';
 import { ReactSession } from 'react-client-session';
 import {  Link } from "react-router-dom";
@@ -10,7 +10,7 @@ const buttonStyle = styled.li;
 class Profile extends React.Component {
   render(){
     return (
-      <div>
+      <div className="App">
         {/*Imports a material design style sheep using the Google API*/}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
      
@@ -53,5 +53,5 @@ class Profile extends React.Component {
     );
   };
 };
-  
+
 export default Profile;
