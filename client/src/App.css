@@ -1,5 +1,6 @@
-.App {
-  font-family: system-ui;
+
+ .App {
+    font-family: system-ui;
   }
 
   h3
@@ -55,7 +56,6 @@
     font-weight:bold;
     color: #e6e6e6;
     padding: 10px;
-    }
   
   .label-no-align{
     font-size: larger;
@@ -87,7 +87,7 @@
     font-size: larger;
     width:60%;
   }
-
+    
   .btn{
     color: #e6e6e6;
     background-color: #39393a;
@@ -140,6 +140,7 @@
     margin-left:auto;
     margin-right:auto;
   }
+    
   div.centered{
     text-align:center;
     margin-left:auto;
@@ -161,7 +162,32 @@
   
   .followingfollows.active {background-color: #ff8552;}
 
-/*All NAVBAR styles below*/
+  a.profilebuttons
+  {
+    color: #e6e6e6;
+    background-color: #39393a;
+    border: 3px solid white;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-align:center;
+    margin: 20px 40%;
+  }
+
+  a.profilebuttons:hover{
+    background-color:#ff8552;
+    color: white;
+  }
+  .textcenter{
+    text-align:center;
+  }
+  div.right {float: right; padding-right:10%}
+  
   ul.topnav {
     list-style-type: none;
     margin: 0;
