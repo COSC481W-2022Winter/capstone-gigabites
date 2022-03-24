@@ -17,7 +17,8 @@ function getUserInfo()
       console.data("False reply from database");
     else{
       ReactSession.set("bio", res.data.bio);
-      ReactSession.set("pickle", res.data.profilePicture+"."+res.data.profilePictureEXT);
+      var out = res.data.profilePicture+"."+res.data.profilePictureEXT
+      ReactSession.set("pickle", out);
     }
   }).catch(() => {
     console.log('Error alert! Profile.js');
@@ -59,7 +60,7 @@ class Login extends React.Component {
         ReactSession.set("username", this.state.username);
         ReactSession.set("fromlogin", true);
         getUserInfo();
-        this.setState({redirect: true});
+        setTimeout(() => { this.setState({redirect: true}); }, 250);
       }
       else  //Incorrect username/password information
         alert ("Incorrect username or password!  Please try again.");

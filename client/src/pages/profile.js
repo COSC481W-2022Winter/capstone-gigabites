@@ -25,7 +25,6 @@ class Profile extends React.Component {
         {/*If the user is logged in, display the profile page*/}
         {(ReactSession.get('username') !== undefined) &&
           <div>
-            {get()}
             <br/><br/>
             <Link to="/following" className="followingfollows">Following: 0</Link>
             <br/><br/><br/>
@@ -41,8 +40,6 @@ class Profile extends React.Component {
               <p>{ReactSession.get('bio')}</p><br/>
             
             <img src={require('./user_images/' + ReactSession.get('pickle'))} alt="blobjr"/>
-            <br/>
-              <Link to="/following" className="followingfollows">Following: 0</Link>
               <br/><br/>
               <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
               <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
@@ -59,7 +56,7 @@ class Profile extends React.Component {
                   </td>
                   <td>
                     <div className="centered">
-                      <label className="label">{Recipe0}</label>
+                      <label className="label">Recipe Name</label>
                     </div>
                   </td>
                 </tr>
@@ -72,7 +69,7 @@ class Profile extends React.Component {
                   </td>
                   <td>
                     <div className="centered">
-                      <label className="label">{Recipe1}</label>
+                      <label className="label">Recipe Name</label>
                     </div>
                   </td>
                 </tr>

@@ -170,11 +170,11 @@
   {
     color: #e6e6e6;
     background-color:#297373;
-    border: 3px solid white;
+    border: 3px solid black;
     padding:0.25%;
     font-weight: bold;
     text-align:center;
-    margin: 10%;
+    margin: 2%;
   }
 
   a.profilebuttons:hover{
