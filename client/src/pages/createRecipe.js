@@ -2,6 +2,7 @@ import "../App.css";
 import React,{ useState } from "react";
 import axios from 'axios';
 import Navbar from '../components/Navbar';
+import { ReactSession } from 'react-client-session';
 const {addRecipe} = require('./config.json');
 
 /* 
@@ -24,6 +25,8 @@ const [servingsize, setServingSize] = useState("");
 const [preptime, setPrepTime] = useState("");
 const [bakingtime, setBakingTime] = useState("");
 
+var username = ReactSession.get('username');
+
 const addNewRecipe = () => {
   console.log('Trying to addNewRecipe');
   axios.post((`${addRecipe}`), {
@@ -33,7 +36,7 @@ const addNewRecipe = () => {
     servingsize,
     preptime,
     bakingtime,
-    
+    username,
   }).then((response) => {
     setlistofRecipes([
       ...listofRecipes,
@@ -44,6 +47,7 @@ const addNewRecipe = () => {
         servingsize,
         preptime,
         bakingtime,
+        username,
       },
     ]);
   });

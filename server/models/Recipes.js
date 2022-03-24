@@ -22,6 +22,9 @@ const RecipeSchema = new mongoose.Schema({
   },
   bakingtime: {
     type: Number,
+  },
+  username: {
+    type: String,
   }
 });
 
