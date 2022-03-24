@@ -3,9 +3,6 @@ import Navbar from '../components/Navbar';
 import { ReactSession } from 'react-client-session';
 import {  Link } from "react-router-dom";
 import Alert from '@mui/material/Alert';
-import styled from "styled-components";
-
-const buttonStyle = styled.li;
 
 class Profile extends React.Component {
   render(){
@@ -31,13 +28,15 @@ class Profile extends React.Component {
             
             <br/><br/>
             <h1 className="textcenter">{ReactSession.get('username')}</h1>
-            <buttonStyle>
+
+            <h2>bio</h2>
+            <p>{ReactSession.get('bio')}</p><br/>
+          
+            <img src={require('./user_images/' + ReactSession.get('pickle'))} alt="blobjr"/>
+            <br/>
               <Link to="/following" className="followingfollows">Following: 0</Link>
-            </buttonStyle>
               <br/><br/>
-            <buttonStyle>
               <Link to="/followers" className="followingfollows">Followers: 0</Link>
-            </buttonStyle>
             <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
             <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
           </div>
