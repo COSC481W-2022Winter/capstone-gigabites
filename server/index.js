@@ -107,6 +107,21 @@ app.post("/getUsers", (req, res) => {
   });
 });
 
+{/*Function to get recipes from recipes collection based on username*/}
+app.post("/getRecipes", (req, res) => {
+  const output = req.body;
+  console.log(output);
+
+  RecipeModel.find({username: output.username }, function(err, recipe) 
+  {
+    if (err)
+    {
+      res.send(false);
+    }
+    res.send(recipe);
+  });
+});
+
 
 {/*Displays running state of server in console, along with the currently running port number*/}
 app.listen(`${port}`, () => {

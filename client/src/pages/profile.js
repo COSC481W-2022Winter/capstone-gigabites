@@ -24,23 +24,103 @@ class Profile extends React.Component {
 
         {/*If the user is logged in, display the profile page*/}
         {(ReactSession.get('username') !== undefined) &&
-          <div className="centered">
-            
+          <div>
+            {get()}
             <br/><br/>
-            <h1 className="textcenter">{ReactSession.get('username')}</h1>
+            <Link to="/following" className="followingfollows">Following: 0</Link>
+            <br/><br/><br/>
+            <Link to="/followers" className="followingfollows">Followers: 0</Link>
+            <br/><br/>
 
-            <h2>bio</h2>
-            <p>{ReactSession.get('bio')}</p><br/>
-          
+            <div className="centered">
+              <h1 className="textcenter">{ReactSession.get('username')}</h1>
+            </div>
+
+            <div className="centered">
+              <h2>bio</h2>
+              <p>{ReactSession.get('bio')}</p><br/>
+            
             <img src={require('./user_images/' + ReactSession.get('pickle'))} alt="blobjr"/>
             <br/>
               <Link to="/following" className="followingfollows">Following: 0</Link>
               <br/><br/>
-              <Link to="/followers" className="followingfollows">Followers: 0</Link>
-            <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
-            <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
+              <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
+              <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
+            </div>
+
+            <br/><br/>
+            <div className="border">
+              <table className="normal">
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">{Recipe0}</label>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">{Recipe1}</label>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Name</label>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Name</label>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Name</label>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         }
+
+        
 
         {/*If the user is not logged in, display a simplistic profile page with an alert saying you must be logged in*/}
         {(ReactSession.get('username') === undefined) &&
