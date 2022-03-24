@@ -60,7 +60,7 @@ class Login extends React.Component {
         ReactSession.set("username", this.state.username);
         ReactSession.set("fromlogin", true);
         getUserInfo();
-        setTimeout(() => { this.setState({redirect: true}); }, 250);
+        setTimeout(() => { this.setState({redirect: true}); }, 500);
       }
       else  //Incorrect username/password information
         alert ("Incorrect username or password!  Please try again.");
