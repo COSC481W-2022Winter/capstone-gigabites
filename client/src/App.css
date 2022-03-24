@@ -109,7 +109,8 @@
     background-color:#ff8552;
     color: white;
   }
-  
+   
+  /* Forgot Password button Styling */
   a.forgotpass
   {
     color: #e6e6e6;
@@ -124,7 +125,7 @@
     padding-top: 7px;
     padding-bottom: 7px;
     text-align:center;
-    margin: 20px 35%;
+    margin: 20px 40%;
   }
 
   a.forgotpass:hover{
@@ -151,12 +152,14 @@
   .followingfollows{
     border: 0.2em solid black;
     background-color:#297373;
-    margin:10%;
+    margin:0.5%;
     color:white; 
     padding:0.25%;
+    float:right;
     text-decoration:none;
     font-weight:bold;
     text-align:center;
+    margin-right:10px;
   }
 
   .followingfollows:hover:not(.active) {background-color: #ff8552;}
@@ -166,18 +169,12 @@
   a.profilebuttons
   {
     color: #e6e6e6;
-    background-color: #39393a;
-    border: 3px solid white;
-    border-radius: 5px;
-    font-size: 13px;
+    background-color:#297373;
+    border: 3px solid black;
+    padding:0.25%;
     font-weight: bold;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
     text-align:center;
-    margin: 20px 40%;
+    margin: 2%;
   }
 
   a.profilebuttons:hover{
@@ -189,6 +186,10 @@
   }
   div.right {float: right; padding-right:10%}
   
+
+
+
+  /* Everything Navbar related is located below this point */
   ul.topnav {
     list-style-type: none;
     margin: 0;

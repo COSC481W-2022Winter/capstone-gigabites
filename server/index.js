@@ -89,6 +89,40 @@ app.post("/passwordValidation", (req, res) => {
   });
 });
 
+
+{/*Function to getUser from database based on username*/}
+app.post("/getUsers", (req, res) => {
+  const output = req.body;
+
+  UserModel.findOne({ username: output.username }, function (err, user) {
+    
+    console.log(user);
+    if (err || user == null) {
+      compareResult = false;
+      res.send(compareResult);
+    }
+    else{
+      res.send(user);
+    }
+  });
+});
+
+{/*Function to get recipes from recipes collection based on username*/}
+app.post("/getRecipes", (req, res) => {
+  const output = req.body;
+  console.log(output);
+
+  RecipeModel.find({username: output.username }, function(err, recipe) 
+  {
+    if (err)
+    {
+      res.send(false);
+    }
+    res.send(recipe);
+  });
+});
+
+
 {/*Displays running state of server in console, along with the currently running port number*/}
 app.listen(`${port}`, () => {
   console.log("SERVER RUNS PERFECTLY!");
