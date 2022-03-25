@@ -3,9 +3,40 @@ import Navbar from '../components/Navbar';
 import { ReactSession } from 'react-client-session';
 import {  Link } from "react-router-dom";
 import Alert from '@mui/material/Alert';
-import styled from "styled-components";
+import axios from 'axios';
+const {getRecipe} = require('./config.json');
 
-const buttonStyle = styled.li;
+var Recipe0;
+var Recipe1;
+var Recipe2;
+var Recipe3;
+var Recipe4;
+
+function get()
+{
+  //Compares password to the hashed one in the database
+  console.log(ReactSession.get('username'));
+  axios.post(`${getRecipe}`, {
+    username: ReactSession.get('username'),
+  }).then((res) => {
+    if(res.data === false)
+      console.data("False reply from database on profile page");
+    else{
+      console.log(res.data);
+      console.log('0: '+res.data[0].name);
+      console.log('1: '+res.data[1].name);
+      Recipe0=res.data[0].name;
+      Recipe1=res.data[1].name;
+      // Recipe2=res.data[2].name
+      // Recipe3=res.data[3].name
+      // Recipe4=res.data[4].name
+      
+    }
+  }).catch(() => {
+    console.log('Error alert! Profile.js');
+  });
+}
+
 
 class Profile extends React.Component {
   render(){
