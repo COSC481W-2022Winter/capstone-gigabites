@@ -152,7 +152,7 @@ function SignUp()
           <div className="App" >
             <div className ="header">
               <h1>Sign Up</h1>
-              <h3>Prepare to Enter a World Full of Delicious Bites</h3>
+              <h3 className="italic">Prepare to Enter a World Full of Delicious Bites</h3>
             </div>
    
             <div className="border">
