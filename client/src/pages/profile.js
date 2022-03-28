@@ -3,30 +3,6 @@ import Navbar from '../components/Navbar';
 import {  Link } from "react-router-dom";
 import { ReactSession } from 'react-client-session';
 import Alert from '@mui/material/Alert';
-import axios from 'axios';
-const { getRecipe } = require('./config.json');
-
-//Gets a list of recipes from the backend based on the logged in users username
-function get()
-{
-  console.log(ReactSession.get('username'));
-  axios.post(`${getRecipe}`, {
-    username: ReactSession.get('username'),
-  }).then((res) => {
-    if(res.data === false)
-      console.data("False reply from database on profile page");
-    else{
-      for(var i = 0; i < ReactSession.get('length'); i++)
-      {
-        ReactSession.set("recipeName"+i,res.data[i].name);
-        ReactSession.set("recipeImage"+i, res.data[i].recipePicture+"."+res.data[i].recipePictureEXT);
-        ReactSession.set("recipeName"+i+"path","../../recipe/"+res.data[i]._id);
-      }
-    }
-  }).catch(() => {
-    console.log('Error alert! Profile.js');
-  });
-}
 
 
 class Profile extends React.Component {
@@ -50,7 +26,6 @@ class Profile extends React.Component {
         {/*If the user is logged in, display the profile page*/}
         {(ReactSession.get('username') !== undefined) &&
           <div>
-            {get()}
             <br/><br/>
             <Link to="/following" className="followingfollows">Following: 0</Link>
             <Link to="/followers" className="followingfollows">Followers: 0</Link>

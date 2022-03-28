@@ -4,7 +4,7 @@ import { ReactSession } from 'react-client-session';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
-const { passwordCompare, getUser } = require('./config.json');
+const { passwordCompare, getUser, getRecipe } = require('./config.json');
 
 function getUserInfo()
 {
@@ -22,6 +22,30 @@ function getUserInfo()
     console.log('Error alert! Profile.js');
   });
 }
+
+//Gets a list of recipes from the backend based on the logged in users username
+function get()
+{
+  console.log(ReactSession.get('username'));
+  axios.post(`${getRecipe}`, {
+    username: ReactSession.get('username'),
+  }).then((res) => {
+    if(res.data === false)
+      console.data("False reply from database on profile page");
+    else{
+      ReactSession.set("length",res.data.length);
+      for(var i = 0; i < ReactSession.get('length'); i++)
+      {
+        ReactSession.set("recipeName"+i,res.data[i].name);
+        ReactSession.set("recipeImage"+i, res.data[i].recipePicture+"."+res.data[i].recipePictureEXT);
+        ReactSession.set("recipeName"+i+"path","../../recipe/"+res.data[i]._id);
+      }
+    }
+  }).catch(() => {
+    console.log('Error alert! Profile.js');
+  });
+}
+
 
 class Login extends React.Component {
   constructor(val) {
@@ -58,6 +82,7 @@ class Login extends React.Component {
         ReactSession.set("username", this.state.username);
         ReactSession.set("fromlogin", true);
         getUserInfo();
+        get();
         setTimeout(() => { this.setState({redirect: true}); }, 500);
       }
       else  //Incorrect username/password information
