@@ -35,18 +35,13 @@ app.post("/createUser", async (req, res) => {
   const existUsername = await UserModel.findOne({ username: req.body.username })
   if (existUsername) {
     console.log(`Username ${user.username} already in use!  Rejecting user entry`)
-    uniqueUser=false;
+    res.send(false);
   }
   else {
     const newUser = new UserModel(user);
     await newUser.save();
-    uniqueUser=true;
+    res.send(true);
   }
-});
-
-{/*Verification response from server based on the unique state of username*/}
-app.get("/getUnique", (req, res) => {
-  res.send(uniqueUser);
 });
 
 {/*Adds recipe to database*/}
@@ -55,21 +50,16 @@ app.post("/addRecipes", async (req, res) => {
 
   console.log(req.body);
   const newRecipe = new RecipeModel(recipe);
-  console.log('Saving recipe....');
-  await newRecipe.save();
-  console.log('Recipe saved');
-  
+  await newRecipe.save(function(err, out)
+    {res.send(out);});
 });
 
 {/*Function to see if the password entered on the login page actually matches the encrypted username in the database*/}
 app.post("/passwordValidation", (req, res) => {
   const output = req.body;
-  console.log(output.password);
-  console.log(output);
 
   UserModel.findOne({ username: output.username }, function (err, user) {
     
-    console.log(user);
     if (err || user == null) {
       compareResult = false;
       res.send(compareResult);
@@ -80,7 +70,7 @@ app.post("/passwordValidation", (req, res) => {
     var password = output.password;
     bcrypt.compare(password, hash, function(err, result) {
       if (err) return handleError(err);
-      console.log('passwordMatch: ' + result);
+      console.log(output.username+' passwordMatch: ' + result);
 
       compareResult = result;
       res.send(compareResult);
@@ -88,6 +78,39 @@ app.post("/passwordValidation", (req, res) => {
   }
   });
 });
+
+
+{/*Function to getUser from database based on username*/}
+app.post("/getUsers", (req, res) => {
+  const output = req.body;
+
+  UserModel.findOne({ username: output.username }, function (err, user) {
+    
+    console.log(user);
+    if (err || user == null) {
+      compareResult = false;
+      res.send(compareResult);
+    }
+    else{
+      res.send(user);
+    }
+  });
+});
+
+{/*Function to get recipes from recipes collection based on username*/}
+app.post("/getRecipes", (req, res) => {
+  const output = req.body;
+
+  RecipeModel.find({username: output.username }, function(err, recipe) 
+  {
+    if (err)
+    {
+      res.send(false);
+    }
+    res.send(recipe);
+  });
+});
+
 
 {/*Displays running state of server in console, along with the currently running port number*/}
 app.listen(`${port}`, () => {

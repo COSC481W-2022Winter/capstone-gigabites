@@ -1,237 +1,283 @@
 
- .App {
-    font-family: system-ui;
-  }
+.App { font-family: system-ui; }
 
-  h3
-  {
-    font-style: italic;
-  }
+h3.italic{ font-style: italic; }
 
-  .border{
-    border:4px solid #ff8552;
-    margin-left:35%;
-    margin-right:35%;
-    background-color:#297373;
-  }
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  table.normal
-  {
-    text-align:left;
-    margin-left:auto;
-    margin-right:auto;
-  }
+body{ background-color:#39393a; }
 
-  .App-header {
-    background-color: #e6e6e6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
+.textcenter{text-align:center;}
 
-  .header {
-    padding: 20px;
-    text-align: center;
-    color: #ff8552;
-    font-size: larger;
-    font-weight: bold;
-  }
-  
-  .label{
-    text-align:left;
-    display: block;
-    font-size: larger;
-    font-weight:bold;
-    color: #e6e6e6;
-    padding: 10px;
-  }
-  
-  .label-no-align{
-    font-size: larger;
-    font-weight:bold;
-    color: #e6e6e6;
-    padding: 10px;
-  }
+div.right {float: right; padding-right:10%}
 
-  input.textbox{
-    font-size: larger;
-    padding: 1%;
-    margin: 1%;
-    width:80%;
-  }
+.border{
+  border:4px solid #ff8552;
+  margin-left:35%;
+  margin-right:35%;
+  background-color:#297373;
+}
 
-  input.createrecipeSmall{
-    font-size: larger;
-    padding: 1%;
-    margin: 1%;
-    width:30%;
-  }
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
 
-  input.ingredients{
-    font-size: larger;
-    width:60%;
-  }
+table.normal
+{
+  text-align:left;
+  margin-left:auto;
+  margin-right:auto;
+}
 
-  input.measurmentsandunits{
-    font-size: larger;
-    width:60%;
-  }
-    
-  .btn{
-    color: #e6e6e6;
-    background-color: #39393a;
-    border: 3px solid white;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    text-align:center;
-    margin: 20px auto;
-  }
+.App-header {
+  background-color: #e6e6e6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
 
-  .btn:hover{
-    background-color:#ff8552;
-    color: white;
-  }
-  
-  a.forgotpass
-  {
-    color: #e6e6e6;
-    background-color: #39393a;
-    border: 3px solid white;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    text-align:center;
-    margin: 20px 35%;
-  }
+.App-link { color: #61dafb; }
 
-  a.forgotpass:hover{
-    background-color:#ff8552;
-    color: white;
-  }
+.header {
+  padding: 20px;
+  text-align: center;
+  color: #ff8552;
+  font-size: larger;
+  font-weight: bold;
+}
 
-  body
-  {
-    background-color:#39393a;
-  }
+.label{
+  text-align:left;
+  display: block;
+  font-size: larger;
+  font-weight:bold;
+  color: #e6e6e6;
+  padding: 10px;
+}
 
-  table.centered{
-    margin-left:auto;
-    margin-right:auto;
-  }
-    
-  div.centered{
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
-  }
+.label-no-align{
+  font-size: larger;
+  font-weight:bold;
+  color: #e6e6e6;
+  padding: 10px;
+}
 
-  .followingfollows{
-    border: 0.2em solid black;
-    background-color:#297373;
-    margin:10%;
-    color:white; 
-    padding:0.25%;
-    text-decoration:none;
-    font-weight:bold;
-    text-align:center;
-  }
+table.centered{
+  margin-left:auto;
+  margin-right:auto;
+}
 
-  .followingfollows:hover:not(.active) {background-color: #ff8552;}
-  
-  .followingfollows.active {background-color: #ff8552;}
+div.centered{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
 
-  a.profilebuttons
-  {
-    color: #e6e6e6;
-    background-color: #39393a;
-    border: 3px solid white;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    text-align:center;
-    margin: 20px 40%;
-  }
+/* ----------------> Start of create recipe page related material <---------------- */
 
-  a.profilebuttons:hover{
-    background-color:#ff8552;
-    color: white;
-  }
-  .textcenter{
-    text-align:center;
-  }
-  div.right {float: right; padding-right:10%}
-  
-  ul.topnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #297373;
-  }
-  
-  ul.topnav li {float: left;}
-  
-  ul.topnav li a {
-    display: block;
-    color: #e6e6e6;
-    font-family: system-ui;
-    font-weight: bold;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  ul.topnav li a:hover:not(.active) {background-color: #ff8552;}
-  
-  ul.topnav li a.active {background-color: #ff8552;}
-  
-  ul.topnav li.right {float: right;}
-  
-  input.logout
-  {
-    display: block;
-    color: #e6e6e6;
-    font-family:system-ui;
-    font-weight:bold;
-    text-align:center;
-    padding:16px 16px;
-    text-decoration:none;
-    background-color:#297373;
-    float:right;
-    border:none;
-    overflow: hidden;
-  }
+input.createrecipeSmall{
+  font-size: larger;
+  padding: 1%;
+  margin: 1%;
+  width:30%;
+}
 
-  input.logout:hover{background-color: #ff8552;}
+input.ingredients{
+  font-size: larger;
+  width:60%;
+}
 
-  input.logout:hover:not(.active) {background-color: #ff8552;}
-  
-  input.logout.active {background-color: #ff8552;}
+input.measurmentsandunits{
+  font-size: larger;
+  width:60%;
+}
+
+/* ----------------> End of create recipe page related material <---------------- */
+
+
+
+
+/* ----------------> Start of login page related material <---------------- */
+
+a.forgotpass
+{
+  color: #e6e6e6;
+  background-color: #39393a;
+  border: 3px solid white;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  display: block;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align:center;
+  margin: 20px 40%;
+}
+
+a.forgotpass:hover{
+  background-color:#ff8552;
+  color: white;
+}
+
+/* ----------------> End of login page related material <---------------- */
+
+
+
+
+/* ----------------> Start of login page and signup page related material <---------------- */
+
+.btn{
+  color: #e6e6e6;
+  background-color: #39393a;
+  border: 3px solid white;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  display: block;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align:center;
+  margin: 20px auto;
+}
+
+.btn:hover{
+  background-color:#ff8552;
+  color: white;
+}
+
+input.textbox{
+  font-size: larger;
+  padding: 1%;
+  margin: 1%;
+  width:80%;
+}
+
+/* ----------------> End of login page and signup page related material <---------------- */
+
+
+
+
+/* ----------------> Start of view profile page related material <---------------- */
+
+.followingfollows{
+  border: 0.2em solid black;
+  background-color:#297373;
+  margin:0.5%;
+  color:white; 
+  padding:0.25%;
+  float:right;
+  text-decoration:none;
+  font-weight:bold;
+  text-align:center;
+  margin-right:10px;
+}
+
+.followingfollows:hover:not(.active) {background-color: #ff8552;}
+
+.followingfollows.active {background-color: #ff8552;}
+
+a.profilebuttons
+{
+  color: #e6e6e6;
+  background-color:#297373;
+  border: 3px solid black;
+  padding:0.25%;
+  font-weight: bold;
+  text-decoration:none;
+  text-align:center;
+  margin: 2%;
+}
+
+a.profilebuttons:hover{
+  background-color:#ff8552;
+  color: white;
+}
+
+.myRecipesHeader{
+  text-align:center;
+  font-weight:bold;
+  color: #e6e6e6;
+  padding-bottom:0%;
+}
+
+.recipeimage{
+  width:100px;
+ }
+
+ .borderProfile{
+  border:4px solid #ff8552;
+  margin-left:35%;
+  margin-right:35%;
+  background-color:#297373;
+}
+
+.labelCenter{
+  display: block;
+  font-size: larger;
+  font-weight:bold;
+  color: #e6e6e6;
+  padding: 10px;
+}
+
+/* ----------------> End of view profile page related material <---------------- */
+
+
+
+
+/* ----------------> Start of Navbar related material <---------------- */
+
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #297373;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: #e6e6e6;
+  font-family: system-ui;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #ff8552;}
+
+ul.topnav li a.active {background-color: #ff8552;}
+
+ul.topnav li.right {float: right;}
+
+input.logout
+{
+  display: block;
+  color: #e6e6e6;
+  font-family:system-ui;
+  font-weight:bold;
+  text-align:center;
+  padding:16px 16px;
+  text-decoration:none;
+  background-color:#297373;
+  float:right;
+  border:none;
+  overflow: hidden;
+}
+
+input.logout:hover{background-color: #ff8552;}
+
+input.logout:hover:not(.active) {background-color: #ff8552;}
+
+input.logout.active {background-color: #ff8552;}
+
+/* ----------------> End of Navbar related material <---------------- */

@@ -4,8 +4,47 @@ import { ReactSession } from 'react-client-session';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
-const { passwordCompare } = require('./config.json');
+const { passwordCompare, getUser, getRecipe } = require('./config.json');
 
+function getUserInfo()
+{
+  //Compares password to the hashed one in the database
+  axios.post(`${getUser}`, {
+    username: ReactSession.get('username'),
+  }).then((res) => {
+    if(res.data === false)
+      console.data("False reply from database");
+    else{
+      ReactSession.set("bio", res.data.bio);
+      ReactSession.set("picture", res.data.profilePicture+"."+res.data.profilePictureEXT);
+    }
+  }).catch(() => {
+    console.log('Error alert! Profile.js');
+  });
+}
+
+//Gets a list of recipes from the backend based on the logged in users username
+function get()
+{
+  console.log(ReactSession.get('username'));
+  axios.post(`${getRecipe}`, {
+    username: ReactSession.get('username'),
+  }).then((res) => {
+    if(res.data === false)
+      console.data("False reply from database on profile page");
+    else{
+      ReactSession.set("length",res.data.length);
+      for(var i = 0; i < ReactSession.get('length'); i++)
+      {
+        ReactSession.set("recipeName"+i,res.data[i].name);
+        ReactSession.set("recipeImage"+i, res.data[i].recipePicture+"."+res.data[i].recipePictureEXT);
+        ReactSession.set("recipeName"+i+"path","../../recipe/"+res.data[i]._id);
+      }
+    }
+  }).catch(() => {
+    console.log('Error alert! Profile.js');
+  });
+}
 
 class Login extends React.Component {
   constructor(val) {
@@ -41,7 +80,9 @@ class Login extends React.Component {
       if(res.data === true){
         ReactSession.set("username", this.state.username);
         ReactSession.set("fromlogin", true);
-        this.setState({redirect: true});
+        getUserInfo();
+        get();
+        setTimeout(() => { this.setState({redirect: true}); }, 500);
       }
       else  //Incorrect username/password information
         alert ("Incorrect username or password!  Please try again.");
@@ -69,7 +110,7 @@ class Login extends React.Component {
           	<Navbar />
           <div className="header">
             <h1>Login</h1>
-            <h3>Welcome Back</h3>
+            <h3 className="italic">Welcome Back</h3>
           </div>
             <div className="border">
               {/* On submit, validate username and password and compare user entry to records in database */}
