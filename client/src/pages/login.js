@@ -46,6 +46,24 @@ function get()
   });
 }
 
+function getUserInfo()
+{
+  //Compares password to the hashed one in the database
+  axios.post(`${getUser}`, {
+    username: ReactSession.get('username'),
+  }).then((res) => {
+    if(res.data === false)
+      console.data("False reply from database");
+    else{
+      ReactSession.set("bio", res.data.bio);
+      var out = res.data.profilePicture+"."+res.data.profilePictureEXT
+      ReactSession.set("pickle", out);
+    }
+  }).catch(() => {
+    console.log('Error alert! Profile.js');
+  });
+}
+
 class Login extends React.Component {
   constructor(val) {
     super(val);

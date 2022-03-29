@@ -100,6 +100,7 @@ app.post("/getUsers", (req, res) => {
 {/*Function to get recipes from recipes collection based on username*/}
 app.post("/getRecipes", (req, res) => {
   const output = req.body;
+  console.log(output);
 
   RecipeModel.find({username: output.username }, function(err, recipe) 
   {

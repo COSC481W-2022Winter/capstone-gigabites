@@ -4,7 +4,6 @@ import {  Link } from "react-router-dom";
 import { ReactSession } from 'react-client-session';
 import Alert from '@mui/material/Alert';
 
-
 class Profile extends React.Component {
   render(){
     return (
@@ -128,7 +127,6 @@ class Profile extends React.Component {
                     </div>
                   </td>
                 </tr>}
-
               </table>
             </div>
           </div>
