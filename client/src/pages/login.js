@@ -16,7 +16,7 @@ function getUserInfo()
       console.data("False reply from database");
     else{
       ReactSession.set("bio", res.data.bio);
-      ReactSession.set("pickle", res.data.profilePicture+"."+res.data.profilePictureEXT);
+      ReactSession.set("picture", res.data.profilePicture+"."+res.data.profilePictureEXT);
     }
   }).catch(() => {
     console.log('Error alert! Profile.js');
@@ -45,7 +45,6 @@ function get()
     console.log('Error alert! Profile.js');
   });
 }
-
 
 class Login extends React.Component {
   constructor(val) {

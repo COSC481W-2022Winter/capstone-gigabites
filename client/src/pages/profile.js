@@ -39,7 +39,7 @@ class Profile extends React.Component {
               <h2>bio</h2>
               <p>{ReactSession.get('bio')}</p><br/>
             
-            <img src={require('./user_images/' + ReactSession.get('pickle'))} alt="blobjr"/>
+            <img src={require('./user_images/' + ReactSession.get('picture'))} alt="blobjr"/>
               <br/><br/>
               <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
               <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>

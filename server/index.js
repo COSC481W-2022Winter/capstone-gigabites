@@ -50,10 +50,8 @@ app.post("/addRecipes", async (req, res) => {
 
   console.log(req.body);
   const newRecipe = new RecipeModel(recipe);
-  console.log('Saving recipe....');
-  await newRecipe.save();
-  console.log('Recipe saved');
-  
+  await newRecipe.save(function(err, out)
+    {res.send(out);});
 });
 
 {/*Function to see if the password entered on the login page actually matches the encrypted username in the database*/}
