@@ -3,9 +3,6 @@ import Navbar from '../components/Navbar';
 import { ReactSession } from 'react-client-session';
 import {  Link } from "react-router-dom";
 import Alert from '@mui/material/Alert';
-import styled from "styled-components";
-
-const buttonStyle = styled.li;
 
 class Profile extends React.Component {
   render(){
@@ -25,23 +22,110 @@ class Profile extends React.Component {
         </div>
         }
 
+        {/*If coming from edit profile page, display successfully updated in alert!  (Also resets ReactSession fromlogin variable)*/}
+        {(ReactSession.get('fromEditProfile') === true) &&
+        <div>
+          <Alert severity="success">Successfully updated your profile!</Alert>
+          {ReactSession.remove("fromEditProfile")}
+        </div>
+        }
+
         {/*If the user is logged in, display the profile page*/}
         {(ReactSession.get('username') !== undefined) &&
-          <div className="centered">
-            
+          <div>
             <br/><br/>
-            <h1 className="textcenter">{ReactSession.get('username')}</h1>
-            <buttonStyle>
-              <Link to="/following" className="followingfollows">Following: 0</Link>
-            </buttonStyle>
+            <Link to="/following" className="followingfollows">Following: 0</Link>
+            <br/><br/><br/>
+            <Link to="/followers" className="followingfollows">Followers: 0</Link>
+            <br/><br/>
+
+            <div className="centered">
+              <h1 className="textcenter">{ReactSession.get('username')}</h1>
+            </div>
+
+            <div className="centered">
+              <h2>bio</h2>
+              <p>{ReactSession.get('bio')}</p><br/>
+            
+            <img src={require('./user_images/' + ReactSession.get('profilePicture'))} alt="blobjr"/>
               <br/><br/>
-            <buttonStyle>
-              <Link to="/followers" className="followingfollows">Followers: 0</Link>
-            </buttonStyle>
-            <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
-            <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
+              <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
+              <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
+            </div>
+
+            <br/><br/>
+            <div className="border">
+              <table className="normal">
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Name</label>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Name</label>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Name</label>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Name</label>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Picture</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="centered">
+                      <label className="label">Recipe Name</label>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         }
+
+        
 
         {/*If the user is not logged in, display a simplistic profile page with an alert saying you must be logged in*/}
         {(ReactSession.get('username') === undefined) &&

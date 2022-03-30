@@ -90,11 +90,10 @@ const addNewRecipe = () => {
 
       <div className="centered">
         <form>
-          <label className="label-no-align">Upload an Image</label>
-          <input type="file" 
-            id="image"
-            accept="image/png, image/jpeg"/>
-          <br />
+					<label className="custom-file-upload">
+						<input type="file" id="image" accept="image/png, image/jpeg, image/gif" alt="blobjr"/>
+            Upload an Image</label>
+          <br /><br />
           <input 
             name="name"
             type="text"

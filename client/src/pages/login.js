@@ -4,8 +4,30 @@ import { ReactSession } from 'react-client-session';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
-const { passwordCompare } = require('./config.json');
+const { passwordCompare, getUser } = require('./config.json');
 
+
+function getUserInfo()
+{
+  //Compares password to the hashed one in the database
+  axios.post(`${getUser}`, {
+    username: ReactSession.get('username'),
+  }).then((res) => {
+    if(res.data === false)
+      console.data("False reply from database");
+    else{
+      ReactSession.set("bio", res.data.bio);
+      ReactSession.set("email", res.data.email);
+      ReactSession.set("question", res.data.question);
+      ReactSession.set("answer", res.data.answer);
+      var out = res.data.profilePicture+"."+res.data.profilePictureEXT
+      ReactSession.set("profilePicture", out);
+      
+    }
+  }).catch(() => {
+    console.log('Error alert! Profile.js');
+  });
+}
 
 class Login extends React.Component {
   constructor(val) {
@@ -41,7 +63,8 @@ class Login extends React.Component {
       if(res.data === true){
         ReactSession.set("username", this.state.username);
         ReactSession.set("fromlogin", true);
-        this.setState({redirect: true});
+        getUserInfo();
+        setTimeout(() => { this.setState({redirect: true}); }, 1000);
       }
       else  //Incorrect username/password information
         alert ("Incorrect username or password!  Please try again.");

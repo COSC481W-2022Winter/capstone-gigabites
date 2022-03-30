@@ -26,6 +26,14 @@
     margin-right:auto;
   }
 
+  table.editProf
+  {
+    text-align:left;
+    margin-left:auto;
+    margin-right:auto;
+    width:75%;
+  }
+
   .App-header {
     background-color: #e6e6e6;
     min-height: 100vh;
@@ -109,7 +117,8 @@
     background-color:#ff8552;
     color: white;
   }
-  
+   
+  /* Forgot Password button Styling */
   a.forgotpass
   {
     color: #e6e6e6;
@@ -124,7 +133,7 @@
     padding-top: 7px;
     padding-bottom: 7px;
     text-align:center;
-    margin: 20px 35%;
+    margin: 20px 40%;
   }
 
   a.forgotpass:hover{
@@ -151,12 +160,14 @@
   .followingfollows{
     border: 0.2em solid black;
     background-color:#297373;
-    margin:10%;
+    margin:0.5%;
     color:white; 
     padding:0.25%;
+    float:right;
     text-decoration:none;
     font-weight:bold;
     text-align:center;
+    margin-right:10px;
   }
 
   .followingfollows:hover:not(.active) {background-color: #ff8552;}
@@ -166,18 +177,12 @@
   a.profilebuttons
   {
     color: #e6e6e6;
-    background-color: #39393a;
-    border: 3px solid white;
-    border-radius: 5px;
-    font-size: 13px;
+    background-color:#297373;
+    border: 3px solid black;
+    padding:0.25%;
     font-weight: bold;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
     text-align:center;
-    margin: 20px 40%;
+    margin: 2%;
   }
 
   a.profilebuttons:hover{
@@ -189,6 +194,23 @@
   }
   div.right {float: right; padding-right:10%}
   
+  input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+  color:white;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 3px solid #297373;
+}
+  .btn:hover{
+    background-color:#ff8552;
+    color: white;
+  }
+
+  /* Everything Navbar related is located below this point */
   ul.topnav {
     list-style-type: none;
     margin: 0;
@@ -235,3 +257,84 @@
   input.logout:hover:not(.active) {background-color: #ff8552;}
   
   input.logout.active {background-color: #ff8552;}
+
+  
+ /*Edit Profile */
+ input.editProf[type=password] {
+  width: 100%;
+  height: 25px;
+  box-sizing: border-box;
+  border: 3px solid #297373;
+  outline: none;
+  text-align: left;
+}
+
+
+input.editProf[type=password]:focus {
+  border: 3px solid #ff8552;  }
+
+ input.editProf[type=text] {
+  width: 100%;
+  height: 25px;
+  box-sizing: border-box;
+  border: 3px solid #297373;
+  outline: none;
+  text-align: left;
+}
+
+
+input.editProf[type=text]:focus {
+  border: 3px solid #ff8552;  }
+
+label.editProf {
+  color: #e6e6e6;
+  font-weight: bold;
+  display: block;
+  text-align: left;
+  font-weight:bold;
+  color: #e6e6e6;
+  padding: 5px;
+}
+
+textarea.editBio {
+  padding: 1%;
+  margin: 1%;
+  width: 100%;
+  height: 100px;
+  border: 3px solid #297373;
+  outline: none;
+  text-align: left;
+}
+
+textarea.editBio:focus {
+  border:3px solid#ff8552;
+}
+
+.avatar{
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.btnProf{
+  color: #e6e6e6;
+  background-color: #297373;
+  border: 3px solid #e6e6e6;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  display: block;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align:center;
+  margin: 20px auto;
+}
+
+.btnProf:hover{
+  background-color:#ff8552;
+  color: #e6e6e6;
+}
+
