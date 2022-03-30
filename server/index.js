@@ -3,6 +3,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const fileUpload = require('express-fileupload');
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const cors = require("cors");
@@ -106,6 +107,89 @@ app.post("/getUsers", (req, res) => {
     }
   });
 });
+
+
+{/*Function to edit user profile*/}
+app.post("/editUsers",function(req,res){
+  
+  console.log(req.body);
+  console.log(req.body.profilePicture);
+
+  if(req.body.password == '')
+  {
+    if(req.body.profilePicture == '')
+    {
+      var editUser = {
+        bio: req.body.bio,
+        email: req.body.email,
+        question: req.body.question,
+        answer: req.body.answer
+      };
+    }
+    else
+    {
+
+      let sampleFile;
+      let uploadPath;
+    
+      if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send('No files were uploaded.');
+      }
+    
+      // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+      sampleFile = 'default.gif';//req.files.sampleFile;
+      console.log(sampleFile);
+      uploadPath = '~/capstone-gigabites/client/src/pages/user_images/' + sampleFile.name;
+    
+      // Use the mv() method to place the file somewhere on your server
+      sampleFile.mv(uploadPath, function(err) {
+        if (err)
+          return res.status(500).send(err);
+      });
+
+
+      var editUser = {
+        bio: req.body.bio,
+        email: req.body.email,
+        profilePicture: req.body.profilePicture,
+        question: req.body.question,
+        answer: req.body.answer
+      };
+    }
+  }
+  else
+  {
+    if(req.body.profilePicture == '')
+    {
+      var editUser = {
+        bio: req.body.bio,
+        email: req.body.email,
+        password: req.body.password,
+        question: req.body.question,
+        answer: req.body.answer
+      };
+    }
+    else
+    {      
+      var editUser = {
+        bio: req.body.bio,
+        profilePicture: req.body.profilePicture,
+        email: req.body.email,
+        password: req.body.password,
+        question: req.body.question,
+        answer: req.body.answer
+      };
+    }
+  }
+
+  UserModel.findOneAndUpdate(
+      { username: req.body.username }, 
+      { $set: editUser },
+  ).then(post => {
+  });
+  
+})
+
 
 {/*Function to get recipes from recipes collection based on username*/}
 app.post("/getRecipes", (req, res) => {
