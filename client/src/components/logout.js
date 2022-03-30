@@ -23,7 +23,7 @@ class logout extends React.Component {
         return(
            //Creates the logout button object and styles it to the right side of the navbar
             <li className="right">
-                { this.state.redir  ? (<Navigate  to="../" />) : null }
+                { this.state.redir  ? (<Navigate  to="../loggedout" />) : null }
                 <input className="logout" type="submit" value="Logout" onClick={this.LogoutClick.bind(this)} />
             </li>
 

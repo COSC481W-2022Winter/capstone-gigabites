@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from '../components/Navbar';
-import { ReactSession } from 'react-client-session';
 import {  Link } from "react-router-dom";
+import { ReactSession } from 'react-client-session';
 import Alert from '@mui/material/Alert';
 
 class Profile extends React.Component {
@@ -27,7 +27,6 @@ class Profile extends React.Component {
           <div>
             <br/><br/>
             <Link to="/following" className="followingfollows">Following: 0</Link>
-            <br/><br/><br/>
             <Link to="/followers" className="followingfollows">Followers: 0</Link>
             <br/><br/>
 
@@ -39,79 +38,95 @@ class Profile extends React.Component {
               <h2>bio</h2>
               <p>{ReactSession.get('bio')}</p><br/>
             
-            <img src={require('./user_images/' + ReactSession.get('pickle'))} alt="blobjr"/>
+            <img src={require('./user_images/' + ReactSession.get('picture'))} alt="blobjr"/>
               <br/><br/>
               <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
               <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
             </div>
 
             <br/><br/>
-            <div className="border">
+
+            <div className="borderProfile">
               <table className="normal">
+              {(ReactSession.get('length') >= 1) &&
                 <tr>
+                  <a href={ReactSession.get('recipeName0path')}>
+                    <td>
+                      <div className="centered">
+                        <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage0'))} alt="pic0"/>
+                      </div>
+                    </td>
+                  </a>
                   <td>
                     <div className="centered">
-                      <label className="label">Recipe Picture</label>
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName0path')}>{ReactSession.get('recipeName0')}</a></label>
                     </div>
                   </td>
+                </tr>}
+ 
+                {(ReactSession.get('length') >= 2) &&
+                <tr>
+                  <a href={ReactSession.get('recipeName1path')}>
+                    <td>
+                      <div className="centered">
+                      <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage1'))} alt="pic1"/>
+                      </div>
+                    </td>
+                  </a>
                   <td>
                     <div className="centered">
-                      <label className="label">Recipe Name</label>
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName1path')}>{ReactSession.get('recipeName1')}</a></label>
                     </div>
                   </td>
-                </tr>
+                </tr>}
 
+                {(ReactSession.get('length') >= 3) &&
                 <tr>
+                  <a href={ReactSession.get('recipeName2path')}>
+                    <td>
+                      <div className="centered">
+                      <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage2'))} alt="pic2"/>
+                      </div>
+                    </td>
+                  </a>
                   <td>
                     <div className="centered">
-                      <label className="label">Recipe Picture</label>
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName2path')}>{ReactSession.get('recipeName2')}</a></label>
                     </div>
                   </td>
+                </tr>}
+                
+                {(ReactSession.get('length') >= 4) &&
+                <tr>
+                  <a href={ReactSession.get('recipeName3path')}>
+                    <td>
+                      <div className="centered">
+                        <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage3'))} alt="pic3"/>
+                      </div>
+                    </td>
+                  </a>
                   <td>
                     <div className="centered">
-                      <label className="label">Recipe Name</label>
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName3path')}>{ReactSession.get('recipeName3')}</a></label>
                     </div>
                   </td>
-                </tr>
+                </tr>}
 
+                {(ReactSession.get('length') >= 5) &&
                 <tr>
+                  <a href={ReactSession.get('recipeName0path')}>
+                    <td>
+                      <div className="centered">
+                        <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage4'))} alt="pic4"/>
+                      </div>
+                    </td>
+                  </a>
                   <td>
                     <div className="centered">
-                      <label className="label">Recipe Picture</label>
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName4path')}>{ReactSession.get('recipeName4')}</a></label>
                     </div>
                   </td>
-                  <td>
-                    <div className="centered">
-                      <label className="label">Recipe Name</label>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <div className="centered">
-                      <label className="label">Recipe Picture</label>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="centered">
-                      <label className="label">Recipe Name</label>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <div className="centered">
-                      <label className="label">Recipe Picture</label>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="centered">
-                      <label className="label">Recipe Name</label>
-                    </div>
-                  </td>
-                </tr>
+                </tr>}
               </table>
             </div>
           </div>

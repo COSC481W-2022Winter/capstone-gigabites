@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
   },
   profilePictureEXT: {
     type: String,
-    default: '.gif',
+    default: 'gif',
   },
   date: {
     type: Date,
