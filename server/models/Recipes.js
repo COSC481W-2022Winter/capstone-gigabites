@@ -25,6 +25,14 @@ const RecipeSchema = new mongoose.Schema({
   },
   username: {
     type: String,
+  },
+  recipePicture: {
+    type: String,
+    default: "default2"
+  },
+  recipePictureEXT: {
+    type: String,
+    default: "png"
   }
 });
 

@@ -1,11 +1,8 @@
 import React from "react";
 import Navbar from '../components/Navbar';
-import { ReactSession } from 'react-client-session';
 import {  Link } from "react-router-dom";
+import { ReactSession } from 'react-client-session';
 import Alert from '@mui/material/Alert';
-import styled from "styled-components";
-
-const buttonStyle = styled.li;
 
 class Profile extends React.Component {
   render(){
@@ -27,21 +24,115 @@ class Profile extends React.Component {
 
         {/*If the user is logged in, display the profile page*/}
         {(ReactSession.get('username') !== undefined) &&
-          <div className="centered">
-            
+          <div>
             <br/><br/>
-            <h1 className="textcenter">{ReactSession.get('username')}</h1>
-            <buttonStyle>
-              <Link to="/following" className="followingfollows">Following: 0</Link>
-            </buttonStyle>
+            <Link to="/following" className="followingfollows">Following: 0</Link>
+            <Link to="/followers" className="followingfollows">Followers: 0</Link>
+            <br/><br/>
+
+            <div className="centered">
+              <h1 className="textcenter">{ReactSession.get('username')}</h1>
+            </div>
+
+            <div className="centered">
+              <h2>bio</h2>
+              <p>{ReactSession.get('bio')}</p><br/>
+            
+            <img src={require('./user_images/' + ReactSession.get('picture'))} alt="blobjr"/>
               <br/><br/>
-            <buttonStyle>
-              <Link to="/followers" className="followingfollows">Followers: 0</Link>
-            </buttonStyle>
-            <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
-            <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
+              <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
+              <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>
+            </div>
+
+            <br/><br/>
+
+            <div className="borderProfile">
+              <table className="normal">
+              {(ReactSession.get('length') >= 1) &&
+                <tr>
+                  <a href={ReactSession.get('recipeName0path')}>
+                    <td>
+                      <div className="centered">
+                        <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage0'))} alt="pic0"/>
+                      </div>
+                    </td>
+                  </a>
+                  <td>
+                    <div className="centered">
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName0path')}>{ReactSession.get('recipeName0')}</a></label>
+                    </div>
+                  </td>
+                </tr>}
+ 
+                {(ReactSession.get('length') >= 2) &&
+                <tr>
+                  <a href={ReactSession.get('recipeName1path')}>
+                    <td>
+                      <div className="centered">
+                      <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage1'))} alt="pic1"/>
+                      </div>
+                    </td>
+                  </a>
+                  <td>
+                    <div className="centered">
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName1path')}>{ReactSession.get('recipeName1')}</a></label>
+                    </div>
+                  </td>
+                </tr>}
+
+                {(ReactSession.get('length') >= 3) &&
+                <tr>
+                  <a href={ReactSession.get('recipeName2path')}>
+                    <td>
+                      <div className="centered">
+                      <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage2'))} alt="pic2"/>
+                      </div>
+                    </td>
+                  </a>
+                  <td>
+                    <div className="centered">
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName2path')}>{ReactSession.get('recipeName2')}</a></label>
+                    </div>
+                  </td>
+                </tr>}
+                
+                {(ReactSession.get('length') >= 4) &&
+                <tr>
+                  <a href={ReactSession.get('recipeName3path')}>
+                    <td>
+                      <div className="centered">
+                        <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage3'))} alt="pic3"/>
+                      </div>
+                    </td>
+                  </a>
+                  <td>
+                    <div className="centered">
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName3path')}>{ReactSession.get('recipeName3')}</a></label>
+                    </div>
+                  </td>
+                </tr>}
+
+                {(ReactSession.get('length') >= 5) &&
+                <tr>
+                  <a href={ReactSession.get('recipeName0path')}>
+                    <td>
+                      <div className="centered">
+                        <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage4'))} alt="pic4"/>
+                      </div>
+                    </td>
+                  </a>
+                  <td>
+                    <div className="centered">
+                      <label className="labelCenter"><a href={ReactSession.get('recipeName4path')}>{ReactSession.get('recipeName4')}</a></label>
+                    </div>
+                  </td>
+                </tr>}
+              </table>
+            </div>
           </div>
         }
+
+        
 
         {/*If the user is not logged in, display a simplistic profile page with an alert saying you must be logged in*/}
         {(ReactSession.get('username') === undefined) &&
