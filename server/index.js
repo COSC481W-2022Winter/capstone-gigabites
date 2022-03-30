@@ -54,6 +54,20 @@ app.post("/addRecipes", async (req, res) => {
     {res.send(out);});
 });
 
+
+{/*Adds ingredients to database*/}
+app.post("/ingredientsUpload", async (req, res) => {
+  const ingredient = req.body;
+
+  console.log(req.body);
+  const newIngredient = new IngredientModel(ingredient);
+  await newIngredient.save(function(err, out)
+    {res.send(out);});
+});
+
+
+
+
 {/*Function to see if the password entered on the login page actually matches the encrypted username in the database*/}
 app.post("/passwordValidation", (req, res) => {
   const output = req.body;

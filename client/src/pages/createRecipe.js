@@ -4,7 +4,7 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 import { Navigate } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
-const  {addRecipe, getRecipe} = require('./config.json');
+const  {addRecipe, getRecipe, ingredientUpload} = require('./config.json');
 
 /* 
   Credit
@@ -15,6 +15,7 @@ const  {addRecipe, getRecipe} = require('./config.json');
    https://stackoverflow.com/a/49174689/17413708
 */
 var id;
+var error;
 
 //Gets a list of recipes from the backend based on the logged in users username
 function get()
@@ -43,7 +44,7 @@ function get()
 class CreateRecipe extends React.Component {
   constructor(val) {
     super(val);
-    this.state = {rows:[], name: '', description: '', directions: '', servingsize: '', preptime: '',  bakingtime: '', redirect: false};
+    this.state = {rows:[{}], name: '', description: '', directions: '', servingsize: '', preptime: '',  bakingtime: '', redirect: false};
     
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -57,20 +58,30 @@ class CreateRecipe extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-    handleChange = idx => e => {
+    handleChange (idx,e) {
       const { name, value } = e.target;
       const rows = [...this.state.rows];
+
+      // console.log("IDX: " + idx);
+      // console.log("old rows[idx].name " + rows[idx].ingredient);
+      // console.log("old rows[idx].measurement " + rows[idx].measurement);
+      // console.log("old rows[idx].units " + rows[idx].units);
+
       rows[idx] = {
+        ...rows[idx],
         [name]: value
       };
       this.setState({
         rows
       });
+      // console.log("New row:  I:" + rows[idx].ingredient + " M: " + rows[idx].measurement + " U: " + rows[idx].units);
     };
+
     handleAddRow = () => {
       const item = {
-        Ingredients: "",
-        Measurement: ""
+        ingredient: "",
+        measurement: "",
+        units: "",
       };
       this.setState({
         rows: [...this.state.rows, item]
@@ -109,11 +120,14 @@ class CreateRecipe extends React.Component {
     //Runs whenever user clicks the submit button to validate the form
     handleSubmit(event) {
       if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.preptime === '' || this.state.bakingtime === '') {
+        error=true;
         alert("Missing fields! Please try again.");
         return;
       }
 
+      console.log("rows.length: "+this.state.rows.length);
       if(this.state.rows.length === 0) {
+        error=true;
         alert("Missing ingredients! Please try again.");
         return;
       }
@@ -121,15 +135,17 @@ class CreateRecipe extends React.Component {
       if(this.state.rows.length > 0) {
         for(var i = 0; i < this.state.rows.length; i++)
         {
-          if(this.state.rows[i].Ingredients === '' || this.state.rows[i].Measurement === '')
-          {
+          if(this.state.rows[i].ingredient === (undefined || "") || this.state.rows[i].measurement === (undefined || "")) {
             alert("Missing fields! Please try again.");
+            error=true;
             return;
           }
         }
       }
-
-      //If all fields are filled, send the form to the server
+      
+      if(error===false)
+      {
+        //If all fields are filled, send the form to the server
         axios.post((`${addRecipe}`), {
           username: ReactSession.get("username"),
           name: this.state.name,
@@ -145,13 +161,35 @@ class CreateRecipe extends React.Component {
             alert('Recipe upload failed, please try again later!');
           else
           {
+            for(var i = 0; i < this.state.rows.length; i++)
+            {
+              console.log(this.state.rows[i]);
+              console.log(this.state.rows[i].ingredient);
+              console.log(this.state.rows[i].measurement);
+            
+              axios.post((`${ingredientUpload}`), {
+                recipeID: id,
+                name: this.state.rows[i].ingredient,
+                measurement: this.state.rows[i].measurement,
+                units: this.state.rows[i].units                
+              }).then((res) => {
+                if(res.data === false)
+                  alert('Ingredient upload failed, please try again later!');
+                else
+                  alert('Ingredient upload successful!');
+              }).catch(() => {
+                console.log('Error alert! createRecipe.js');
+              });
+            }
             get();
-            alert("Recipe successfully added!");
+            //alert("Recipe successfully added!");
             this.setState({redirect: true});
           }
         });
         event.preventDefault();
       }
+      error=false;
+    }
   render(){
     //Alerts user of successful login, and redirects to user profile
     if(this.state.redirect){
@@ -267,21 +305,25 @@ class CreateRecipe extends React.Component {
                             <td>
                               <input
                                 type="text"
-                                name="ingredientName"
-                                onChange={this.handleChange(idx)}
+                                name="ingredient"
+                                onChange={e => this.handleChange(idx, e)}
                                 className="ingredients" required
                               />
                             </td>
                             <td>
                               <input
-                                type="text"
+                                type="number"
                                 name="measurement"
-                                onChange={this.handleChange(idx)}
+                                onChange={e => this.handleChange(idx, e)}
                                 className="measurmentsandunits" required
                               />
                             </td>
                             <td>
-                              <select>
+                              
+                              <select 
+                                name="units" 
+                                onChange={e => this.handleChange(idx, e)}>
+                                  
                                 <option defaultValue value="none">none</option>
                                 <option value="teaspoon">teaspoon</option>
                                 <option value="tablespoon">tablespoon</option>
