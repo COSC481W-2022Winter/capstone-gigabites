@@ -4,7 +4,7 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 import { Navigate } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
-const  {addRecipe, getRecipe, ingredientUpload} = require('./config.json');
+const  {addRecipe, getRecipe, ingredientUpload, upload } = require('./config.json');
 
 /* 
   Credit
@@ -142,7 +142,7 @@ class CreateRecipe extends React.Component {
           }
         }
       }
-      
+
       if(error===false)
       {
         //If all fields are filled, send the form to the server
@@ -153,7 +153,7 @@ class CreateRecipe extends React.Component {
           directions: this.state.directions,
           servingsize: this.state.servingsize,
           preptime: this.state.preptime,
-          bakingtime: this.state.bakingtime
+          bakingtime: this.state.bakingtime,
 
         }).then((res) => {
           id = res.data._id;
@@ -211,10 +211,11 @@ class CreateRecipe extends React.Component {
           </div>
 
         <div className="centered">
-          <form>
+          <form ref='uploadForm' id='uploadForm' action={upload} method='post' encType="multipart/form-data">
             <label className="label-no-align">Upload an Image</label>
+
             <input type="file" 
-              id="image"
+              name="sampleFile"
               accept="image/png, image/jpeg"/>
             <br />
             <input 
@@ -246,7 +247,7 @@ class CreateRecipe extends React.Component {
                   <th>Serving Size</th>
                   <td>
                     <input 
-                      name="servingSize"
+                      name="servingsize"
                       type="number"
                       placeholder="?" className="createrecipeSmall"
                       onChange={this.handleServingSizeChange} value={this.state.servingsize}
@@ -260,7 +261,7 @@ class CreateRecipe extends React.Component {
                   <th>Prep Time</th>
                     <th>
                       <input 
-                        name="prepTime"
+                        name="preptime"
                         type="number"
                         placeholder="?" className="createrecipeSmall"
                         onChange={this.handlePrepTimeChange} value={this.state.preptime}
@@ -274,7 +275,7 @@ class CreateRecipe extends React.Component {
                   <th>Baking Time</th>
                     <th>
                       <input 
-                        name="bakeTime"
+                        name="bakingtime"
                         type="number"
                         placeholder="?" className="createrecipeSmall"
                         onChange={this.handleBakingTimeChange} value={this.state.bakingtime}
