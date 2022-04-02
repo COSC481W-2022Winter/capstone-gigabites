@@ -7,6 +7,7 @@ const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const IngredientModel = require("./models/Ingredients");
 const cors = require("cors");
+//const { port, db, temp } = require('./config.json');
 const { port, db } = require('./config.json');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
@@ -25,6 +26,7 @@ mongoose.connect(`${db}`);
 
 {/*Defines variables for later use*/}
 var compareResult;
+var IDofRecipe;
 
 
 // default options for file upload using express-fileupload
@@ -37,11 +39,33 @@ app.post('/uploads', async function(req, res) {
   let uploadPath;
 
   const newRecipe = new RecipeModel(recipe);
-  console.log(recipe);
   await newRecipe.save(function(err, out)
   {
+    IDofRecipe = out._id.toString();
+
+
     if (!req.files || Object.keys(req.files).length === 0) {
-      res.send(out);
+      
+      for(var j=0; j<recipe.ingredient.length; j++)
+      {
+        var ingredientObject = {
+          recipeID: out._id.toString(),
+          name: req.body.ingredient[j],
+          measurement: req.body.measurement[j],
+          units: req.body.units[j]
+        };
+        
+        const newIngredient = new IngredientModel(ingredientObject);
+        newIngredient.save(function(err, result)
+        {
+          if(err)
+            console.log("Ingredient Upload Error");
+        });
+      }
+
+      //res.writeHead(302, { Location: temp });
+      //res.end();
+
     }
     else
     {
@@ -50,11 +74,15 @@ app.post('/uploads', async function(req, res) {
       
       let arr = sampleFile.name.split(".");
       let ext = arr.pop();
-      console.log(ext);
       sampleFile.name = out._id+"."+ext;
-
-      console.log("sample file: "+sampleFile);
       uploadPath = '../client/src/pages/user_images/' + sampleFile.name; //'../client/src/pages/user_images/' + sampleFile.name;
+
+      // Use the mv() method to place the file somewhere on your server
+      sampleFile.mv(uploadPath, function(err) {
+        if (err)
+          return res.status(500).send(err);
+          console.log('File '+sampleFile.name+' uploaded!');
+      });
 
       var editRecipe = {
         recipePicture: out._id,
@@ -67,19 +95,35 @@ app.post('/uploads', async function(req, res) {
       ).then(post => {
       });
 
-      // Use the mv() method to place the file somewhere on your server
-      sampleFile.mv(uploadPath, function(err) {
-        if (err)
-          return res.status(500).send(err);
-          console.log('File '+sampleFile.name+' uploaded!');
-      });
+      for(var j=0; j<recipe.ingredient.length; j++)
+      {
+        var ingredientObject = {
+          recipeID: out._id.toString(),
+          name: req.body.ingredient[j],
+          measurement: req.body.measurement[j],
+          units: req.body.units[j]
+        };
+        
+        const newIngredient = new IngredientModel(ingredientObject);
+        newIngredient.save(function(err, result)
+        {
+          if(err)
+            console.log("Ingredient Upload Error");
+        });
+      }
 
-      res.send(out);
+      //res.writeHead(302, { Location: temp });
+      //res.end();
+
     }
   });
 });
 
 
+{/*Function to get recipes from recipes collection based on RecipeID*/}
+// app.get("/getRecipeByIDs", async (req, res) => {
+//   res.send(IDofRecipe);
+// });
 
 
 
@@ -178,17 +222,15 @@ app.post("/getUsers", (req, res) => {
 
 {/*Function to get recipes from recipes collection based on username*/}
 app.post("/getRecipes", (req, res) => {
-  const output = req.body;
-  console.log(output);
+  const output = req.body.username;
 
-  RecipeModel.find({username: output.username }, function(err, recipe) 
+  RecipeModel.find({username: output }, function(err, recipe) 
   {
     if (err)
-    {
       res.send(false);
-    }
+
     res.send(recipe);
-  });
+  }).limit(5);
 });
 
 
