@@ -7,7 +7,7 @@ const fileUpload = require('express-fileupload');
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const cors = require("cors");
-const { port, db } = require('./config.json');
+const { port, db, editProfileRedirect } = require('./config.json');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 const router = express.Router();
@@ -18,6 +18,9 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// default options for file upload using express-fileupload
+app.use(fileUpload());
 
 {/*Sets up connection to MongoDB database using mongoose library*/}
 mongoose.connect(`${db}`);
@@ -59,7 +62,6 @@ app.post("/addRecipes", async (req, res) => {
   console.log('Saving recipe....');
   await newRecipe.save();
   console.log('Recipe saved');
-  
 });
 
 {/*Function to see if the password entered on the login page actually matches the encrypted username in the database*/}
@@ -82,7 +84,6 @@ app.post("/passwordValidation", (req, res) => {
     bcrypt.compare(password, hash, function(err, result) {
       if (err) return handleError(err);
       console.log('passwordMatch: ' + result);
-
       compareResult = result;
       res.send(compareResult);
     });
@@ -110,85 +111,101 @@ app.post("/getUsers", (req, res) => {
 
 
 {/*Function to edit user profile*/}
-app.post("/editUsers",function(req,res){
-  
-  console.log(req.body);
-  console.log(req.body.profilePicture);
+app.post("/editUsers", async function(req,res)
+{
+  console.log(req.body)
+  let sampleFile;
+  let uploadPath;
 
-  if(req.body.password == '')
+  UserModel.findOne({ username: req.body.username }, async function (err, out) 
   {
-    if(req.body.profilePicture == '')
+    console.log(out);
+    if (!req.files || Object.keys(req.files).length === 0) 
     {
-      var editUser = {
-        bio: req.body.bio,
-        email: req.body.email,
-        question: req.body.question,
-        answer: req.body.answer
-      };
+      console.log("Uploaded no image");
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+      if(req.body.password == '')
+      {
+        var editUser = {
+          bio: req.body.bio,
+          email: req.body.email,
+          question: req.body.question,
+          answer: req.body.answer
+        };
+      }
+      else
+      {
+        var editUser = {
+          bio: req.body.bio,
+          email: req.body.email,
+          password: hashedPassword,
+          question: req.body.question,
+          answer: req.body.answer
+        };
+      }
     }
     else
     {
-
-      let sampleFile;
-      let uploadPath;
-    
-      if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No files were uploaded.');
-      }
-    
       // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-      sampleFile = 'default.gif';//req.files.sampleFile;
-      console.log(sampleFile);
-      uploadPath = '~/capstone-gigabites/client/src/pages/user_images/' + sampleFile.name;
-    
+      sampleFile = req.files.sampleFile;
+      
+      let arr = sampleFile.name.split(".");
+      let ext = arr.pop();
+      sampleFile.name = out._id+"."+ext;
+
+      uploadPath = '../client/src/pages/user_images/' + sampleFile.name;
+
       // Use the mv() method to place the file somewhere on your server
       sampleFile.mv(uploadPath, function(err) {
         if (err)
           return res.status(500).send(err);
+          console.log('File '+sampleFile.name+' uploaded!');
       });
 
+      //At this point file has successfully been renamed with the id of the user, and uploaded to the server.
 
-      var editUser = {
-        bio: req.body.bio,
-        email: req.body.email,
-        profilePicture: req.body.profilePicture,
-        question: req.body.question,
-        answer: req.body.answer
-      };
-    }
-  }
-  else
-  {
-    if(req.body.profilePicture == '')
-    {
-      var editUser = {
-        bio: req.body.bio,
-        email: req.body.email,
-        password: req.body.password,
-        question: req.body.question,
-        answer: req.body.answer
-      };
-    }
-    else
-    {      
-      var editUser = {
-        bio: req.body.bio,
-        profilePicture: req.body.profilePicture,
-        email: req.body.email,
-        password: req.body.password,
-        question: req.body.question,
-        answer: req.body.answer
-      };
-    }
-  }
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-  UserModel.findOneAndUpdate(
+      if(req.body.password == '')
+      {
+          var editUser = {
+            bio: req.body.bio,
+            email: req.body.email,
+            profilePicture: out._id,
+            profilePictureEXT: ext,
+            question: req.body.question,
+            answer: req.body.answer
+          };
+      }
+      else
+      {   
+        var editUser = {
+          bio: req.body.bio,
+          profilePicture: out._id,
+          profilePictureEXT: ext,
+          email: req.body.email,
+          password: hashedPassword,
+          question: req.body.question,
+          answer: req.body.answer
+        };
+      }
+    }
+
+    UserModel.findOneAndUpdate(
       { username: req.body.username }, 
       { $set: editUser },
-  ).then(post => {
+    ).then(post => {});
   });
-  
-})
+
+  res.writeHead(302, { Location: editProfileRedirect });
+  res.end();
+});
+
+
 
 
 {/*Function to get recipes from recipes collection based on username*/}

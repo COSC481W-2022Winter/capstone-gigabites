@@ -193,18 +193,7 @@
     text-align:center;
   }
   div.right {float: right; padding-right:10%}
-  
-  input[type="file"] {
-    display: none;
-}
 
-.custom-file-upload {
-  color:white;
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  border: 3px solid #297373;
-}
   .btn:hover{
     background-color:#ff8552;
     color: white;
@@ -307,7 +296,7 @@ textarea.editBio {
 }
 
 textarea.editBio:focus {
-  border:3px solid#ff8552;
+  border:3px solid #ff8552;
 }
 
 .avatar{
