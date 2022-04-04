@@ -16,6 +16,7 @@ import Followers from './pages/followers';
 import Following from './pages/following';
 import IngredientSearch from './pages/ingredientSearch';
 import LoggedOut from './pages/loggedout';
+import AboutUs from './pages/About-Us';
 
 //Sets storage type for session variables
 ReactSession.setStoreType('localStorage');
@@ -48,6 +49,7 @@ class App extends Component {
                     <Route path='/editProfile' element={<EditProfile/>} />
                     <Route path='/loggedout' element={<LoggedOut/>} />
                     <Route path='/ingredientSearch' element={<IngredientSearch/>} />
+                    <Route path='/About-Us' element={<AboutUs/>} />
                 </Routes>
             </Router>
         );
