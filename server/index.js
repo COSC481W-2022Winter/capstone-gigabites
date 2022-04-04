@@ -38,6 +38,12 @@ app.post('/uploads', async function(req, res) {
   let sampleFile;
   let uploadPath;
 
+  const names = (v) => [].concat(v).map(name => name.toString());
+  
+  const ingredientsarray = names(recipe.ingredient);
+  const measurementarray = names(recipe.measurement);
+  const unitsarray = names(recipe.units);
+  
   const newRecipe = new RecipeModel(recipe);
   await newRecipe.save(function(err, out)
   {
@@ -46,13 +52,13 @@ app.post('/uploads', async function(req, res) {
 
     if (!req.files || Object.keys(req.files).length === 0) {
       
-      for(var j=0; j<recipe.ingredient.length; j++)
+      for(var j=0; j<ingredientsarray.length; j++)
       {
         var ingredientObject = {
           recipeID: out._id.toString(),
-          name: req.body.ingredient[j],
-          measurement: req.body.measurement[j],
-          units: req.body.units[j]
+          name: ingredientsarray[j],
+          measurement: measurementarray[j],
+          units: unitsarray[j]
         };
         
         const newIngredient = new IngredientModel(ingredientObject);
@@ -95,13 +101,13 @@ app.post('/uploads', async function(req, res) {
       ).then(post => {
       });
 
-      for(var j=0; j<recipe.ingredient.length; j++)
+      for(var j=0; j<ingredientsarray.length; j++)
       {
         var ingredientObject = {
           recipeID: out._id.toString(),
-          name: req.body.ingredient[j],
-          measurement: req.body.measurement[j],
-          units: req.body.units[j]
+          name: ingredientsarray[j],
+          measurement: measurementarray[j],
+          units: unitsarray[j]
         };
         
         const newIngredient = new IngredientModel(ingredientObject);
