@@ -14,14 +14,32 @@ const RecipeSchema = new mongoose.Schema({
   servingsize: {
     type: String,
   },
+  amountperserving: {
+    type: Number,
+  },
+  amountperservingunit: {
+    type: String,
+  },
   totaltime: {
     type: Number,
   },
   preptime: {
     type: Number,
   },
+  preptimeunit: {
+    type: String,
+  },
   bakingtime: {
     type: Number,
+  },
+  bakingtimeunit: {
+    type: String,
+  },
+  cooktime: {
+    type: Number,
+  },
+  cooktimeunit: {
+    type: String,
   },
   username: {
     type: String,
@@ -39,7 +57,7 @@ const RecipeSchema = new mongoose.Schema({
 //function to calculate total time 
 RecipeSchema.pre('save', async function (next) {
   try{
-      this.totaltime = (this.preptime + this.bakingtime);
+      this.totaltime = (this.preptime + this.bakingtime + this.cooktime);
       next();
   } catch (error) {
     next(error);

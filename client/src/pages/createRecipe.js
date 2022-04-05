@@ -40,18 +40,22 @@ function get()
   });
 }
 
-
 class CreateRecipe extends React.Component {
   constructor(val) {
     super(val);
-    this.state = {rows:[{}], name: '', description: '', directions: '', servingsize: '', preptime: '',  bakingtime: '', redirect: false};
+    this.state = {rows:[{}], name: '', description: '', directions: '', servingsize: '', amountperserving: '', amountperservingunit: 'g', preptime: '', cooktime: '', cooktimeunit:'minutes', bakingtime: '', bakingtimeunit: 'minutes', redirect: false};
     
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleDirectionsChange = this.handleDirectionsChange.bind(this);
     this.handleServingSizeChange = this.handleServingSizeChange.bind(this);
+    this.handleAmountPerServingChange = this.handleAmountPerServingChange.bind(this);
+    this.handleAmountPerServingUnitChange = this.handleAmountPerServingUnitChange.bind(this);
     this.handlePrepTimeChange = this.handlePrepTimeChange.bind(this);
+    this.handleCookTimeChange = this.handleCookTimeChange.bind(this);
+    this.handleCookTimeUnitChange = this.handleCookTimeUnitChange.bind(this);
     this.handleBakingTimeChange = this.handleBakingTimeChange.bind(this);
+    this.handleBakingTimeUnitChange = this.handleBakingTimeUnitChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleAddRow = this.handleAddRow.bind(this);
     this.handleRemoveSpecificRow = this.handleRemoveSpecificRow.bind(this);
@@ -109,17 +113,35 @@ class CreateRecipe extends React.Component {
     handleServingSizeChange(event) {
       this.setState({servingsize: event.target.value});
     }
+    //Function executes whenever user changes the amountperserving textfield
+    handleAmountPerServingChange(event) {
+      this.setState({amountperserving: event.target.value});
+    }
+    handleAmountPerServingUnitChange(event) {
+      this.setState({amountperservingunit: event.target.value});
+    }
     //Function executes whenever user changes the preptime textfield
     handlePrepTimeChange(event) {
       this.setState({preptime: event.target.value});
+    }
+    //Function executes whenever user changes the preptime textfield
+    handleCookTimeChange(event) {
+      this.setState({cooktime: event.target.value});
+    }
+    handleCookTimeUnitChange(event) {
+      this.setState({cooktimeunit: event.target.value});
     }
     //Function executes whenever user changes the bakingtime textfield
     handleBakingTimeChange(event) {
       this.setState({bakingtime: event.target.value});
     }
+    handleBakingTimeUnitChange(event) {
+      this.setState({bakingtimeunit: event.target.value});
+    }
     //Runs whenever user clicks the submit button to validate the form
     handleSubmit(event) {
-      if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.preptime === '' || this.state.bakingtime === '') {
+      console.log("Bake Unit: " + this.state.bakingtimeunit);
+      if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.amountperserving === '' || this.state.preptime === '' || this.state.cooktime === '' || this.state.bakingtime === '') {
         error=true;
         alert("Missing fields! Please try again.");
         return;
@@ -152,8 +174,12 @@ class CreateRecipe extends React.Component {
           description: this.state.description,
           directions: this.state.directions,
           servingsize: this.state.servingsize,
+          amountperserving: this.state.amountperserving,
           preptime: this.state.preptime,
+          cooktime: this.state.cooktime,
+          cooktimeunit: this.state.cooktimeunit,
           bakingtime: this.state.bakingtime,
+          bakingtimeunit: this.state.bakingtimeunit,
 
         }).then((res) => {
           id = res.data._id;
@@ -253,6 +279,34 @@ class CreateRecipe extends React.Component {
                       onChange={this.handleServingSizeChange} value={this.state.servingsize}
                       required />
                   </td>
+                  <th>Units</th>
+                </tr>
+              </tbody>
+
+              <tbody>
+                <tr>
+                  <th>Amount per Serving</th>
+                  <td>
+                    <input
+                      name="amountperserving"
+                      type="number"
+                      placeholder="?" className="createrecipeSmall"
+                      onChange={this.handleAmountPerServingChange} value={this.state.amountperserving}
+                      required />
+                  </td>
+                  <td>
+                    <select
+                      name="amountperservingunit" 
+                      onChange={this.handleAmountPerServingUnitChange} value={this.state.amountperservingunit} >
+                      <option defaultValue value="g">g</option>
+                      <option value="teaspoon">teaspoon</option>
+                      <option value="tablespoon">tablespoon</option>
+                      <option value="fluidOz">fl oz</option>
+                      <option value="cup">cup</option>
+                      <option value="ml">milliliter</option>
+                      <option value="oz">oz</option>
+                    </select>
+                  </td>
                 </tr>
               </tbody>
 
@@ -267,6 +321,35 @@ class CreateRecipe extends React.Component {
                         onChange={this.handlePrepTimeChange} value={this.state.preptime}
                         required />
                     </th>
+                    <td>
+                      <select
+                        name="preptimeunit" >
+                        <option defaultValue value="minutes">minutes</option>
+                        <option value="hours">hours</option>
+                      </select> 
+                    </td>
+                </tr>
+              </tbody>
+
+              <tbody>
+                <tr>
+                  <th>Cook Time</th>
+                    <th>
+                      <input 
+                        name="cooktime"
+                        type="number"
+                        placeholder="?" className="createrecipeSmall"
+                        onChange={this.handleCookTimeChange} value={this.state.cooktime}
+                        required />
+                    </th>
+                    <td>
+                      <select
+                        name="cooktimeunit"
+                        onChange={this.handleCookTimeUnitChange} value={this.state.cooktimeunit} >
+                        <option defaultValue value="minutes">minutes</option>
+                        <option value="hours">hours</option>
+                      </select> 
+                    </td>
                 </tr>
               </tbody>
 
@@ -281,6 +364,14 @@ class CreateRecipe extends React.Component {
                         onChange={this.handleBakingTimeChange} value={this.state.bakingtime}
                         required />
                     </th>
+                    <td>
+                      <select
+                        name="bakingtimeunit" 
+                        onChange={this.handleBakingTimeUnitChange} value={this.state.bakingtimeunit} >
+                        <option defaultValue value="minutes">minutes</option>
+                        <option value="hours">hours</option>
+                      </select> 
+                    </td>
                 </tr>
               </tbody>
             </table>
@@ -320,7 +411,6 @@ class CreateRecipe extends React.Component {
                               />
                             </td>
                             <td>
-                              
                               <select 
                                 name="units" 
                                 onChange={e => this.handleChange(idx, e)}>
