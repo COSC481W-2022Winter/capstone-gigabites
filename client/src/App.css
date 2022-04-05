@@ -281,7 +281,14 @@ label.editProf {
   display: block;
   text-align: left;
   font-weight:bold;
+  padding: 5px;
+}
+
+label.user {
   color: #e6e6e6;
+  font-weight: bold;
+  display: block;
+  text-align: center;
   padding: 5px;
 }
 

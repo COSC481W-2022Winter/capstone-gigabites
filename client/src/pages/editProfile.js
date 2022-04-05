@@ -1,11 +1,61 @@
 import "../App.css";
 import React from "react";
 import { ReactSession } from 'react-client-session';
-import { Navigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 const { editUser } = require('./config.json');
-
   
+
+
+function checkPassword(password)
+{ // eslint-disable-next-line
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.\/?~]/;
+  const upperChar = /[A-Z]/;
+  const lowerChar = /[a-z]/;
+  const number = /\d/;
+
+  if(password.length >= 8)  //Checks for a password with a minimum with 8 characters in string length
+  {
+	if(specialChars.test(password))  //Checks for special characters in the password field
+	{
+	  if(upperChar.test(password))  //Checks for uppercase letters in the password field
+	  {
+		if(lowerChar.test(password))  //Checks for lowercase letters in the password field
+		{
+		  if(number.test(password))  //Checks for numbers in the password field
+		  {
+			return true;
+		  } else invalidPassword(4);
+		} else invalidPassword(3);
+	  } else invalidPassword(2);
+	} else invalidPassword(1);
+  } else invalidPassword(0);
+}
+
+function invalidPassword(param)
+{
+  switch(param)
+  {
+	case 0:   //Less than 8 characters
+	  alert('⛔️ Your password must be a minimum of 8 characters or more!');
+	  break;
+	case 1:   //No special characters
+	  alert('⛔️ Password MUST contain special characters');
+	  break;
+	case 2:   //No uppercase letters
+	  alert('⛔️ Password MUST contain uppercase letters');
+	  break;
+	case 3:   //No lowercase letters
+	  alert('⛔️ Password MUST contain lowercase letters');
+	  break;
+	case 4:   //No numbers
+	  alert('⛔️ Password MUST contain numbers');
+	  break;
+	default:
+	  return false;
+  }
+  return false;
+}
+
  class EditProfile extends React.Component {
     constructor(val) {
         super(val);
@@ -18,26 +68,21 @@ const { editUser } = require('./config.json');
 			password: '' ,
 			question:ReactSession.get("question"),
 			answer: ReactSession.get("answer"),
-			redirect: false
 		};	
-		this.handleUsernameChange = this.handleUsernameChange.bind(this);
    		this.handleBioChange = this.handleBioChange.bind(this);
     	this.handleProfilePictureChange = this.handleProfilePictureChange.bind(this);
      	this.handleEmailChange = this.handleEmailChange.bind(this);
    		this.handlePasswordChange = this.handlePasswordChange.bind(this);
   		this.handleQuestionChange = this.handleQuestionChange.bind(this);
    		this.handleAnswerChange = this.handleAnswerChange.bind(this);
-	}
-
-	//Function to execute when user changes bio
-	handleUsernameChange(event) {
-		this.setState({username: event.target.value});
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
     //Function to execute when user changes bio
     handleBioChange(event) {
+		ReactSession.set("bio", event.target.value);
         this.setState({bio: event.target.value});
-    }
+	}
 	
 	//Function to execute when user changes profile picture 
     handleProfilePictureChange(event) {
@@ -49,11 +94,10 @@ const { editUser } = require('./config.json');
         this.setState({email: event.target.value});
     }
 
-	//Function to execute when user changes paswword
     handlePasswordChange(event) {
-        this.setState({password: event.target.value});
-    }
-
+		this.setState({password: event.target.value});
+	}
+	
 	//Function to execute when user changes security question
     handleQuestionChange(event) {
         this.setState({question: event.target.value});
@@ -64,53 +108,19 @@ const { editUser } = require('./config.json');
         this.setState({answer: event.target.value});
     }
 
-	// //Function to execute when user submits changes 
-	// handleSubmit(event) {
-	// //const editUsers = () => {
-	// 	axios.post(`${editUser}`, {
-	// 		username: this.state.username,
-    //         bio: this.state.bio,
-	// 		profilePicture: this.state.profilePicture,
-    //         email: this.state.email,
-    //         password: this.state.password,
-    //         question: this.state.question,
-    //         answer: this.state.answer
-	// 	}).then(res => console.log(res))
-	// 	.catch(err => {
-	// 			console.log(err);
-	// 			alert("There was an error updating your profile");
-	// 		});
-	// 		ReactSession.set("fromEditProfile", true);
-	// 		this.setState({redirect: true});
-	// 	//}
-	//   }
+	//Function to execute when user submits changes 
+	handleSubmit(event) {
+		checkPassword(this.state.password);
+	}
 
     render(){
-        //Redirect to profile page
-        if(this.state.redirect)
-		{
-			ReactSession.set("bio", this.state.bio);
-
-			if(this.state.profilePicture !== ''){
-				ReactSession.set("profilePicture", this.state.profilePicture);
-			}
-
-			let finalURL = '../profile/'+ReactSession.get('username');
-			return(
-				<div>
-					<Navigate to={finalURL} />
-				</div>
-			);
-		}
-		else
-		{
 		return (
     		<div className="App">
 		
 				{/*Imports navbar to the top of the page*/}
 				<Navbar />
 				<div className="header">
-					<h1>{ReactSession.get('username')}: Edit Profile</h1>
+					<h1>Edit Profile</h1>
 				</div>
 		
 				<form ref='uploadForm' id='uploadForm' action={editUser} method='post' encType="multipart/form-data">
@@ -126,8 +136,8 @@ const { editUser } = require('./config.json');
 							<tbody>
 								<tr>
 									<td>
-										{/*Username which doesn't actually appear on page.. SHHHH*/}
-										<textarea className="editBio" name="username" id='username' maxLength="500" type="text" value={this.state.username} onChange={this.handleUsernameChange} hidden/>
+										<label className="user">{ReactSession.get('username')}</label>
+										<textarea className="editBio" name="username" id='username' type="text" value={this.state.username} onChange={this.handleUsernameChange} hidden/>
 									</td>
 								</tr>
 
@@ -168,11 +178,10 @@ const { editUser } = require('./config.json');
 								</tr>
 							</tbody>
 						</table>
-						<button className="btn" type="submit">Save Changes</button>
+						<button onClick={this.handleSubmit} className="btn" type="submit">Save Changes</button>
 					</div>
 				</form>
 			</div>
         )}  
 	}
-}
 export default EditProfile;

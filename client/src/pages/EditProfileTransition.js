@@ -13,7 +13,6 @@ axios.post(`${getUser}`, {
     else
     {
         ReactSession.set("fromEditProfile", true);
-        ReactSession.set("bio", res.data.bio);
         ReactSession.set("email", res.data.email);
         ReactSession.set("question", res.data.question);
         ReactSession.set("answer", res.data.answer);
