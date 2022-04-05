@@ -12,7 +12,7 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
   },
   servingsize: {
-    type: String,
+    type: Number,
   },
   amountperserving: {
     type: Number,
