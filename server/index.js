@@ -81,7 +81,7 @@ app.post('/uploads', async function(req, res) {
       let arr = sampleFile.name.split(".");
       let ext = arr.pop();
       sampleFile.name = out._id+"."+ext;
-      uploadPath = '../client/src/pages/user_images/' + sampleFile.name; //'../client/src/pages/user_images/' + sampleFile.name;
+      uploadPath = '../client/src/pages/recipe_images/' + sampleFile.name; //'../client/src/pages/user_images/' + sampleFile.name;
 
       // Use the mv() method to place the file somewhere on your server
       sampleFile.mv(uploadPath, function(err) {
