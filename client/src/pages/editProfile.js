@@ -56,6 +56,20 @@ function invalidPassword(param)
   return false;
 }
 
+function validation()
+{
+  var password = document.getElementById("password").value;
+
+  console.log(password);
+  if(password.length < 1) { return true; }
+  if(checkPassword(password)) 
+  {
+	return true;
+  }
+  else
+  	return false;
+}
+
  class EditProfile extends React.Component {
     constructor(val) {
         super(val);
@@ -95,7 +109,9 @@ function invalidPassword(param)
     }
 
     handlePasswordChange(event) {
-		this.setState({password: event.target.value});
+		if (event.target.value.length>0){
+			this.setState({password: event.target.value});
+		}
 	}
 	
 	//Function to execute when user changes security question
@@ -110,7 +126,9 @@ function invalidPassword(param)
 
 	//Function to execute when user submits changes 
 	handleSubmit(event) {
-		checkPassword(this.state.password);
+		if(validation()==false){
+			event.preventDefault();
+		}
 	}
 
     render(){

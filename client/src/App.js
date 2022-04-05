@@ -32,7 +32,7 @@ class App extends Component {
                 <Routes>
                     <Route path='/' exact element={<Home />} />
                     <Route path='/signup' element={<SignUp/>} />
-                    <Route path='profile/:username' component={User} element={<Profile/>} />
+                    <Route path='/profile/:username' component={User} element={<Profile/>} />
                     <Route path='/login' element={<Login/>} />
                     <Route path='/passwordReset' element={<PasswordReset/>} />
                     <Route path='/searchResults' element={<SearchResults/>} />
