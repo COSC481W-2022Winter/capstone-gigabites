@@ -210,7 +210,8 @@ class CreateRecipe extends React.Component {
                   <td>
                     <select
                       name="amountperservingunit" >
-                      <option defaultValue value="g">g</option>
+                      <option defaultValue value="none">none</option>
+                      <option value="g">g</option>
                       <option value="teaspoon">teaspoon</option>
                       <option value="tablespoon">tablespoon</option>
                       <option value="fluidOz">fl oz</option>
