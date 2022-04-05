@@ -1,10 +1,9 @@
 import "../App.css";
 import React from "react";
-import axios from 'axios';
 import Navbar from '../components/Navbar';
 import { Navigate } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
-const  {addRecipe, getRecipe} = require('./config.json');
+const  {upload} = require('./config.json');
 
 /* 
   Credit
@@ -16,40 +15,18 @@ const  {addRecipe, getRecipe} = require('./config.json');
 */
 var id;
 
-//Gets a list of recipes from the backend based on the logged in users username
-function get()
-{
-  console.log(ReactSession.get('username'));
-  axios.post(`${getRecipe}`, {
-    username: ReactSession.get('username'),
-  }).then((res) => {
-    if(res.data === false)
-      console.data("False reply from database on profile page");
-    else{
-      ReactSession.set("length",res.data.length);
-      for(var i = 0; i < ReactSession.get('length'); i++)
-      {
-        ReactSession.set("recipeName"+i,res.data[i].name);
-        ReactSession.set("recipeImage"+i, res.data[i].recipePicture+"."+res.data[i].recipePictureEXT);
-        ReactSession.set("recipeName"+i+"path","../../recipe/"+res.data[i]._id);
-      }
-    }
-  }).catch(() => {
-    console.log('Error alert! Profile.js');
-  });
-}
-
-
 class CreateRecipe extends React.Component {
   constructor(val) {
     super(val);
-    this.state = {rows:[], name: '', description: '', directions: '', servingsize: '', preptime: '',  bakingtime: '', redirect: false};
+    this.state = {rows:[{}], name: '', description: '', directions: '', servingsize: '', amountperserving: '', amountperservingunit: 'g', preptime: '', preptimeunit: 'minutes', cooktime: '', cooktimeunit: 'minutes', bakingtime: '', bakingtimeunit: 'minutes', redirect: false};
     
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleDirectionsChange = this.handleDirectionsChange.bind(this);
     this.handleServingSizeChange = this.handleServingSizeChange.bind(this);
+    this.handleAmountPerServingChange = this.handleAmountPerServingChange.bind(this);
     this.handlePrepTimeChange = this.handlePrepTimeChange.bind(this);
+    this.handleCookTimeChange = this.handleCookTimeChange.bind(this);
     this.handleBakingTimeChange = this.handleBakingTimeChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleAddRow = this.handleAddRow.bind(this);
@@ -57,20 +34,30 @@ class CreateRecipe extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-    handleChange = idx => e => {
+    handleChange (idx,e) {
       const { name, value } = e.target;
       const rows = [...this.state.rows];
+
+      // console.log("IDX: " + idx);
+      // console.log("old rows[idx].name " + rows[idx].ingredient);
+      // console.log("old rows[idx].measurement " + rows[idx].measurement);
+      // console.log("old rows[idx].units " + rows[idx].units);
+
       rows[idx] = {
+        ...rows[idx],
         [name]: value
       };
       this.setState({
         rows
       });
+      // console.log("New row:  I:" + rows[idx].ingredient + " M: " + rows[idx].measurement + " U: " + rows[idx].units);
     };
+
     handleAddRow = () => {
       const item = {
-        Ingredients: "",
-        Measurement: ""
+        ingredient: "",
+        measurement: "",
+        units: "",
       };
       this.setState({
         rows: [...this.state.rows, item]
@@ -98,9 +85,17 @@ class CreateRecipe extends React.Component {
     handleServingSizeChange(event) {
       this.setState({servingsize: event.target.value});
     }
+    //Function executes whenever user changes the amountperserving textfield
+    handleAmountPerServingChange(event) {
+      this.setState({amountperserving: event.target.value});
+    }
     //Function executes whenever user changes the preptime textfield
     handlePrepTimeChange(event) {
       this.setState({preptime: event.target.value});
+    }
+    //Function executes whenever user changes the preptime textfield
+    handleCookTimeChange(event) {
+      this.setState({cooktime: event.target.value});
     }
     //Function executes whenever user changes the bakingtime textfield
     handleBakingTimeChange(event) {
@@ -108,11 +103,12 @@ class CreateRecipe extends React.Component {
     }
     //Runs whenever user clicks the submit button to validate the form
     handleSubmit(event) {
-      if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.preptime === '' || this.state.bakingtime === '') {
+      if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.amountperserving === '' || this.state.preptime === '' || this.state.cooktime === '' || this.state.bakingtime === '') {
         alert("Missing fields! Please try again.");
         return;
       }
 
+      console.log("rows.length: "+this.state.rows.length);
       if(this.state.rows.length === 0) {
         alert("Missing ingredients! Please try again.");
         return;
@@ -121,37 +117,13 @@ class CreateRecipe extends React.Component {
       if(this.state.rows.length > 0) {
         for(var i = 0; i < this.state.rows.length; i++)
         {
-          if(this.state.rows[i].Ingredients === '' || this.state.rows[i].Measurement === '')
-          {
+          if(this.state.rows[i].ingredient === (undefined || "") || this.state.rows[i].measurement === (undefined || "")) {
             alert("Missing fields! Please try again.");
             return;
           }
         }
       }
-
-      //If all fields are filled, send the form to the server
-        axios.post((`${addRecipe}`), {
-          username: ReactSession.get("username"),
-          name: this.state.name,
-          description: this.state.description,
-          directions: this.state.directions,
-          servingsize: this.state.servingsize,
-          preptime: this.state.preptime,
-          bakingtime: this.state.bakingtime
-
-        }).then((res) => {
-          id = res.data._id;
-          if(id==='')
-            alert('Recipe upload failed, please try again later!');
-          else
-          {
-            get();
-            alert("Recipe successfully added!");
-            this.setState({redirect: true});
-          }
-        });
-        event.preventDefault();
-      }
+    }
   render(){
     //Alerts user of successful login, and redirects to user profile
     if(this.state.redirect){
@@ -173,12 +145,18 @@ class CreateRecipe extends React.Component {
           </div>
 
         <div className="centered">
-          <form>
+          <form ref='uploadForm' id='uploadForm' action={upload} method='post' encType="multipart/form-data">
             <label className="label-no-align">Upload an Image</label>
+
             <input type="file" 
-              id="image"
+              name="sampleFile"
               accept="image/png, image/jpeg"/>
             <br />
+            <input 
+              name="username"
+              type="text"
+              value={ReactSession.get("username")}
+              hidden />
             <input 
               name="name"
               type="text"
@@ -208,11 +186,38 @@ class CreateRecipe extends React.Component {
                   <th>Serving Size</th>
                   <td>
                     <input 
-                      name="servingSize"
+                      name="servingsize"
                       type="number"
                       placeholder="?" className="createrecipeSmall"
                       onChange={this.handleServingSizeChange} value={this.state.servingsize}
                       required />
+                  </td>
+                  <th>Units</th>
+                </tr>
+              </tbody>
+
+              <tbody>
+                <tr>
+                  <th>Amount per Serving</th>
+                  <td>
+                    <input
+                      name="amountperserving"
+                      type="number"
+                      placeholder="?" className="createrecipeSmall"
+                      onChange={this.handleAmountPerServingChange} value={this.state.amountperserving}
+                      required />
+                  </td>
+                  <td>
+                    <select
+                      name="amountperservingunit" >
+                      <option defaultValue value="g">g</option>
+                      <option value="teaspoon">teaspoon</option>
+                      <option value="tablespoon">tablespoon</option>
+                      <option value="fluidOz">fl oz</option>
+                      <option value="cup">cup</option>
+                      <option value="ml">milliliter</option>
+                      <option value="oz">oz</option>
+                    </select>
                   </td>
                 </tr>
               </tbody>
@@ -222,12 +227,40 @@ class CreateRecipe extends React.Component {
                   <th>Prep Time</th>
                     <th>
                       <input 
-                        name="prepTime"
+                        name="preptime"
                         type="number"
                         placeholder="?" className="createrecipeSmall"
                         onChange={this.handlePrepTimeChange} value={this.state.preptime}
                         required />
                     </th>
+                    <td>
+                      <select
+                        name="preptimeunit" >
+                        <option defaultValue value="minutes">minutes</option>
+                        <option value="hours">hours</option>
+                      </select> 
+                    </td>
+                </tr>
+              </tbody>
+
+              <tbody>
+                <tr>
+                  <th>Cook Time</th>
+                    <th>
+                      <input 
+                        name="cooktime"
+                        type="number"
+                        placeholder="?" className="createrecipeSmall"
+                        onChange={this.handleCookTimeChange} value={this.state.cooktime}
+                        required />
+                    </th>
+                    <td>
+                      <select
+                        name="cooktimeunit" >
+                        <option defaultValue value="minutes">minutes</option>
+                        <option value="hours">hours</option>
+                      </select> 
+                    </td>
                 </tr>
               </tbody>
 
@@ -236,12 +269,19 @@ class CreateRecipe extends React.Component {
                   <th>Baking Time</th>
                     <th>
                       <input 
-                        name="bakeTime"
+                        name="bakingtime"
                         type="number"
                         placeholder="?" className="createrecipeSmall"
                         onChange={this.handleBakingTimeChange} value={this.state.bakingtime}
                         required />
                     </th>
+                    <td>
+                      <select
+                        name="bakingtimeunit" >
+                        <option defaultValue value="minutes">minutes</option>
+                        <option value="hours">hours</option>
+                      </select> 
+                    </td>
                 </tr>
               </tbody>
             </table>
@@ -267,21 +307,24 @@ class CreateRecipe extends React.Component {
                             <td>
                               <input
                                 type="text"
-                                name="ingredientName"
-                                onChange={this.handleChange(idx)}
+                                name="ingredient"
+                                onChange={e => this.handleChange(idx, e)}
                                 className="ingredients" required
                               />
                             </td>
                             <td>
                               <input
-                                type="text"
+                                type="number"
                                 name="measurement"
-                                onChange={this.handleChange(idx)}
+                                onChange={e => this.handleChange(idx, e)}
                                 className="measurmentsandunits" required
                               />
                             </td>
                             <td>
-                              <select>
+                              <select 
+                                name="units" 
+                                onChange={e => this.handleChange(idx, e)}>
+                                  
                                 <option defaultValue value="none">none</option>
                                 <option value="teaspoon">teaspoon</option>
                                 <option value="tablespoon">tablespoon</option>
