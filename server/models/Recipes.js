@@ -39,6 +39,7 @@ const RecipeSchema = new mongoose.Schema({
   },
   cooktime: {
     type: Number,
+    default: 0,
   },
   cooktimeunit: {
     type: String,
@@ -54,10 +55,6 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     default: "png"
   },
-  cooktime: {
-    type: Number,
-    default: 0,
-  }
 });
 
 //function to calculate total time 
