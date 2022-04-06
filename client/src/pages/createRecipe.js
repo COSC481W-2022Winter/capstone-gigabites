@@ -11,6 +11,7 @@ const  {upload} = require('./config.json');
   Text area: https://stackoverflow.com/a/2528061/17413708
   Dynamic table for ingredients and helper functions: 
    https://stackoverflow.com/a/49174689/17413708
+  Min/Max constraint for text area: https://stackoverflow.com/a/29214886/17413708
 */
 
 
