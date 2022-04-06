@@ -2,7 +2,7 @@ import "../App.css";
 import React from "react";
 import Navbar from '../components/Navbar';
 import { ReactSession } from 'react-client-session';
-const  {upload} = require('./config.json');
+const {upload} = require('./config.json');
 
 /* 
   Credit
@@ -20,8 +20,8 @@ const  {upload} = require('./config.json');
 class CreateRecipe extends React.Component {
   constructor(val) {
     super(val);
-    this.state = {rows:[{}], name: '', description: '', directions: '', servingsize: '', amountperserving: '', amountperservingunit: 'g', preptime: '', preptimeunit: 'minutes', cooktime: '', cooktimeunit: 'minutes', bakingtime: '', bakingtimeunit: 'minutes', redirect: false};
-    
+    this.state = {rows:[{}], totaltime: 0, name: '', description: '', directions: '', servingsize: '', amountperserving: '', amountperservingunit: 'g', preptime: '', preptimeunit: 'minutes', cooktime: '', cooktimeunit: 'minutes', bakingtime: '', bakingtimeunit: 'minutes'};
+
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleDirectionsChange = this.handleDirectionsChange.bind(this);
@@ -33,17 +33,11 @@ class CreateRecipe extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleAddRow = this.handleAddRow.bind(this);
     this.handleRemoveSpecificRow = this.handleRemoveSpecificRow.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);  // DON'T NEED
   }
 
   handleChange (idx,e) {
     const { name, value } = e.target;
     const rows = [...this.state.rows];
-
-    // console.log("IDX: " + idx);
-    // console.log("old rows[idx].name " + rows[idx].ingredient);
-    // console.log("old rows[idx].measurement " + rows[idx].measurement);
-    // console.log("old rows[idx].units " + rows[idx].units);
 
     rows[idx] = {
       ...rows[idx],
@@ -52,7 +46,6 @@ class CreateRecipe extends React.Component {
     this.setState({
       rows
     });
-    // console.log("New row:  I:" + rows[idx].ingredient + " M: " + rows[idx].measurement + " U: " + rows[idx].units);
   };
 
   handleAddRow = () => {
@@ -93,41 +86,19 @@ class CreateRecipe extends React.Component {
   }
   //Function executes whenever user changes the preptime textfield
   handlePrepTimeChange(event) {
+    this.totaltime = this.bakingtime + this.cooktime + this.preptime;
     this.setState({preptime: event.target.value});
-  }
-  //Function executes whenever user changes the preptime textfield
-  handleCookTimeChange(event) {
-    this.setState({cooktime: event.target.value});
   }
   //Function executes whenever user changes the bakingtime textfield
   handleBakingTimeChange(event) {
+    this.totaltime = this.bakingtime + this.cooktime + this.preptime;
     this.setState({bakingtime: event.target.value});
   }
-
-  // Don't need, not called from submit button.
-  //Runs whenever user clicks the submit button to validate the form
-  // handleSubmit(event) {
-  //   if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.amountperserving === '' || this.state.preptime === '' || this.state.cooktime === '' || this.state.bakingtime === '') {
-  //     alert("Missing fields! Please try again.");
-  //     return;
-  //   }
-
-  //   if(this.state.rows.length === 0) {
-  //     alert("Missing ingredients! Please try again.");
-  //     return;
-  //   }
-
-  //   if(this.state.rows.length > 0) {
-  //     for(var i = 0; i < this.state.rows.length; i++)
-  //     {
-  //       if(this.state.rows[i].ingredient === (undefined || "") || this.state.rows[i].measurement === (undefined || "")) {
-  //         alert("Missing fields! Please try again.");
-  //         return;
-  //       }
-  //     }
-  //   }
-  // }
-
+  //Function executes whenever user changes the cooktime textfield
+  handleCookTimeChange(event) {
+    this.totaltime = this.bakingtime + this.cooktime + this.preptime;
+    this.setState({cooktime: event.target.value});
+  }
   render(){
     return (
       <div className="App">

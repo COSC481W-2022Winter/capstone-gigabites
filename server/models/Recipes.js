@@ -25,12 +25,14 @@ const RecipeSchema = new mongoose.Schema({
   },
   preptime: {
     type: Number,
+    default: 0,
   },
   preptimeunit: {
     type: String,
   },
   bakingtime: {
     type: Number,
+    default: 0,
   },
   bakingtimeunit: {
     type: String,
@@ -51,6 +53,10 @@ const RecipeSchema = new mongoose.Schema({
   recipePictureEXT: {
     type: String,
     default: "png"
+  },
+  cooktime: {
+    type: Number,
+    default: 0,
   }
 });
 
