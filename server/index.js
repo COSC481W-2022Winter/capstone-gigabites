@@ -4,12 +4,12 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const fileUpload = require('express-fileupload');
+const DeveloperModel = require("./models/Developers");
 const IngredientModel = require("./models/Ingredients");
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
-const DeveloperModel = require("./models/Developers");
 const cors = require("cors");
-const { port, db, editProfileRedirect } = require('./config.json');
+const { port, db, temp, editProfileRedirect } = require('./config.json');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 const router = express.Router();
@@ -29,6 +29,105 @@ mongoose.connect(`${db}`);
 
 {/*Defines variables for later use*/}
 var compareResult;
+var IDofRecipe;
+
+
+// default options for file upload using express-fileupload
+app.use(fileUpload());
+
+app.post('/uploads', async function(req, res) {
+
+  const recipe = req.body;
+  let sampleFile;
+  let uploadPath;
+
+  const names = (v) => [].concat(v).map(name => name.toString());
+  
+  const ingredientsarray = names(recipe.ingredient);
+  const measurementarray = names(recipe.measurement);
+  const unitsarray = names(recipe.units);
+  
+  const newRecipe = new RecipeModel(recipe);
+  await newRecipe.save(function(err, out)
+  {
+    IDofRecipe = out._id.toString();
+
+
+    if (!req.files || Object.keys(req.files).length === 0) {
+      
+      for(var j=0; j<ingredientsarray.length; j++)
+      {
+        var ingredientObject = {
+          recipeID: out._id.toString(),
+          name: ingredientsarray[j],
+          measurement: measurementarray[j],
+          units: unitsarray[j]
+        };
+        
+        const newIngredient = new IngredientModel(ingredientObject);
+        newIngredient.save(function(err, result)
+        {
+          if(err)
+            console.log("Ingredient Upload Error");
+        });
+      }
+
+      res.writeHead(302, { Location: temp });
+      res.end();
+
+    }
+    else
+    {
+      // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+      sampleFile = req.files.sampleFile;
+      
+      let arr = sampleFile.name.split(".");
+      let ext = arr.pop();
+      sampleFile.name = out._id+"."+ext;
+      uploadPath = '../client/src/pages/recipe_images/' + sampleFile.name;
+
+      // Use the mv() method to place the file somewhere on your server
+      sampleFile.mv(uploadPath, function(err) {
+        if (err)
+          return res.status(500).send(err);
+          console.log('File '+sampleFile.name+' uploaded!');
+      });
+
+      var editRecipe = {
+        recipePicture: out._id,
+        recipePictureEXT: ext
+      };
+      
+      RecipeModel.findOneAndUpdate(
+        { _id: out._id }, 
+        { $set: editRecipe },
+      ).then(post => {
+      });
+
+      for(var j=0; j<ingredientsarray.length; j++)
+      {
+        var ingredientObject = {
+          recipeID: out._id.toString(),
+          name: ingredientsarray[j],
+          measurement: measurementarray[j],
+          units: unitsarray[j]
+        };
+        
+        const newIngredient = new IngredientModel(ingredientObject);
+        newIngredient.save(function(err, result)
+        {
+          if(err)
+            console.log("Ingredient Upload Error");
+        });
+      }
+
+      res.writeHead(302, { Location: temp });
+      res.end();
+
+    }
+  });
+});
+
 
 {/*Function to get recipes from recipes collection based on RecipeID*/}
 app.post("/getRecipeByRecipeIDs", (req, res) => {
@@ -43,6 +142,7 @@ app.post("/getRecipeByRecipeIDs", (req, res) => {
   });
 });
 
+
 {/*Verification request from front-end client to see if the username entered on the signup page is unique or not*/}
 app.post("/createUser", async (req, res) => {
   const user = req.body;
@@ -52,7 +152,7 @@ app.post("/createUser", async (req, res) => {
   //function to check if username exists 
   const existUsername = await UserModel.findOne({ username: req.body.username })
   if (existUsername) {
-    console.log(`Username ${user.username} already in use!  Rejecting user entry`)
+    //console.log(`Username ${user.username} already in use!  Rejecting user entry`)
     res.send(false);
   }
   else {
@@ -62,14 +162,6 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
-{/*Adds recipe to database*/}
-app.post("/addRecipes", async (req, res) => {
-  const recipe = req.body;
-
-  const newRecipe = new RecipeModel(recipe);
-  await newRecipe.save(function(err, out)
-    {res.send(out);});
-});
 
 {/*Function to see if the password entered on the login page actually matches the encrypted username in the database*/}
 app.post("/passwordValidation", (req, res) => {
@@ -205,13 +297,9 @@ app.post("/editUsers", async function(req,res)
 });
 
 
-
-
 {/*Function to get recipes from recipes collection based on username*/}
 app.post("/getRecipes", (req, res) => {
   const output = req.body.username;
-
-
   RecipeModel.find({username: output }, function(err, recipe) 
   {
     if (err)
@@ -221,6 +309,21 @@ app.post("/getRecipes", (req, res) => {
   }).limit(5);
 });
 
+
+{/*Function to get recipes from recipes collection based on username*/}
+app.post("/getLastRecipes", (req, res) => {
+  const output = req.body.username;
+
+  RecipeModel.find({username: output }, function(err, recipe) 
+  {
+    if (err)
+      res.send(false);
+    //console.log(JSON.stringify(recipe));
+    res.send(recipe);
+  }).limit(1).sort({$natural:-1})
+});
+  
+
 {/*Function to get ingredients from collection based on the recipeID of the recipe*/}
 app.post("/getIngredientsByRecipeID", (req, res) => {
   const output = req.body.recipeID
@@ -229,11 +332,11 @@ app.post("/getIngredientsByRecipeID", (req, res) => {
   {
     if (err)
       res.send(false);
-
     
     res.send(ingredients);
   });
 });
+
 
 {/*Function to get developers from developers collection*/}
 app.post("/getDevelopers", (req, res) => {
@@ -244,7 +347,6 @@ app.post("/getDevelopers", (req, res) => {
     res.send(developer);
   });
 });
-
 
 
 {/*Displays running state of server in console, along with the currently running port number*/}
