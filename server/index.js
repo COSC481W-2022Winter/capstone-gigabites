@@ -9,10 +9,9 @@ const IngredientModel = require("./models/Ingredients");
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const cors = require("cors");
-const { port, db, temp, editProfileRedirect } require('./config.json');
+const { port, db, temp, editProfileRedirect } = require('./config.json');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
-const fileUpload = require('express-fileupload');
 const router = express.Router();
 app.use("/",router);
 
@@ -300,7 +299,7 @@ app.post("/editUsers", async function(req,res)
 
 {/*Function to get recipes from recipes collection based on username*/}
 app.post("/getRecipes", (req, res) => {
-
+  const output = req.body.username;
   RecipeModel.find({username: output }, function(err, recipe) 
   {
     if (err)
