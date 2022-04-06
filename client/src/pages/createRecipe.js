@@ -339,6 +339,7 @@ class CreateRecipe extends React.Component {
                           </td>
                           <td>
                             <button
+                              type="button"
                               className="btn btn-outline-danger btn-sm"
                               onClick={this.handleRemoveSpecificRow(idx)}>
                               Remove
