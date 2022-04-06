@@ -3,6 +3,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const IngredientModel = require("./models/Ingredients");
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const cors = require("cors");
@@ -124,6 +125,21 @@ app.post("/getRecipes", (req, res) => {
     res.send(recipe);
   }).limit(5);
 });
+
+{/*Function to get ingredients from collection based on the recipeID of the recipe*/}
+app.post("/getIngredientsByRecipeID", (req, res) => {
+  const output = req.body.recipeID
+
+  IngredientModel.find({recipeID: output }, function(err, ingredients) 
+  {
+    if (err)
+      res.send(false);
+
+    
+    res.send(ingredients);
+  });
+});
+
 
 
 {/*Displays running state of server in console, along with the currently running port number*/}

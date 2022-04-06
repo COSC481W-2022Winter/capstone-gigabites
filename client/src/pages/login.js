@@ -45,12 +45,12 @@ function getRecipesByUsername()
         ReactSession.set("recipeTotalTime"+i,res.data[i].totaltime);
         ReactSession.set("recipePrepTime"+i,res.data[i].preptime);
         ReactSession.set("recipeBakingTime"+i,res.data[i].bakingtime);
-        // ReactSession.set("recipeCookTime"+i,res.data[i].cooktime);
-        // ReactSession.set("recipePrepTimeUnits"+i,res.data[i].preptimeunits);
-        // ReactSession.set("recipeCookTimeUnits"+i,res.data[i].cooktimeunits);
-        // ReactSession.set("recipeBakingTimeUnits"+i,res.data[i].bakingtimeunits);
-        // ReactSession.set("amountPerServing"+i,res.data[i].amountperserving);
-        // ReactSession.set("amountPerServingUnits"+i,res.data[i].amountperservingunits);
+        ReactSession.set("recipeCookTime"+i,res.data[i].cooktime);
+        ReactSession.set("recipePrepTimeUnits"+i,res.data[i].preptimeunit);
+        ReactSession.set("recipeCookTimeUnits"+i,res.data[i].cooktimeunit);
+        ReactSession.set("recipeBakingTimeUnits"+i,res.data[i].bakingtimeunit);
+        ReactSession.set("amountPerServing"+i,res.data[i].amountperserving);
+        ReactSession.set("amountPerServingUnits"+i,res.data[i].amountperservingunit);
       }
     }
   }).catch(() => {
