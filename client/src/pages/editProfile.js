@@ -109,9 +109,7 @@ function validation()
     }
 
     handlePasswordChange(event) {
-		if (event.target.value.length>0){
 			this.setState({password: event.target.value});
-		}
 	}
 	
 	//Function to execute when user changes security question
