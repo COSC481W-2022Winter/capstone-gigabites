@@ -7,8 +7,7 @@ const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const IngredientModel = require("./models/Ingredients");
 const cors = require("cors");
-//const { port, db, temp } = require('./config.json');
-const { port, db } = require('./config.json');
+const { port, db, temp } = require('./config.json');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 const fileUpload = require('express-fileupload');
@@ -69,8 +68,8 @@ app.post('/uploads', async function(req, res) {
         });
       }
 
-      //res.writeHead(302, { Location: temp });
-      //res.end();
+      res.writeHead(302, { Location: temp });
+      res.end();
 
     }
     else
@@ -81,7 +80,7 @@ app.post('/uploads', async function(req, res) {
       let arr = sampleFile.name.split(".");
       let ext = arr.pop();
       sampleFile.name = out._id+"."+ext;
-      uploadPath = '../client/src/pages/recipe_images/' + sampleFile.name; //'../client/src/pages/user_images/' + sampleFile.name;
+      uploadPath = '../client/src/pages/recipe_images/' + sampleFile.name;
 
       // Use the mv() method to place the file somewhere on your server
       sampleFile.mv(uploadPath, function(err) {
@@ -118,8 +117,8 @@ app.post('/uploads', async function(req, res) {
         });
       }
 
-      //res.writeHead(302, { Location: temp });
-      //res.end();
+      res.writeHead(302, { Location: temp });
+      res.end();
 
     }
   });
@@ -127,9 +126,9 @@ app.post('/uploads', async function(req, res) {
 
 
 {/*Function to get recipes from recipes collection based on RecipeID*/}
-// app.get("/getRecipeByIDs", async (req, res) => {
-//   res.send(IDofRecipe);
-// });
+app.get("/getRecipeByIDs", async (req, res) => {
+  res.send(IDofRecipe);
+ });
 
 
 
@@ -238,6 +237,21 @@ app.post("/getRecipes", (req, res) => {
     res.send(recipe);
   }).limit(5);
 });
+
+
+{/*Function to get recipes from recipes collection based on username*/}
+app.post("/getLastRecipes", (req, res) => {
+  const output = req.body.username;
+
+  RecipeModel.find({username: output }, function(err, recipe) 
+  {
+    if (err)
+      res.send(false);
+    //console.log(JSON.stringify(recipe));
+    res.send(recipe);
+  }).limit(1).sort({$natural:-1})
+});
+
 
 
 {/*Displays running state of server in console, along with the currently running port number*/}
