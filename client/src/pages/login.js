@@ -33,7 +33,7 @@ class Login extends React.Component {
   constructor(val) {
     super(val);
     this.state = {username: '', password: '', redirect: false};
-
+    ReactSession.set("fromEditProfile", false);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
