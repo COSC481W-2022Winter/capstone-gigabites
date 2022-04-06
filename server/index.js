@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
+const DeveloperModel = require("./models/Developers");
 const cors = require("cors");
 const { port, db } = require('./config.json');
 const bcrypt = require('bcrypt');
@@ -109,6 +110,21 @@ app.post("/getRecipes", (req, res) => {
       res.send(false);
     }
     res.send(recipe);
+  });
+});
+
+{/*Function to get developers from developers collection*/}
+app.post("/getDevelopers", (req, res) => {
+  const output = req.body;
+  console.log(output);
+
+  DeveloperModel.find({}, function(err, developer) 
+  {
+    if (err)
+    {
+      console.log(developer);
+    }
+    res.send(developer);
   });
 });
 
