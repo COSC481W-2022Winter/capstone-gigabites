@@ -1,158 +1,256 @@
 .App { font-family: system-ui; }
 
-h3.italic{ font-style: italic; }
+.App-logo {
+height: 40vmin;
+pointer-events: none;
+}
 
-body{ background-color:#39393a; }
+.App-header {
+background-color: #e6e6e6;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+font-size: calc(10px + 2vmin);
+color: white;
+}
+
+.App-link { color: #61dafb; }
+
+table.normal
+{
+text-align:left;
+margin-left:auto;
+margin-right:auto;
+}
+
+table.editProf
+{
+text-align:left;
+margin-left:auto;
+margin-right:auto;
+width:75%;
+}
+
+.label{
+text-align:left;
+display: block;
+font-size: larger;
+font-weight:bold;
+color: #e6e6e6;
+padding: 10px;
+}
+
+input.textbox{
+font-size: larger;
+padding: 1%;
+margin: 1%;
+width:80%;
+}
+
+.btn{
+color: #e6e6e6;
+background-color: #39393a;
+border: 3px solid white;
+border-radius: 5px;
+font-size: 13px;
+font-weight: bold;
+display: block;
+padding-left: 20px;
+padding-right: 20px;
+padding-top: 7px;
+padding-bottom: 7px;
+text-align:center;
+margin: 20px auto;
+}
+
+.btn:hover{
+background-color:#ff8552;
+color: white;
+}
+
+body
+{
+background-color:#39393a;
+}
+
+table.centered{
+margin-left:auto;
+margin-right:auto;
+}
+
+div.centered{
+text-align:center;
+margin-left:auto;
+margin-right:auto;
+}
+
+input.editProf[type=password] {
+width: 100%;
+height: 25px;
+box-sizing: border-box;
+border: 3px solid #297373;
+outline: none;
+text-align: left;
+}
+
+
+input.editProf[type=password]:focus {
+border: 3px solid #ff8552;  }
+
+input.editProf[type=text] {
+width: 100%;
+height: 25px;
+box-sizing: border-box;
+border: 3px solid #297373;
+outline: none;
+text-align: left;
+}
+
+
+input.editProf[type=text]:focus {
+border: 3px solid #ff8552;  }
+
+label.editProf {
+color: #e6e6e6;
+font-weight: bold;
+display: block;
+text-align: left;
+font-weight:bold;
+padding: 5px;
+}
+
+label.user {
+color: #e6e6e6;
+font-weight: bold;
+display: block;
+text-align: center;
+padding: 5px;
+}
+
+textarea.editBio {
+padding: 1%;
+margin: 1%;
+width: 100%;
+height: 100px;
+border: 3px solid #297373;
+outline: none;
+text-align: left;
+}
+
+textarea.editBio:focus {
+border:3px solid #ff8552;
+}
+
+.avatar{
+vertical-align: middle;
+width: 150px;
+height: 150px;
+border-radius: 50%;
+}
+
+.btnProf{
+color: #e6e6e6;
+background-color: #297373;
+border: 3px solid #e6e6e6;
+}
+
+h3.italic{ font-style: italic; }
 
 .textcenter{text-align:center;}
 
 div.right {float: right; padding-right:10%}
 
 .border{
-  border:4px solid #ff8552;
-  margin-left:35%;
-  margin-right:35%;
-  background-color:#297373;
+border:4px solid #ff8552;
+margin-left:35%;
+margin-right:35%;
+background-color:#297373;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-table.normal
-{
-  text-align:left;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.App-header {
-  background-color: #e6e6e6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link { color: #61dafb; }
 
 .header {
-  padding: 20px;
-  text-align: center;
-  color: #ff8552;
-  font-size: larger;
-  font-weight: bold;
-}
-
-.label{
-  text-align:left;
-  display: block;
-  font-size: larger;
-  font-weight:bold;
-  color: #e6e6e6;
-  padding: 10px;
+padding: 20px;
+text-align: center;
+color: #ff8552;
+font-size: larger;
+font-weight: bold;
 }
 
 .label-no-align{
-  font-size: larger;
-  font-weight:bold;
-  color: #e6e6e6;
-  padding: 10px;
+font-size: larger;
+font-weight:bold;
+color: #e6e6e6;
+padding: 10px;
 }
-
-table.centered{
-  margin-left:auto;
-  margin-right:auto;
-}
-
-div.centered{
-  text-align:center;
-  margin-left:auto;
-  margin-right:auto;
-}
-
 
 /* ----------------> Start of recipe page related material <---------------- */
 
 .imageTD{
-  text-align:center;
-  width:50%;
+text-align:center;
+width:50%;
 }
 
 table.recipePageTable{
-  /* border:1px solid black; */
-  margin-left:auto;
-  margin-right:auto;
+margin-left:auto;
+margin-right:auto;
 }
 
 table.recipePageTableMain{
-  margin-left:auto;
-  margin-right:auto;
-  width:50%;
-  /* border:1px solid black; */
+margin-left:auto;
+margin-right:auto;
+width:50%;
 }
 
 .recipeCenter{
-  width:100%;
-  max-width:500px;
-  float:left;
+width:100%;
+max-width:500px;
+float:left;
 }
 
 td.recipeHeader{
-  /* border:1px solid black; */
-  width:1%;
-  text-align:right;
+width:1%;
+text-align:right;
 }
 
 td.recipeHeaderCenter{
-  text-align:center;
-  /* border:1px solid black; */
-  width:1%;
+text-align:center;
+width:1%;
 }
 
 td.recipeExtra{
-  /* border:1px solid black; */
-  width:1%;
-  text-align:center;
+width:1%;
+text-align:center;
 }
 
 .borderRecipe{
-  border:4px solid #ff8552;
-  margin-left:30%;
-  margin-right:30%;
-  background-color:#297373;
+border:4px solid #ff8552;
+margin-left:30%;
+margin-right:30%;
+background-color:#297373;
 }
 
 .borderRecipeTop{
-  border:4px solid #ff8552;
-  background-color:#297373;
-  margin-left:15%;
-  margin-right:15%;
+border:4px solid #ff8552;
+background-color:#297373;
+margin-left:15%;
+margin-right:15%;
 }
 
 .timeHeader{
-  text-align:right;
-  /* border:1px solid black; */
-  width:10%;
+text-align:right;
+width:10%;
 }
 
 .time{
-  text-align:center;
-  /* border:1px solid black; */
-  width:10%;
+text-align:center;
+width:10%;
 }
 hr{
-  background-color:black;
-  height:3px; 
-  width:100%;
+background-color:black;
+height:3px; 
+width:100%;
 }
-/* td{
-  border:1px solid black;
-} */
 
 /* ----------------> End of recipe page related material <---------------- */
 
@@ -161,20 +259,20 @@ hr{
 /* ----------------> Start of create recipe page related material <---------------- */
 
 input.createrecipeSmall{
-  font-size: larger;
-  padding: 1%;
-  margin: 1%;
-  width:30%;
+font-size: larger;
+padding: 1%;
+margin: 1%;
+width:30%;
 }
 
 input.ingredients{
-  font-size: larger;
-  width:60%;
+font-size: larger;
+width:60%;
 }
 
 input.measurmentsandunits{
-  font-size: larger;
-  width:60%;
+font-size: larger;
+width:60%;
 }
 
 /* ----------------> End of create recipe page related material <---------------- */
@@ -186,94 +284,58 @@ input.measurmentsandunits{
 
 a.forgotpass
 {
-  color: #e6e6e6;
-  background-color: #39393a;
-  border: 3px solid white;
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: bold;
-  display: block;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  text-align:center;
-  margin: 20px 40%;
+color: #e6e6e6;
+background-color: #39393a;
+border: 3px solid white;
+border-radius: 5px;
+font-size: 13px;
+font-weight: bold;
+display: block;
+padding-left: 20px;
+padding-right: 20px;
+padding-top: 7px;
+padding-bottom: 7px;
+text-align:center;
+margin: 20px 40%;
 }
 
 a.forgotpass:hover{
-  background-color:#ff8552;
-  color: white;
+background-color:#ff8552;
+color: white;
 }
 
 /* ----------------> End of login page related material <---------------- */
 
 
 
-
-/* ----------------> Start of login page and signup page related material <---------------- */
-
-.btn{
-  color: #e6e6e6;
-  background-color: #39393a;
-  border: 3px solid white;
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: bold;
-  display: block;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  text-align:center;
-  margin: 20px auto;
-}
-
-.btn:hover{
-  background-color:#ff8552;
-  color: white;
-}
-
-input.textbox{
-  font-size: larger;
-  padding: 1%;
-  margin: 1%;
-  width:80%;
-}
-
-/* ----------------> End of login page and signup page related material <---------------- */
-
-
-
-
 /* ----------------> Start of view profile page related material <---------------- */
 .bio{
-  text-align:center;
-  color:#e6e6e6;
+text-align:center;
+color:#e6e6e6;
 }
 
 .UsernameHeader{
-  color: #e6e6e6;
-  text-align:center;
-  text-decoration:underline;
+color: #e6e6e6;
+text-align:center;
+text-decoration:underline;
 }
 .YourRecipes{
 
-  color:#e6e6e6;
-  text-align:center;
+color:#e6e6e6;
+text-align:center;
 }
 
 .followingfollows{
-  border: 0.2em solid black;
-  background-color:#297373;
-  margin:0.5%;
-  color:white; 
-  padding:0.25%;
-  float:right;
-  text-decoration:none;
-  font-weight:bold;
-  text-align:center;
-  margin-right:10px;
+border: 0.2em solid black;
+background-color:#297373;
+margin:0.5%;
+color:white; 
+padding:0.25%;
+float:right;
+text-decoration:none;
+font-weight:bold;
+text-align:center;
+margin-right:10px;
 }
 
 .followingfollows:hover:not(.active) {background-color: #ff8552;}
@@ -282,67 +344,67 @@ input.textbox{
 
 a.profilebuttons
 {
-  color: #e6e6e6;
-  background-color:#297373;
-  border: 3px solid black;
-  padding:0.25%;
-  font-weight: bold;
-  text-decoration:none;
-  text-align:center;
-  margin: 2%;
+color: #e6e6e6;
+background-color:#297373;
+border: 3px solid black;
+padding:0.25%;
+font-weight: bold;
+text-decoration:none;
+text-align:center;
+margin: 2%;
 }
 
 a.profilebuttons:hover{
-  background-color:#ff8552;
-  color: white;
+background-color:#ff8552;
+color: white;
 }
 
 .myRecipesHeader{
-  text-align:center;
-  font-weight:bold;
-  color: #e6e6e6;
-  padding-bottom:0%;
+text-align:center;
+font-weight:bold;
+color: #e6e6e6;
+padding-bottom:0%;
 }
 
 .recipeimage{
-  width:100px;
- }
+width:100px;
+}
 
- .borderProfile{
-  border:4px solid #ff8552;
-  margin-left:35%;
-  margin-right:35%;
-  background-color:#297373;
+.borderProfile{
+border:4px solid #ff8552;
+margin-left:35%;
+margin-right:35%;
+background-color:#297373;
 }
 
 .labelCenter{
-  display: block;
-  font-size: larger;
-  font-weight:bold;
-  color: #e6e6e6;
-  padding: 10px;
+display: block;
+font-size: larger;
+font-weight:bold;
+color: #e6e6e6;
+padding: 10px;
 }
 
 .profileImage{
-  width:80%;
-  max-width:300px;
- }
+width:80%;
+max-width:300px;
+}
 
 button.profilebuttons
 {
-  color: #ff8552;
-  background-color:#39393a;
-  border: 3px solid black;
-  padding:10% 10%;
-  font-weight: bold;
-  text-decoration:none;
-  text-align:center;
-  margin: 2%;
+color: #ff8552;
+background-color:#39393a;
+border: 3px solid black;
+padding:10% 10%;
+font-weight: bold;
+text-decoration:none;
+text-align:center;
+margin: 2%;
 }
 
 button.profilebuttons:hover{
-  background-color:#85ffc7;
-  color: black;
+background-color:#85ffc7;
+color: black;
 }
 
 /* ----------------> End of view profile page related material <---------------- */
@@ -353,23 +415,23 @@ button.profilebuttons:hover{
 /* ----------------> Start of Navbar related material <---------------- */
 
 ul.topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #297373;
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+background-color: #297373;
 }
 
 ul.topnav li {float: left;}
 
 ul.topnav li a {
-  display: block;
-  color: #e6e6e6;
-  font-family: system-ui;
-  font-weight: bold;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+display: block;
+color: #e6e6e6;
+font-family: system-ui;
+font-weight: bold;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
 }
 
 ul.topnav li a:hover:not(.active) {background-color: #ff8552;}
@@ -380,17 +442,17 @@ ul.topnav li.right {float: right;}
 
 input.logout
 {
-  display: block;
-  color: #e6e6e6;
-  font-family:system-ui;
-  font-weight:bold;
-  text-align:center;
-  padding:16px 16px;
-  text-decoration:none;
-  background-color:#297373;
-  float:right;
-  border:none;
-  overflow: hidden;
+display: block;
+color: #e6e6e6;
+font-family:system-ui;
+font-weight:bold;
+text-align:center;
+padding:16px 16px;
+text-decoration:none;
+background-color:#297373;
+float:right;
+border:none;
+overflow: hidden;
 }
 
 input.logout:hover{background-color: #ff8552;}

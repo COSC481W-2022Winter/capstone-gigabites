@@ -56,7 +56,6 @@ class CreateRecipe extends React.Component {
     this.handleRemoveSpecificRow = this.handleRemoveSpecificRow.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
     handleChange = idx => e => {
       const { name, value } = e.target;
       const rows = [...this.state.rows];
@@ -177,7 +176,7 @@ class CreateRecipe extends React.Component {
             <label className="label-no-align">Upload an Image</label>
             <input type="file" 
               id="image"
-              accept="image/png, image/jpeg"/>
+              accept="image/png, image/jpeg, image/gif"/>
             <br />
             <input 
               name="name"

@@ -29,6 +29,14 @@ class Profile extends React.Component {
         </div>
         }
 
+        {/*If coming from edit profile page, display successfully updated in alert!  (Also resets ReactSession fromlogin variable)*/}
+        {(ReactSession.get('fromEditProfile') === true) &&
+        <div>
+          <Alert severity="success">Successfully updated your profile!</Alert>
+          {ReactSession.remove("fromEditProfile")}
+        </div>
+        }
+
         {/*If the user is logged in, display the profile page*/}
         {(ReactSession.get('username') !== undefined) &&
           <div>
@@ -43,7 +51,8 @@ class Profile extends React.Component {
               <h2 className="bio">bio</h2>
               <p className="bio">{ReactSession.get('bio')}</p><br/>
             
-            <img className="profileImage" src={require('./user_images/' + ReactSession.get('picture'))} alt="blobjr"/>
+            <img className="profileImage" src={require('./user_images/' + ReactSession.get('profilePicture'))} alt="blobjr"/>
+
               <br/><br/>
               <Link to="/recipe/create" className="profilebuttons">Create a Recipe</Link>
               <Link to="/editprofile" className="profilebuttons">Edit Profile</Link>

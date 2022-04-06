@@ -9,6 +9,7 @@ import SignUp from './pages/signup';
 import Login from './pages/login';
 import PasswordReset from './pages/passwordReset';
 import EditProfile from './pages/editProfile';
+import EditProfileTransition from './pages/EditProfileTransition';
 import SearchResults from './pages/searchResults';
 import CreateRecipe from './pages/createRecipe';
 import Recipe from './pages/recipe';
@@ -47,6 +48,7 @@ class App extends Component {
                     <Route path='/followers' element={<Followers/>} />
                     <Route path='/following' element={<Following/>} />
                     <Route path='/editProfile' element={<EditProfile/>} />
+                    <Route path='/editProfileTransition' element={<EditProfileTransition/>} />
                     <Route path='/loggedout' element={<LoggedOut/>} />
                     <Route path='/ingredientSearch' element={<IngredientSearch/>} />
                     <Route path='/About-Us' element={<AboutUs/>} />
