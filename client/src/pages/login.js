@@ -16,17 +16,19 @@ function getUserInfo()
       console.data("False reply from database");
     else{
       ReactSession.set("bio", res.data.bio);
-      ReactSession.set("picture", res.data.profilePicture+"."+res.data.profilePictureEXT);
+      ReactSession.set("email", res.data.email);
+      ReactSession.set("question", res.data.question);
+      ReactSession.set("answer", res.data.answer);
+      ReactSession.set("profilePicture", res.data.profilePicture+"."+res.data.profilePictureEXT);
     }
   }).catch(() => {
-    console.log('Error alert! Profile.js');
+    console.log('Error alert! Login.js');
   });
 }
 
 //Gets a list of recipes from the backend based on the logged in users username
-function get()
+function getRecipesByUsername()
 {
-  console.log(ReactSession.get('username'));
   axios.post(`${getRecipe}`, {
     username: ReactSession.get('username'),
   }).then((res) => {
@@ -36,13 +38,26 @@ function get()
       ReactSession.set("length",res.data.length);
       for(var i = 0; i < ReactSession.get('length'); i++)
       {
+        ReactSession.set("recipeID"+i,res.data[i]._id);
         ReactSession.set("recipeName"+i,res.data[i].name);
         ReactSession.set("recipeImage"+i, res.data[i].recipePicture+"."+res.data[i].recipePictureEXT);
         ReactSession.set("recipeName"+i+"path","../../recipe/"+res.data[i]._id);
+        ReactSession.set("recipeDescription"+i, res.data[i].description);
+        ReactSession.set("recipeDirections"+i,res.data[i].directions);
+        ReactSession.set("recipeServingSize"+i,res.data[i].servingsize);
+        ReactSession.set("recipeTotalTime"+i,res.data[i].totaltime);
+        ReactSession.set("recipePrepTime"+i,res.data[i].preptime);
+        ReactSession.set("recipeBakingTime"+i,res.data[i].bakingtime);
+        ReactSession.set("recipeCookTime"+i,res.data[i].cooktime);
+        ReactSession.set("recipePrepTimeUnits"+i,res.data[i].preptimeunit);
+        ReactSession.set("recipeCookTimeUnits"+i,res.data[i].cooktimeunit);
+        ReactSession.set("recipeBakingTimeUnits"+i,res.data[i].bakingtimeunit);
+        ReactSession.set("amountPerServing"+i,res.data[i].amountperserving);
+        ReactSession.set("amountPerServingUnits"+i,res.data[i].amountperservingunit);
       }
     }
   }).catch(() => {
-    console.log('Error alert! Profile.js');
+    console.log('Error alert! Login.js');
   });
 }
 
@@ -50,7 +65,7 @@ class Login extends React.Component {
   constructor(val) {
     super(val);
     this.state = {username: '', password: '', redirect: false};
-
+    ReactSession.set("fromEditProfile", false);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,8 +96,8 @@ class Login extends React.Component {
         ReactSession.set("username", this.state.username);
         ReactSession.set("fromlogin", true);
         getUserInfo();
-        get();
-        setTimeout(() => { this.setState({redirect: true}); }, 500);
+        getRecipesByUsername();
+        setTimeout(() => { this.setState({redirect: true}); }, 1000);
       }
       else  //Incorrect username/password information
         alert ("Incorrect username or password!  Please try again.");

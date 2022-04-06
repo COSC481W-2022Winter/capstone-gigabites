@@ -34,7 +34,7 @@ class CreateRecipe extends React.Component {
     this.handleAddRow = this.handleAddRow.bind(this);
     this.handleRemoveSpecificRow = this.handleRemoveSpecificRow.bind(this);
   }
-
+  
   handleChange (idx,e) {
     const { name, value } = e.target;
     const rows = [...this.state.rows];
