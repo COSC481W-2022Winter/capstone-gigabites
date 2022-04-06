@@ -3,7 +3,6 @@ import React from "react";
 import { ReactSession } from 'react-client-session';
 import Navbar from '../components/Navbar';
 const { editUser } = require('./config.json');
-  
 
 
 function checkPassword(password)
@@ -94,7 +93,6 @@ function validation()
 
     //Function to execute when user changes bio
     handleBioChange(event) {
-		ReactSession.set("bio", event.target.value);
         this.setState({bio: event.target.value});
 	}
 	
@@ -124,7 +122,9 @@ function validation()
 
 	//Function to execute when user submits changes 
 	handleSubmit(event) {
-		if(validation()==false){
+		ReactSession.set("bio", this.state.bio);
+
+		if(validation()===false){
 			event.preventDefault();
 		}
 	}
@@ -182,7 +182,7 @@ function validation()
 									<td>
 										{/*Security Answer*/}
 										<label className="editProf">Security Question Answer </label>
-										<input className="editProf" name="answer" id='answer' type="text" value={this.state.answer} onChange={this.handleAnswerChange}/>
+										<input className="editProf" name="answer" id='answer' type="text" value={this.state.answer} onChange={this.handleAnswerChange} required/>
 									</td>
 								</tr>
 								<tr>

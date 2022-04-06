@@ -61,7 +61,7 @@ const AboutUs = () => {
 								<h1>{ developersData[0][0]} </h1>
 								<h3>{ developersData[0][1]} </h3>
 								<h3>{ developersData[0][2]} </h3>
-								<h3><a href={ developersData[0][3]} >github</a></h3>
+								<h3><a href={ developersData[0][3]} >Github</a></h3>
 							
 			
 							</div>
@@ -74,7 +74,7 @@ const AboutUs = () => {
 								<h1>{ developersData[1][0]} </h1>
 								<h3>{ developersData[1][1]} </h3>
 								<h3>{ developersData[1][2]} </h3>
-								<h3><a href={ developersData[1][3]} >github</a></h3>
+								<h3><a href={ developersData[1][3]} >Github</a></h3>
 							
 			
 							</div>
@@ -87,7 +87,7 @@ const AboutUs = () => {
 								<h1>{ developersData[2][0]} </h1>
 								<h3>{ developersData[2][1]} </h3>
 								<h3>{ developersData[2][2]} </h3>
-								<h3><a href={ developersData[2][3]} >github</a></h3>
+								<h3><a href={ developersData[2][3]} >Github</a></h3>
 							
 			
 							</div>
@@ -100,7 +100,7 @@ const AboutUs = () => {
 								<h1>{ developersData[3][0]} </h1>
 								<h3>{ developersData[3][1]} </h3>
 								<h3>{ developersData[3][2]} </h3>
-								<h3><a href={ developersData[3][3]} >github</a></h3>
+								<h3><a href={ developersData[3][3]} >Github</a></h3>
 							
 			
 							</div>
@@ -113,7 +113,7 @@ const AboutUs = () => {
 								<h1>{ developersData[4][0]} </h1>
 								<h3>{ developersData[4][1]} </h3>
 								<h3>{ developersData[4][2]} </h3>
-								<h3><a href={ developersData[4][3]} >github</a></h3>
+								<h3><a href={ developersData[4][3]} >Github</a></h3>
 							
 			
 							</div>
@@ -126,7 +126,7 @@ const AboutUs = () => {
 								<h1>{ developersData[5][0]} </h1>
 								<h3>{ developersData[5][1]} </h3>
 								<h3>{ developersData[5][2]} </h3>
-								<h3><a href={ developersData[5][3]} >github</a></h3>
+								<h3><a href={ developersData[5][3]} >Github</a></h3>
 							
 			
 							</div>
