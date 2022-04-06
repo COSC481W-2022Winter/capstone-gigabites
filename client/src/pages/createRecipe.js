@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from '../components/Navbar';
 import { Navigate } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
-const  {upload} = require('./config.json');
+const {upload} = require('./config.json');
 
 /* 
   Credit
@@ -18,8 +18,8 @@ var id;
 class CreateRecipe extends React.Component {
   constructor(val) {
     super(val);
-    this.state = {rows:[{}], name: '', description: '', directions: '', servingsize: '', amountperserving: '', amountperservingunit: 'g', preptime: '', preptimeunit: 'minutes', cooktime: '', cooktimeunit: 'minutes', bakingtime: '', bakingtimeunit: 'minutes', redirect: false};
-    
+    this.state = {rows:[{}], totaltime: 0, name: '', description: '', directions: '', servingsize: '', amountperserving: '', amountperservingunit: 'g', preptime: '', preptimeunit: 'minutes', cooktime: '', cooktimeunit: 'minutes', bakingtime: '', bakingtimeunit: 'minutes', redirect: false};
+
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleDirectionsChange = this.handleDirectionsChange.bind(this);
@@ -91,15 +91,18 @@ class CreateRecipe extends React.Component {
     }
     //Function executes whenever user changes the preptime textfield
     handlePrepTimeChange(event) {
+      this.totaltime = this.bakingtime + this.cooktime + this.preptime;
       this.setState({preptime: event.target.value});
-    }
-    //Function executes whenever user changes the preptime textfield
-    handleCookTimeChange(event) {
-      this.setState({cooktime: event.target.value});
     }
     //Function executes whenever user changes the bakingtime textfield
     handleBakingTimeChange(event) {
+      this.totaltime = this.bakingtime + this.cooktime + this.preptime;
       this.setState({bakingtime: event.target.value});
+    }
+    //Function executes whenever user changes the cooktime textfield
+    handleCookTimeChange(event) {
+      this.totaltime = this.bakingtime + this.cooktime + this.preptime;
+      this.setState({cooktime: event.target.value});
     }
     //Runs whenever user clicks the submit button to validate the form
     handleSubmit(event) {
@@ -122,6 +125,11 @@ class CreateRecipe extends React.Component {
             return;
           }
         }
+      }
+      if(this.state.totaltime===0)
+      {
+        alert("Total time may not be zero");
+        return;
       }
     }
   render(){

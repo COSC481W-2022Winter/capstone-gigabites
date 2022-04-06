@@ -16,6 +16,7 @@ import Followers from './pages/followers';
 import Following from './pages/following';
 import IngredientSearch from './pages/ingredientSearch';
 import LoggedOut from './pages/loggedout';
+import RecipeRedirect from './pages/recipeRedirect';
 
 //Sets storage type for session variables
 ReactSession.setStoreType('localStorage');
@@ -37,7 +38,7 @@ class App extends Component {
                 <Routes>
                     <Route path='/' exact element={<Home />} />
                     <Route path='/signup' element={<SignUp/>} />
-                    <Route path='profile/:username' component={User} element={<Profile/>} />
+                    <Route path='/profile/:username' component={User} element={<Profile/>} />
                     <Route path='/login' element={<Login/>} />
                     <Route path='/passwordReset' element={<PasswordReset/>} />
                     <Route path='/searchResults' element={<SearchResults/>} />
@@ -48,6 +49,8 @@ class App extends Component {
                     <Route path='/editProfile' element={<EditProfile/>} />
                     <Route path='/loggedout' element={<LoggedOut/>} />
                     <Route path='/ingredientSearch' element={<IngredientSearch/>} />
+                    <Route path='/recipeRedirect' element={<RecipeRedirect/>} />
+                    
                 </Routes>
             </Router>
         );
