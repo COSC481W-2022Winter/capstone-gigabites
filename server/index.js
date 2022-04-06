@@ -3,6 +3,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const IngredientModel = require("./models/Ingredients");
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const DeveloperModel = require("./models/Developers");
@@ -24,7 +25,21 @@ mongoose.connect(`${db}`);
 
 {/*Defines variables for later use*/}
 var compareResult;
-var uniqueUser;
+
+{/*Function to get recipes from recipes collection based on RecipeID*/}
+app.post("/getRecipeByRecipeIDs", (req, res) => {
+  const output = req.body;
+
+  RecipeModel.find({_id: output.id }, function(err, recipe) 
+  {
+    if (err)
+      res.send(false);
+    else
+      res.send(recipe);
+
+    //console.log(recipe);
+  });
+});
 
 {/*Verification request from front-end client to see if the username entered on the signup page is unique or not*/}
 app.post("/createUser", async (req, res) => {
@@ -100,16 +115,29 @@ app.post("/getUsers", (req, res) => {
 
 {/*Function to get recipes from recipes collection based on username*/}
 app.post("/getRecipes", (req, res) => {
-  const output = req.body;
-  console.log(output);
+  const output = req.body.username;
 
-  RecipeModel.find({username: output.username }, function(err, recipe) 
+
+  RecipeModel.find({username: output }, function(err, recipe) 
   {
     if (err)
-    {
       res.send(false);
-    }
+
     res.send(recipe);
+  }).limit(5);
+});
+
+{/*Function to get ingredients from collection based on the recipeID of the recipe*/}
+app.post("/getIngredientsByRecipeID", (req, res) => {
+  const output = req.body.recipeID
+
+  IngredientModel.find({recipeID: output }, function(err, ingredients) 
+  {
+    if (err)
+      res.send(false);
+
+    
+    res.send(ingredients);
   });
 });
 
@@ -127,6 +155,7 @@ app.post("/getDevelopers", (req, res) => {
     res.send(developer);
   });
 });
+
 
 
 {/*Displays running state of server in console, along with the currently running port number*/}

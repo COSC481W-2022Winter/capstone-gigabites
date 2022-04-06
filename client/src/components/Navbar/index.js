@@ -11,7 +11,7 @@ const navbar= () =>{
 	return (
 	<div>
 		{/* Shows the logged in session username above the NAVBAR for temporary testing and debugging purposes */}
-		<p>You are logged in as: {ReactSession.get('username')}</p>
+		{/* <p>You are logged in as: {ReactSession.get('username')}</p>*/}
 		<ul className="topnav">
 			<li>
 				<Link to="/">Home</Link>
@@ -32,7 +32,7 @@ const navbar= () =>{
 			<li className ="right">
 				<Link to="/login">Login</Link>
 			</li>}
-
+			
 			<li>
 				<Link to={finalURL}>Profile</Link>
 			</li>
