@@ -3,7 +3,6 @@ import React from "react";
 import { ReactSession } from 'react-client-session';
 import Navbar from '../components/Navbar';
 const { editUser } = require('./config.json');
-  
 
 
 function checkPassword(password)
@@ -183,7 +182,7 @@ function validation()
 									<td>
 										{/*Security Answer*/}
 										<label className="editProf">Security Question Answer </label>
-										<input className="editProf" name="answer" id='answer' type="text" value={this.state.answer} onChange={this.handleAnswerChange}/>
+										<input className="editProf" name="answer" id='answer' type="text" value={this.state.answer} onChange={this.handleAnswerChange} required/>
 									</td>
 								</tr>
 								<tr>
