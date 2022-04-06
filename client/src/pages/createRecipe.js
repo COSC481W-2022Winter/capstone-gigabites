@@ -12,6 +12,7 @@ const  {upload} = require('./config.json');
   Dynamic table for ingredients and helper functions: 
    https://stackoverflow.com/a/49174689/17413708
   Min/Max constraint for text area: https://stackoverflow.com/a/29214886/17413708
+  Form submiting on deleting a row fix: https://stackoverflow.com/a/39959351/17413708
 */
 
 
