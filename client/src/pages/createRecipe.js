@@ -35,97 +35,97 @@ class CreateRecipe extends React.Component {
     // this.handleSubmit = this.handleSubmit.bind(this);  // DON'T NEED
   }
 
-    handleChange (idx,e) {
-      const { name, value } = e.target;
-      const rows = [...this.state.rows];
+  handleChange (idx,e) {
+    const { name, value } = e.target;
+    const rows = [...this.state.rows];
 
-      // console.log("IDX: " + idx);
-      // console.log("old rows[idx].name " + rows[idx].ingredient);
-      // console.log("old rows[idx].measurement " + rows[idx].measurement);
-      // console.log("old rows[idx].units " + rows[idx].units);
+    // console.log("IDX: " + idx);
+    // console.log("old rows[idx].name " + rows[idx].ingredient);
+    // console.log("old rows[idx].measurement " + rows[idx].measurement);
+    // console.log("old rows[idx].units " + rows[idx].units);
 
-      rows[idx] = {
-        ...rows[idx],
-        [name]: value
-      };
-      this.setState({
-        rows
-      });
-      // console.log("New row:  I:" + rows[idx].ingredient + " M: " + rows[idx].measurement + " U: " + rows[idx].units);
+    rows[idx] = {
+      ...rows[idx],
+      [name]: value
     };
+    this.setState({
+      rows
+    });
+    // console.log("New row:  I:" + rows[idx].ingredient + " M: " + rows[idx].measurement + " U: " + rows[idx].units);
+  };
 
-    handleAddRow = () => {
-      const item = {
-        ingredient: "",
-        measurement: "",
-        units: "",
-      };
-      this.setState({
-        rows: [...this.state.rows, item]
-      });
+  handleAddRow = () => {
+    const item = {
+      ingredient: "",
+      measurement: "",
+      units: "",
     };
-    handleRemoveSpecificRow = (idx) => () => {
-      const rows = [...this.state.rows]
-      rows.splice(idx, 1)
-      this.setState({ rows })
-    }
+    this.setState({
+      rows: [...this.state.rows, item]
+    });
+  };
+  handleRemoveSpecificRow = (idx) => () => {
+    const rows = [...this.state.rows]
+    rows.splice(idx, 1)
+    this.setState({ rows })
+  }
 
-    //Function executes whenever user changes the name textfield
-    handleNameChange(event) {
-      this.setState({name: event.target.value});
-    }
-    //Function executes whenever user changes the description textfield
-    handleDescriptionChange(event) {
-      this.setState({description: event.target.value});
-    }
-    //Function executes whenever user changes the directions textfield
-    handleDirectionsChange(event) {
-      this.setState({directions: event.target.value});
-    }
-    //Function executes whenever user changes the servingsize textfield
-    handleServingSizeChange(event) {
-      this.setState({servingsize: event.target.value});
-    }
-    //Function executes whenever user changes the amountperserving textfield
-    handleAmountPerServingChange(event) {
-      this.setState({amountperserving: event.target.value});
-    }
-    //Function executes whenever user changes the preptime textfield
-    handlePrepTimeChange(event) {
-      this.setState({preptime: event.target.value});
-    }
-    //Function executes whenever user changes the preptime textfield
-    handleCookTimeChange(event) {
-      this.setState({cooktime: event.target.value});
-    }
-    //Function executes whenever user changes the bakingtime textfield
-    handleBakingTimeChange(event) {
-      this.setState({bakingtime: event.target.value});
-    }
+  //Function executes whenever user changes the name textfield
+  handleNameChange(event) {
+    this.setState({name: event.target.value});
+  }
+  //Function executes whenever user changes the description textfield
+  handleDescriptionChange(event) {
+    this.setState({description: event.target.value});
+  }
+  //Function executes whenever user changes the directions textfield
+  handleDirectionsChange(event) {
+    this.setState({directions: event.target.value});
+  }
+  //Function executes whenever user changes the servingsize textfield
+  handleServingSizeChange(event) {
+    this.setState({servingsize: event.target.value});
+  }
+  //Function executes whenever user changes the amountperserving textfield
+  handleAmountPerServingChange(event) {
+    this.setState({amountperserving: event.target.value});
+  }
+  //Function executes whenever user changes the preptime textfield
+  handlePrepTimeChange(event) {
+    this.setState({preptime: event.target.value});
+  }
+  //Function executes whenever user changes the preptime textfield
+  handleCookTimeChange(event) {
+    this.setState({cooktime: event.target.value});
+  }
+  //Function executes whenever user changes the bakingtime textfield
+  handleBakingTimeChange(event) {
+    this.setState({bakingtime: event.target.value});
+  }
 
-    // Don't need, not called from submit button.
-    //Runs whenever user clicks the submit button to validate the form
-    // handleSubmit(event) {
-    //   if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.amountperserving === '' || this.state.preptime === '' || this.state.cooktime === '' || this.state.bakingtime === '') {
-    //     alert("Missing fields! Please try again.");
-    //     return;
-    //   }
+  // Don't need, not called from submit button.
+  //Runs whenever user clicks the submit button to validate the form
+  // handleSubmit(event) {
+  //   if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.amountperserving === '' || this.state.preptime === '' || this.state.cooktime === '' || this.state.bakingtime === '') {
+  //     alert("Missing fields! Please try again.");
+  //     return;
+  //   }
 
-    //   if(this.state.rows.length === 0) {
-    //     alert("Missing ingredients! Please try again.");
-    //     return;
-    //   }
+  //   if(this.state.rows.length === 0) {
+  //     alert("Missing ingredients! Please try again.");
+  //     return;
+  //   }
 
-    //   if(this.state.rows.length > 0) {
-    //     for(var i = 0; i < this.state.rows.length; i++)
-    //     {
-    //       if(this.state.rows[i].ingredient === (undefined || "") || this.state.rows[i].measurement === (undefined || "")) {
-    //         alert("Missing fields! Please try again.");
-    //         return;
-    //       }
-    //     }
-    //   }
-    // }
+  //   if(this.state.rows.length > 0) {
+  //     for(var i = 0; i < this.state.rows.length; i++)
+  //     {
+  //       if(this.state.rows[i].ingredient === (undefined || "") || this.state.rows[i].measurement === (undefined || "")) {
+  //         alert("Missing fields! Please try again.");
+  //         return;
+  //       }
+  //     }
+  //   }
+  // }
 
   render(){
     return (
