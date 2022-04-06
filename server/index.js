@@ -4,8 +4,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const fileUpload = require('express-fileupload');
+const IngredientModel = require("./models/Ingredients");
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
+const DeveloperModel = require("./models/Developers");
 const cors = require("cors");
 const { port, db, editProfileRedirect } = require('./config.json');
 const bcrypt = require('bcrypt');
@@ -27,7 +29,19 @@ mongoose.connect(`${db}`);
 
 {/*Defines variables for later use*/}
 var compareResult;
-var uniqueUser;
+
+{/*Function to get recipes from recipes collection based on RecipeID*/}
+app.post("/getRecipeByRecipeIDs", (req, res) => {
+  const output = req.body;
+
+  RecipeModel.find({_id: output.id }, function(err, recipe) 
+  {
+    if (err)
+      res.send(false);
+    else
+      res.send(recipe);
+  });
+});
 
 {/*Verification request from front-end client to see if the username entered on the signup page is unique or not*/}
 app.post("/createUser", async (req, res) => {
@@ -39,40 +53,30 @@ app.post("/createUser", async (req, res) => {
   const existUsername = await UserModel.findOne({ username: req.body.username })
   if (existUsername) {
     console.log(`Username ${user.username} already in use!  Rejecting user entry`)
-    uniqueUser=false;
+    res.send(false);
   }
   else {
     const newUser = new UserModel(user);
     await newUser.save();
-    uniqueUser=true;
+    res.send(true);
   }
-});
-
-{/*Verification response from server based on the unique state of username*/}
-app.get("/getUnique", (req, res) => {
-  res.send(uniqueUser);
 });
 
 {/*Adds recipe to database*/}
 app.post("/addRecipes", async (req, res) => {
   const recipe = req.body;
 
-  console.log(req.body);
   const newRecipe = new RecipeModel(recipe);
-  console.log('Saving recipe....');
-  await newRecipe.save();
-  console.log('Recipe saved');
+  await newRecipe.save(function(err, out)
+    {res.send(out);});
 });
 
 {/*Function to see if the password entered on the login page actually matches the encrypted username in the database*/}
 app.post("/passwordValidation", (req, res) => {
   const output = req.body;
-  console.log(output.password);
-  console.log(output);
 
   UserModel.findOne({ username: output.username }, function (err, user) {
     
-    console.log(user);
     if (err || user == null) {
       compareResult = false;
       res.send(compareResult);
@@ -83,7 +87,7 @@ app.post("/passwordValidation", (req, res) => {
     var password = output.password;
     bcrypt.compare(password, hash, function(err, result) {
       if (err) return handleError(err);
-      console.log('passwordMatch: ' + result);
+
       compareResult = result;
       res.send(compareResult);
     });
@@ -98,7 +102,6 @@ app.post("/getUsers", (req, res) => {
 
   UserModel.findOne({ username: output.username }, function (err, user) {
     
-    console.log(user);
     if (err || user == null) {
       compareResult = false;
       res.send(compareResult);
@@ -113,17 +116,13 @@ app.post("/getUsers", (req, res) => {
 {/*Function to edit user profile*/}
 app.post("/editUsers", async function(req,res)
 {
-  console.log(req.body)
   let sampleFile;
   let uploadPath;
 
   UserModel.findOne({ username: req.body.username }, async function (err, out) 
   {
-    console.log(out);
     if (!req.files || Object.keys(req.files).length === 0) 
     {
-      console.log("Uploaded no image");
-
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -210,18 +209,42 @@ app.post("/editUsers", async function(req,res)
 
 {/*Function to get recipes from recipes collection based on username*/}
 app.post("/getRecipes", (req, res) => {
-  const output = req.body;
-  console.log(output);
+  const output = req.body.username;
 
-  RecipeModel.find({username: output.username }, function(err, recipe) 
+
+  RecipeModel.find({username: output }, function(err, recipe) 
   {
     if (err)
-    {
       res.send(false);
-    }
+
     res.send(recipe);
+  }).limit(5);
+});
+
+{/*Function to get ingredients from collection based on the recipeID of the recipe*/}
+app.post("/getIngredientsByRecipeID", (req, res) => {
+  const output = req.body.recipeID
+
+  IngredientModel.find({recipeID: output }, function(err, ingredients) 
+  {
+    if (err)
+      res.send(false);
+
+    
+    res.send(ingredients);
   });
 });
+
+{/*Function to get developers from developers collection*/}
+app.post("/getDevelopers", (req, res) => {
+  const output = req.body;
+
+  DeveloperModel.find({}, function(err, developer) 
+  {
+    res.send(developer);
+  });
+});
+
 
 
 {/*Displays running state of server in console, along with the currently running port number*/}

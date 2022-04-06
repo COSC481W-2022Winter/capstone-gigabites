@@ -16,6 +16,8 @@ import Recipe from './pages/recipe';
 import Followers from './pages/followers';
 import Following from './pages/following';
 import IngredientSearch from './pages/ingredientSearch';
+import LoggedOut from './pages/loggedout';
+import AboutUs from './pages/About-Us';
 
 //Sets storage type for session variables
 ReactSession.setStoreType('localStorage');
@@ -24,6 +26,11 @@ ReactSession.setStoreType('localStorage');
 function User() {
     return ReactSession.get('username');
   }
+
+/*Updates recipe page URL based on the RecipeID of the recipe*/ 
+function RecipeID() {
+    return ReactSession.get('RecipeID');
+}
 
 class App extends Component {
     render () {
@@ -37,12 +44,14 @@ class App extends Component {
                     <Route path='/passwordReset' element={<PasswordReset/>} />
                     <Route path='/searchResults' element={<SearchResults/>} />
                     <Route path='/recipe/create' element={<CreateRecipe/>} />
-                    <Route path='/recipe' element={<Recipe/>} />
+                    <Route path='/recipe/:RecipeID' component={RecipeID} element={<Recipe/>} />
                     <Route path='/followers' element={<Followers/>} />
                     <Route path='/following' element={<Following/>} />
                     <Route path='/editProfile' element={<EditProfile/>} />
                     <Route path='/editProfileTransition' element={<EditProfileTransition/>} />
+                    <Route path='/loggedout' element={<LoggedOut/>} />
                     <Route path='/ingredientSearch' element={<IngredientSearch/>} />
+                    <Route path='/About-Us' element={<AboutUs/>} />
                 </Routes>
             </Router>
         );

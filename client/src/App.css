@@ -1,336 +1,464 @@
+.App { font-family: system-ui; }
 
- .App {
-    font-family: system-ui;
-  }
+.App-logo {
+height: 40vmin;
+pointer-events: none;
+}
 
-  h3
-  {
-    font-style: italic;
-  }
+.App-header {
+background-color: #e6e6e6;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+font-size: calc(10px + 2vmin);
+color: white;
+}
 
-  .border{
-    border:4px solid #ff8552;
-    margin-left:35%;
-    margin-right:35%;
-    background-color:#297373;
-  }
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  table.normal
-  {
-    text-align:left;
-    margin-left:auto;
-    margin-right:auto;
-  }
+.App-link { color: #61dafb; }
 
-  table.editProf
-  {
-    text-align:left;
-    margin-left:auto;
-    margin-right:auto;
-    width:75%;
-  }
+table.normal
+{
+text-align:left;
+margin-left:auto;
+margin-right:auto;
+}
 
-  .App-header {
-    background-color: #e6e6e6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
+table.editProf
+{
+text-align:left;
+margin-left:auto;
+margin-right:auto;
+width:75%;
+}
 
-  .header {
-    padding: 20px;
-    text-align: center;
-    color: #ff8552;
-    font-size: larger;
-    font-weight: bold;
-  }
-  
-  .label{
-    text-align:left;
-    display: block;
-    font-size: larger;
-    font-weight:bold;
-    color: #e6e6e6;
-    padding: 10px;
-  }
-  
-  .label-no-align{
-    font-size: larger;
-    font-weight:bold;
-    color: #e6e6e6;
-    padding: 10px;
-  }
+.label{
+text-align:left;
+display: block;
+font-size: larger;
+font-weight:bold;
+color: #e6e6e6;
+padding: 10px;
+}
 
-  input.textbox{
-    font-size: larger;
-    padding: 1%;
-    margin: 1%;
-    width:80%;
-  }
+input.textbox{
+font-size: larger;
+padding: 1%;
+margin: 1%;
+width:80%;
+}
 
-  input.createrecipeSmall{
-    font-size: larger;
-    padding: 1%;
-    margin: 1%;
-    width:30%;
-  }
+.btn{
+color: #e6e6e6;
+background-color: #39393a;
+border: 3px solid white;
+border-radius: 5px;
+font-size: 13px;
+font-weight: bold;
+display: block;
+padding-left: 20px;
+padding-right: 20px;
+padding-top: 7px;
+padding-bottom: 7px;
+text-align:center;
+margin: 20px auto;
+}
 
-  input.ingredients{
-    font-size: larger;
-    width:60%;
-  }
+.btn:hover{
+background-color:#ff8552;
+color: white;
+}
 
-  input.measurmentsandunits{
-    font-size: larger;
-    width:60%;
-  }
-    
-  .btn{
-    color: #e6e6e6;
-    background-color: #39393a;
-    border: 3px solid white;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    text-align:center;
-    margin: 20px auto;
-  }
+body
+{
+background-color:#39393a;
+}
 
-  .btn:hover{
-    background-color:#ff8552;
-    color: white;
-  }
-   
-  /* Forgot Password button Styling */
-  a.forgotpass
-  {
-    color: #e6e6e6;
-    background-color: #39393a;
-    border: 3px solid white;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    text-align:center;
-    margin: 20px 40%;
-  }
+table.centered{
+margin-left:auto;
+margin-right:auto;
+}
 
-  a.forgotpass:hover{
-    background-color:#ff8552;
-    color: white;
-  }
+div.centered{
+text-align:center;
+margin-left:auto;
+margin-right:auto;
+}
 
-  body
-  {
-    background-color:#39393a;
-  }
-
-  table.centered{
-    margin-left:auto;
-    margin-right:auto;
-  }
-    
-  div.centered{
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .followingfollows{
-    border: 0.2em solid black;
-    background-color:#297373;
-    margin:0.5%;
-    color:white; 
-    padding:0.25%;
-    float:right;
-    text-decoration:none;
-    font-weight:bold;
-    text-align:center;
-    margin-right:10px;
-  }
-
-  .followingfollows:hover:not(.active) {background-color: #ff8552;}
-  
-  .followingfollows.active {background-color: #ff8552;}
-
-  a.profilebuttons
-  {
-    color: #e6e6e6;
-    background-color:#297373;
-    border: 3px solid black;
-    padding:0.25%;
-    font-weight: bold;
-    text-align:center;
-    margin: 2%;
-  }
-
-  a.profilebuttons:hover{
-    background-color:#ff8552;
-    color: white;
-  }
-  .textcenter{
-    text-align:center;
-  }
-  div.right {float: right; padding-right:10%}
-
-  .btn:hover{
-    background-color:#ff8552;
-    color: white;
-  }
-
-  /* Everything Navbar related is located below this point */
-  ul.topnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #297373;
-  }
-  
-  ul.topnav li {float: left;}
-  
-  ul.topnav li a {
-    display: block;
-    color: #e6e6e6;
-    font-family: system-ui;
-    font-weight: bold;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  ul.topnav li a:hover:not(.active) {background-color: #ff8552;}
-  
-  ul.topnav li a.active {background-color: #ff8552;}
-  
-  ul.topnav li.right {float: right;}
-  
-  input.logout
-  {
-    display: block;
-    color: #e6e6e6;
-    font-family:system-ui;
-    font-weight:bold;
-    text-align:center;
-    padding:16px 16px;
-    text-decoration:none;
-    background-color:#297373;
-    float:right;
-    border:none;
-    overflow: hidden;
-  }
-
-  input.logout:hover{background-color: #ff8552;}
-
-  input.logout:hover:not(.active) {background-color: #ff8552;}
-  
-  input.logout.active {background-color: #ff8552;}
-
-  
- /*Edit Profile */
- input.editProf[type=password] {
-  width: 100%;
-  height: 25px;
-  box-sizing: border-box;
-  border: 3px solid #297373;
-  outline: none;
-  text-align: left;
+input.editProf[type=password] {
+width: 100%;
+height: 25px;
+box-sizing: border-box;
+border: 3px solid #297373;
+outline: none;
+text-align: left;
 }
 
 
 input.editProf[type=password]:focus {
-  border: 3px solid #ff8552;  }
+border: 3px solid #ff8552;  }
 
- input.editProf[type=text] {
-  width: 100%;
-  height: 25px;
-  box-sizing: border-box;
-  border: 3px solid #297373;
-  outline: none;
-  text-align: left;
+input.editProf[type=text] {
+width: 100%;
+height: 25px;
+box-sizing: border-box;
+border: 3px solid #297373;
+outline: none;
+text-align: left;
 }
 
 
 input.editProf[type=text]:focus {
-  border: 3px solid #ff8552;  }
+border: 3px solid #ff8552;  }
 
 label.editProf {
-  color: #e6e6e6;
-  font-weight: bold;
-  display: block;
-  text-align: left;
-  font-weight:bold;
-  padding: 5px;
+color: #e6e6e6;
+font-weight: bold;
+display: block;
+text-align: left;
+font-weight:bold;
+padding: 5px;
 }
 
 label.user {
-  color: #e6e6e6;
-  font-weight: bold;
-  display: block;
-  text-align: center;
-  padding: 5px;
+color: #e6e6e6;
+font-weight: bold;
+display: block;
+text-align: center;
+padding: 5px;
 }
 
 textarea.editBio {
-  padding: 1%;
-  margin: 1%;
-  width: 100%;
-  height: 100px;
-  border: 3px solid #297373;
-  outline: none;
-  text-align: left;
+padding: 1%;
+margin: 1%;
+width: 100%;
+height: 100px;
+border: 3px solid #297373;
+outline: none;
+text-align: left;
 }
 
 textarea.editBio:focus {
-  border:3px solid #ff8552;
+border:3px solid #ff8552;
 }
 
 .avatar{
-  vertical-align: middle;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+vertical-align: middle;
+width: 150px;
+height: 150px;
+border-radius: 50%;
 }
 
 .btnProf{
-  color: #e6e6e6;
-  background-color: #297373;
-  border: 3px solid #e6e6e6;
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: bold;
-  display: block;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  text-align:center;
-  margin: 20px auto;
+color: #e6e6e6;
+background-color: #297373;
+border: 3px solid #e6e6e6;
 }
 
-.btnProf:hover{
-  background-color:#ff8552;
-  color: #e6e6e6;
+h3.italic{ font-style: italic; }
+
+.textcenter{text-align:center;}
+
+div.right {float: right; padding-right:10%}
+
+.border{
+border:4px solid #ff8552;
+margin-left:35%;
+margin-right:35%;
+background-color:#297373;
 }
 
+.header {
+padding: 20px;
+text-align: center;
+color: #ff8552;
+font-size: larger;
+font-weight: bold;
+}
+
+.label-no-align{
+font-size: larger;
+font-weight:bold;
+color: #e6e6e6;
+padding: 10px;
+}
+
+/* ----------------> Start of recipe page related material <---------------- */
+
+.imageTD{
+text-align:center;
+width:50%;
+}
+
+table.recipePageTable{
+margin-left:auto;
+margin-right:auto;
+}
+
+table.recipePageTableMain{
+margin-left:auto;
+margin-right:auto;
+width:50%;
+}
+
+.recipeCenter{
+width:100%;
+max-width:500px;
+float:left;
+}
+
+td.recipeHeader{
+width:1%;
+text-align:right;
+}
+
+td.recipeHeaderCenter{
+text-align:center;
+width:1%;
+}
+
+td.recipeExtra{
+width:1%;
+text-align:center;
+}
+
+.borderRecipe{
+border:4px solid #ff8552;
+margin-left:30%;
+margin-right:30%;
+background-color:#297373;
+}
+
+.borderRecipeTop{
+border:4px solid #ff8552;
+background-color:#297373;
+margin-left:15%;
+margin-right:15%;
+}
+
+.timeHeader{
+text-align:right;
+width:10%;
+}
+
+.time{
+text-align:center;
+width:10%;
+}
+hr{
+background-color:black;
+height:3px; 
+width:100%;
+}
+
+/* ----------------> End of recipe page related material <---------------- */
+
+
+
+/* ----------------> Start of create recipe page related material <---------------- */
+
+input.createrecipeSmall{
+font-size: larger;
+padding: 1%;
+margin: 1%;
+width:30%;
+}
+
+input.ingredients{
+font-size: larger;
+width:60%;
+}
+
+input.measurmentsandunits{
+font-size: larger;
+width:60%;
+}
+
+/* ----------------> End of create recipe page related material <---------------- */
+
+
+
+
+/* ----------------> Start of login page related material <---------------- */
+
+a.forgotpass
+{
+color: #e6e6e6;
+background-color: #39393a;
+border: 3px solid white;
+border-radius: 5px;
+font-size: 13px;
+font-weight: bold;
+display: block;
+padding-left: 20px;
+padding-right: 20px;
+padding-top: 7px;
+padding-bottom: 7px;
+text-align:center;
+margin: 20px 40%;
+}
+
+a.forgotpass:hover{
+background-color:#ff8552;
+color: white;
+}
+
+/* ----------------> End of login page related material <---------------- */
+
+
+
+/* ----------------> Start of view profile page related material <---------------- */
+.bio{
+text-align:center;
+color:#e6e6e6;
+}
+
+.UsernameHeader{
+color: #e6e6e6;
+text-align:center;
+text-decoration:underline;
+}
+.YourRecipes{
+
+color:#e6e6e6;
+text-align:center;
+}
+
+.followingfollows{
+border: 0.2em solid black;
+background-color:#297373;
+margin:0.5%;
+color:white; 
+padding:0.25%;
+float:right;
+text-decoration:none;
+font-weight:bold;
+text-align:center;
+margin-right:10px;
+}
+
+.followingfollows:hover:not(.active) {background-color: #ff8552;}
+
+.followingfollows.active {background-color: #ff8552;}
+
+a.profilebuttons
+{
+color: #e6e6e6;
+background-color:#297373;
+border: 3px solid black;
+padding:0.25%;
+font-weight: bold;
+text-decoration:none;
+text-align:center;
+margin: 2%;
+}
+
+a.profilebuttons:hover{
+background-color:#ff8552;
+color: white;
+}
+
+.myRecipesHeader{
+text-align:center;
+font-weight:bold;
+color: #e6e6e6;
+padding-bottom:0%;
+}
+
+.recipeimage{
+width:100px;
+}
+
+.borderProfile{
+border:4px solid #ff8552;
+margin-left:35%;
+margin-right:35%;
+background-color:#297373;
+}
+
+.labelCenter{
+display: block;
+font-size: larger;
+font-weight:bold;
+color: #e6e6e6;
+padding: 10px;
+}
+
+.profileImage{
+width:80%;
+max-width:300px;
+}
+
+button.profilebuttons
+{
+color: #ff8552;
+background-color:#39393a;
+border: 3px solid black;
+padding:10% 10%;
+font-weight: bold;
+text-decoration:none;
+text-align:center;
+margin: 2%;
+}
+
+button.profilebuttons:hover{
+background-color:#85ffc7;
+color: black;
+}
+
+/* ----------------> End of view profile page related material <---------------- */
+
+
+
+
+/* ----------------> Start of Navbar related material <---------------- */
+
+ul.topnav {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+background-color: #297373;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+display: block;
+color: #e6e6e6;
+font-family: system-ui;
+font-weight: bold;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #ff8552;}
+
+ul.topnav li a.active {background-color: #ff8552;}
+
+ul.topnav li.right {float: right;}
+
+input.logout
+{
+display: block;
+color: #e6e6e6;
+font-family:system-ui;
+font-weight:bold;
+text-align:center;
+padding:16px 16px;
+text-decoration:none;
+background-color:#297373;
+float:right;
+border:none;
+overflow: hidden;
+}
+
+input.logout:hover{background-color: #ff8552;}
+
+input.logout:hover:not(.active) {background-color: #ff8552;}
+
+input.logout.active {background-color: #ff8552;}
+
+/* ----------------> End of Navbar related material <---------------- */
