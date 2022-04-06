@@ -153,7 +153,7 @@ class CreateRecipe extends React.Component {
                 <td>
                   <input 
                     name="servingsize"
-                    type="number"
+                    type="number" min="1"
                     placeholder="?" className="createrecipeSmall"
                     onChange={this.handleServingSizeChange} value={this.state.servingsize}
                     required />
@@ -168,7 +168,7 @@ class CreateRecipe extends React.Component {
                 <td>
                   <input
                     name="amountperserving"
-                    type="number"
+                    type="number" min="1"
                     placeholder="?" className="createrecipeSmall"
                     onChange={this.handleAmountPerServingChange} value={this.state.amountperserving}
                     required />
@@ -195,7 +195,7 @@ class CreateRecipe extends React.Component {
                   <th>
                     <input 
                       name="preptime"
-                      type="number"
+                      type="number" min="0"
                       placeholder="?" className="createrecipeSmall"
                       onChange={this.handlePrepTimeChange} value={this.state.preptime}
                       required />
@@ -216,7 +216,7 @@ class CreateRecipe extends React.Component {
                   <th>
                     <input 
                       name="cooktime"
-                      type="number"
+                      type="number" min="0"
                       placeholder="?" className="createrecipeSmall"
                       onChange={this.handleCookTimeChange} value={this.state.cooktime}
                       required />
@@ -237,7 +237,7 @@ class CreateRecipe extends React.Component {
                   <th>
                     <input 
                       name="bakingtime"
-                      type="number"
+                      type="number" min="0"
                       placeholder="?" className="createrecipeSmall"
                       onChange={this.handleBakingTimeChange} value={this.state.bakingtime}
                       required />
@@ -282,7 +282,7 @@ class CreateRecipe extends React.Component {
                           <td>
                             <input
                               type="number"
-                              name="measurement"
+                              name="measurement" min="0"
                               onChange={e => this.handleChange(idx, e)}
                               className="measurmentsandunits" required
                             />
