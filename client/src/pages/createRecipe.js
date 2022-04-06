@@ -1,7 +1,6 @@
 import "../App.css";
 import React from "react";
 import Navbar from '../components/Navbar';
-import { Navigate } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
 const  {upload} = require('./config.json');
 
@@ -13,7 +12,8 @@ const  {upload} = require('./config.json');
   Dynamic table for ingredients and helper functions: 
    https://stackoverflow.com/a/49174689/17413708
 */
-var id;
+
+
 
 class CreateRecipe extends React.Component {
   constructor(val) {
@@ -31,7 +31,7 @@ class CreateRecipe extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleAddRow = this.handleAddRow.bind(this);
     this.handleRemoveSpecificRow = this.handleRemoveSpecificRow.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);  // DON'T NEED
   }
 
     handleChange (idx,e) {
@@ -101,271 +101,263 @@ class CreateRecipe extends React.Component {
     handleBakingTimeChange(event) {
       this.setState({bakingtime: event.target.value});
     }
+
+    // Don't need, not called from submit button.
     //Runs whenever user clicks the submit button to validate the form
-    handleSubmit(event) {
-      if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.amountperserving === '' || this.state.preptime === '' || this.state.cooktime === '' || this.state.bakingtime === '') {
-        alert("Missing fields! Please try again.");
-        return;
-      }
+    // handleSubmit(event) {
+    //   if(this.state.name ==='' || this.state.description === '' || this.state.directions === '' || this.state.servingsize === '' || this.state.amountperserving === '' || this.state.preptime === '' || this.state.cooktime === '' || this.state.bakingtime === '') {
+    //     alert("Missing fields! Please try again.");
+    //     return;
+    //   }
 
-      console.log("rows.length: "+this.state.rows.length);
-      if(this.state.rows.length === 0) {
-        alert("Missing ingredients! Please try again.");
-        return;
-      }
+    //   if(this.state.rows.length === 0) {
+    //     alert("Missing ingredients! Please try again.");
+    //     return;
+    //   }
 
-      if(this.state.rows.length > 0) {
-        for(var i = 0; i < this.state.rows.length; i++)
-        {
-          if(this.state.rows[i].ingredient === (undefined || "") || this.state.rows[i].measurement === (undefined || "")) {
-            alert("Missing fields! Please try again.");
-            return;
-          }
-        }
-      }
-    }
+    //   if(this.state.rows.length > 0) {
+    //     for(var i = 0; i < this.state.rows.length; i++)
+    //     {
+    //       if(this.state.rows[i].ingredient === (undefined || "") || this.state.rows[i].measurement === (undefined || "")) {
+    //         alert("Missing fields! Please try again.");
+    //         return;
+    //       }
+    //     }
+    //   }
+    // }
+
   render(){
-    //Alerts user of successful login, and redirects to user profile
-    if(this.state.redirect){
-      /*Updates profile page URL based on users username*/
-      let finalURL = '../../recipe/'+id;
-      return(
-        <div>
-          <Navigate to={finalURL} />
+    return (
+      <div className="App">
+        <Navbar />
+        <div className="header">
+          <h1>Create a Recipe</h1>
         </div>
-      );
-    }
-    else
-    {
-      return (
-        <div className="App">
-          <Navbar />
-          <div className="header">
-            <h1>Create a Recipe</h1>
-          </div>
 
-        <div className="centered">
-          <form ref='uploadForm' id='uploadForm' action={upload} method='post' encType="multipart/form-data">
-            <label className="label-no-align">Upload an Image</label>
+      <div className="centered">
+        <form ref='uploadForm' id='uploadForm' action={upload} method='post' encType="multipart/form-data">
+          <label className="label-no-align">Upload an Image</label>
 
-            <input type="file" 
-              name="sampleFile"
-              accept="image/png, image/jpeg"/>
-            <br />
-            <input 
-              name="username"
-              type="text"
-              value={ReactSession.get("username")}
-              hidden />
-            <input 
-              name="name"
-              type="text"
-              placeholder="Name"
-              onChange={this.handleNameChange} value={this.state.name}
-              required />
-            <br />
-            <textarea 
-              name="description"
-              rows="5" cols="80"
-              placeholder="Description"
-              onChange={this.handleDescriptionChange} value={this.state.description}
-              required />
-            <br />
-            <textarea 
-              name="directions"
-              rows="5" cols="80"
-              placeholder="Directions"
-              onChange={this.handleDirectionsChange} value={this.state.directions}
-              required />
-            <br />
+          <input type="file" 
+            name="sampleFile"
+            accept="image/png, image/jpeg"/>
+          <br />
+          <input 
+            name="username"
+            type="text"
+            value={ReactSession.get("username")}
+            hidden />
+          <input 
+            name="name"
+            type="text"
+            placeholder="Name"
+            required
+            minLength="3"
+            maxLength="100" />
+          <br />
+          <textarea 
+            name="description"
+            minLength="20" maxLength="500"
+            rows="5" cols="80"
+            placeholder="Description"
+            required >
+          </textarea>
+          <br />
+          <textarea 
+            name="directions"
+            minLength="20" maxLength="500"
+            rows="5" cols="80"
+            placeholder="Directions"
+            required >
+          </textarea>  
+          <br />
 
-            {/* Table for serving size, total time, prep tim, and baking time. */}
-            <table className="centered">
-              <tbody>
-                <tr>
-                  <th>Serving Size</th>
-                  <td>
+          {/* Table for serving size, total time, prep tim, and baking time. */}
+          <table className="centered">
+            <tbody>
+              <tr>
+                <th>Serving Size</th>
+                <td>
+                  <input 
+                    name="servingsize"
+                    type="number"
+                    placeholder="?" className="createrecipeSmall"
+                    onChange={this.handleServingSizeChange} value={this.state.servingsize}
+                    required />
+                </td>
+                <th>Units</th>
+              </tr>
+            </tbody>
+
+            <tbody>
+              <tr>
+                <th>Amount per Serving</th>
+                <td>
+                  <input
+                    name="amountperserving"
+                    type="number"
+                    placeholder="?" className="createrecipeSmall"
+                    onChange={this.handleAmountPerServingChange} value={this.state.amountperserving}
+                    required />
+                </td>
+                <td>
+                  <select
+                    name="amountperservingunit" >
+                    <option defaultValue value="none">none</option>
+                    <option value="g">g</option>
+                    <option value="teaspoon">teaspoon</option>
+                    <option value="tablespoon">tablespoon</option>
+                    <option value="fluidOz">fl oz</option>
+                    <option value="cup">cup</option>
+                    <option value="ml">milliliter</option>
+                    <option value="oz">oz</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody>
+              <tr>
+                <th>Prep Time</th>
+                  <th>
                     <input 
-                      name="servingsize"
+                      name="preptime"
                       type="number"
                       placeholder="?" className="createrecipeSmall"
-                      onChange={this.handleServingSizeChange} value={this.state.servingsize}
+                      onChange={this.handlePrepTimeChange} value={this.state.preptime}
                       required />
-                  </td>
-                  <th>Units</th>
-                </tr>
-              </tbody>
-
-              <tbody>
-                <tr>
-                  <th>Amount per Serving</th>
-                  <td>
-                    <input
-                      name="amountperserving"
-                      type="number"
-                      placeholder="?" className="createrecipeSmall"
-                      onChange={this.handleAmountPerServingChange} value={this.state.amountperserving}
-                      required />
-                  </td>
+                  </th>
                   <td>
                     <select
-                      name="amountperservingunit" >
-                      <option defaultValue value="none">none</option>
-                      <option value="g">g</option>
-                      <option value="teaspoon">teaspoon</option>
-                      <option value="tablespoon">tablespoon</option>
-                      <option value="fluidOz">fl oz</option>
-                      <option value="cup">cup</option>
-                      <option value="ml">milliliter</option>
-                      <option value="oz">oz</option>
-                    </select>
+                      name="preptimeunit" >
+                      <option defaultValue value="minutes">minutes</option>
+                      <option value="hours">hours</option>
+                    </select> 
                   </td>
-                </tr>
-              </tbody>
+              </tr>
+            </tbody>
 
-              <tbody>
-                <tr>
-                  <th>Prep Time</th>
-                    <th>
-                      <input 
-                        name="preptime"
-                        type="number"
-                        placeholder="?" className="createrecipeSmall"
-                        onChange={this.handlePrepTimeChange} value={this.state.preptime}
-                        required />
-                    </th>
-                    <td>
-                      <select
-                        name="preptimeunit" >
-                        <option defaultValue value="minutes">minutes</option>
-                        <option value="hours">hours</option>
-                      </select> 
-                    </td>
-                </tr>
-              </tbody>
+            <tbody>
+              <tr>
+                <th>Cook Time</th>
+                  <th>
+                    <input 
+                      name="cooktime"
+                      type="number"
+                      placeholder="?" className="createrecipeSmall"
+                      onChange={this.handleCookTimeChange} value={this.state.cooktime}
+                      required />
+                  </th>
+                  <td>
+                    <select
+                      name="cooktimeunit" >
+                      <option defaultValue value="minutes">minutes</option>
+                      <option value="hours">hours</option>
+                    </select> 
+                  </td>
+              </tr>
+            </tbody>
 
-              <tbody>
-                <tr>
-                  <th>Cook Time</th>
-                    <th>
-                      <input 
-                        name="cooktime"
-                        type="number"
-                        placeholder="?" className="createrecipeSmall"
-                        onChange={this.handleCookTimeChange} value={this.state.cooktime}
-                        required />
-                    </th>
-                    <td>
-                      <select
-                        name="cooktimeunit" >
-                        <option defaultValue value="minutes">minutes</option>
-                        <option value="hours">hours</option>
-                      </select> 
-                    </td>
-                </tr>
-              </tbody>
+            <tbody>
+              <tr>
+                <th>Baking Time</th>
+                  <th>
+                    <input 
+                      name="bakingtime"
+                      type="number"
+                      placeholder="?" className="createrecipeSmall"
+                      onChange={this.handleBakingTimeChange} value={this.state.bakingtime}
+                      required />
+                  </th>
+                  <td>
+                    <select
+                      name="bakingtimeunit" >
+                      <option defaultValue value="minutes">minutes</option>
+                      <option value="hours">hours</option>
+                    </select> 
+                  </td>
+              </tr>
+            </tbody>
+          </table>
 
-              <tbody>
-                <tr>
-                  <th>Baking Time</th>
-                    <th>
-                      <input 
-                        name="bakingtime"
-                        type="number"
-                        placeholder="?" className="createrecipeSmall"
-                        onChange={this.handleBakingTimeChange} value={this.state.bakingtime}
-                        required />
-                    </th>
-                    <td>
-                      <select
-                        name="bakingtimeunit" >
-                        <option defaultValue value="minutes">minutes</option>
-                        <option value="hours">hours</option>
-                      </select> 
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-
-            {/* Dynamic table for adding ingredients, their measurements, and their measurement unit. */}
-            <div>
-              <div className="container">
-                <div className="row clearfix">
-                  <div className="col-md-12 column">
-                    <table className="centered" id="tab_logic">
-                      <thead>
-                        <tr>
-                          <th className="text-center"> # </th>
-                          <th className="text-center"> Ingredients </th>
-                          <th className="text-center"> Measurements </th>
-                          <th className="text-center"> Units </th>
+          {/* Dynamic table for adding ingredients, their measurements, and their measurement unit. */}
+          <div>
+            <div className="container">
+              <div className="row clearfix">
+                <div className="col-md-12 column">
+                  <table className="centered" id="tab_logic">
+                    <thead>
+                      <tr>
+                        <th className="text-center"> # </th>
+                        <th className="text-center"> Ingredients </th>
+                        <th className="text-center"> Measurements </th>
+                        <th className="text-center"> Units </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.rows.map((item, idx) => (
+                        <tr key={idx}>
+                          <td>{idx}</td>
+                          <td>
+                            <input
+                              type="text"
+                              name="ingredient"
+                              onChange={e => this.handleChange(idx, e)}
+                              className="ingredients" required
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="number"
+                              name="measurement"
+                              onChange={e => this.handleChange(idx, e)}
+                              className="measurmentsandunits" required
+                            />
+                          </td>
+                          <td>
+                            <select 
+                              name="units" 
+                              onChange={e => this.handleChange(idx, e)}>
+                                
+                              <option defaultValue value="none">none</option>
+                              <option value="teaspoon">teaspoon</option>
+                              <option value="tablespoon">tablespoon</option>
+                              <option value="fluidOz">fl oz</option>
+                              <option value="cup">cup</option>
+                              <option value="pint">pint</option>
+                              <option value="quart">quart</option>
+                              <option value="gallon">gallon</option>
+                              <option value="ml">milliliter</option>
+                              <option value="liter">liter</option>
+                              <option value="lb">lb</option>
+                              <option value="oz">oz</option>
+                              <option value="mg">mg</option>
+                              <option value="g">g</option>
+                              <option value="kg">kg</option>
+                            </select>
+                          </td>
+                          <td>
+                            <button
+                              className="btn btn-outline-danger btn-sm"
+                              onClick={this.handleRemoveSpecificRow(idx)}>
+                              Remove
+                            </button>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {this.state.rows.map((item, idx) => (
-                          <tr key={idx}>
-                            <td>{idx}</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="ingredient"
-                                onChange={e => this.handleChange(idx, e)}
-                                className="ingredients" required
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="number"
-                                name="measurement"
-                                onChange={e => this.handleChange(idx, e)}
-                                className="measurmentsandunits" required
-                              />
-                            </td>
-                            <td>
-                              <select 
-                                name="units" 
-                                onChange={e => this.handleChange(idx, e)}>
-                                  
-                                <option defaultValue value="none">none</option>
-                                <option value="teaspoon">teaspoon</option>
-                                <option value="tablespoon">tablespoon</option>
-                                <option value="fluidOz">fl oz</option>
-                                <option value="cup">cup</option>
-                                <option value="pint">pint</option>
-                                <option value="quart">quart</option>
-                                <option value="gallon">gallon</option>
-                                <option value="ml">milliliter</option>
-                                <option value="liter">liter</option>
-                                <option value="lb">lb</option>
-                                <option value="oz">oz</option>
-                                <option value="mg">mg</option>
-                                <option value="g">g</option>
-                                <option value="kg">kg</option>
-                              </select>
-                            </td>
-                            <td>
-                              <button
-                                className="btn btn-outline-danger btn-sm"
-                                onClick={this.handleRemoveSpecificRow(idx)}>
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    <button onClick={this.handleAddRow} className="btn btn-primary">
-                      Add Row
-                    </button>
-                  </div>
+                      ))}
+                    </tbody>
+                  </table>
+                  <button onClick={this.handleAddRow} className="btn btn-primary">
+                    Add Row
+                  </button>
                 </div>
               </div>
             </div>
-            <input type="submit" value="Submit" onClick={this.handleSubmit}/>
-          </form> 
-        </div>
+          </div>
+          <input type="submit" value="Submit"/>
+        </form> 
       </div>
-    )}
-  }
+    </div>
+  )}
 }
 export default CreateRecipe;
