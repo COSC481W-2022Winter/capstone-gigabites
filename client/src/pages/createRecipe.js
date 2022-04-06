@@ -58,7 +58,11 @@ class CreateRecipe extends React.Component {
       rows: [...this.state.rows, item]
     });
   };
-  handleRemoveSpecificRow = (idx) => () => {
+  handleRemoveSpecificRow = (idx) => () => { 
+    if (idx === 0) {
+      alert("You need atleast 1 ingredient");
+      return
+    }
     const rows = [...this.state.rows]
     rows.splice(idx, 1)
     this.setState({ rows })
