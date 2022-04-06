@@ -75,6 +75,89 @@ div.centered{
   margin-right:auto;
 }
 
+
+/* ----------------> Start of recipe page related material <---------------- */
+
+.imageTD{
+  text-align:center;
+  width:50%;
+}
+
+table.recipePageTable{
+  /* border:1px solid black; */
+  margin-left:auto;
+  margin-right:auto;
+}
+
+table.recipePageTableMain{
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
+  /* border:1px solid black; */
+}
+
+.recipeCenter{
+  width:100%;
+  max-width:500px;
+  float:left;
+}
+
+td.recipeHeader{
+  /* border:1px solid black; */
+  width:1%;
+  text-align:right;
+}
+
+td.recipeHeaderCenter{
+  text-align:center;
+  /* border:1px solid black; */
+  width:1%;
+}
+
+td.recipeExtra{
+  /* border:1px solid black; */
+  width:1%;
+  text-align:center;
+}
+
+.borderRecipe{
+  border:4px solid #ff8552;
+  margin-left:30%;
+  margin-right:30%;
+  background-color:#297373;
+}
+
+.borderRecipeTop{
+  border:4px solid #ff8552;
+  background-color:#297373;
+  margin-left:15%;
+  margin-right:15%;
+}
+
+.timeHeader{
+  text-align:right;
+  /* border:1px solid black; */
+  width:10%;
+}
+
+.time{
+  text-align:center;
+  /* border:1px solid black; */
+  width:10%;
+}
+hr{
+  background-color:black;
+  height:3px; 
+  width:100%;
+}
+/* td{
+  border:1px solid black;
+} */
+
+/* ----------------> End of recipe page related material <---------------- */
+
+
+
 /* ----------------> Start of create recipe page related material <---------------- */
 
 input.createrecipeSmall{
@@ -164,6 +247,21 @@ input.textbox{
 
 
 /* ----------------> Start of view profile page related material <---------------- */
+.bio{
+  text-align:center;
+  color:#e6e6e6;
+}
+
+.UsernameHeader{
+  color: #e6e6e6;
+  text-align:center;
+  text-decoration:underline;
+}
+.YourRecipes{
+
+  color:#e6e6e6;
+  text-align:center;
+}
 
 .followingfollows{
   border: 0.2em solid black;
@@ -223,6 +321,28 @@ a.profilebuttons:hover{
   font-weight:bold;
   color: #e6e6e6;
   padding: 10px;
+}
+
+.profileImage{
+  width:80%;
+  max-width:300px;
+ }
+
+button.profilebuttons
+{
+  color: #ff8552;
+  background-color:#39393a;
+  border: 3px solid black;
+  padding:10% 10%;
+  font-weight: bold;
+  text-decoration:none;
+  text-align:center;
+  margin: 2%;
+}
+
+button.profilebuttons:hover{
+  background-color:#85ffc7;
+  color: black;
 }
 
 /* ----------------> End of view profile page related material <---------------- */

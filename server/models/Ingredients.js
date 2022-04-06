@@ -4,12 +4,11 @@ const mongoose = require("mongoose");
 const IngredientSchema = new mongoose.Schema({
   recipeID: {
     type: String,
-    required,
   },
   name: {
     type: String,
   },
-  measurment: {
+  measurement: {
     type: Number,
     default: 0,
   },
