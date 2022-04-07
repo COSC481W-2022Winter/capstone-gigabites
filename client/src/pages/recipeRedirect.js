@@ -3,7 +3,7 @@ import React,{ useEffect, useState } from "react";
 import { ReactSession } from 'react-client-session';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
-const { getlastRecipe } = require('./config.json');  //, getIngredientByRecipeID } = require('./config.json');  
+const { getlastRecipe } = require('./config.json');
 
 function RecipeRedirect() {
 	const [isLoading, setLoading] = useState(true);
@@ -37,7 +37,7 @@ function RecipeRedirect() {
             }
             }).catch(err => {
                 console.log(err);
-                alert("Error on EditProfile redirect page");
+                alert("Error on recipeRedirect page");
             });
 	}, []);
   

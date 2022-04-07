@@ -21,9 +21,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// default options for file upload using express-fileupload
-app.use(fileUpload());
-
 {/*Sets up connection to MongoDB database using mongoose library*/}
 mongoose.connect(`${db}`);
 
