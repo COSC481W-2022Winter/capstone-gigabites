@@ -2,8 +2,7 @@ import "../App.css";
 import React from "react";
 import { ReactSession } from 'react-client-session';
 import Navbar from '../components/Navbar';
-const { editUser } = require('./config.json');
-
+const { serverAddress } = require('./config.json');
 
 function checkPassword(password)
 { // eslint-disable-next-line
@@ -139,7 +138,7 @@ function validation()
 					<h1>Edit Profile</h1>
 				</div>
 		
-				<form ref='uploadForm' id='uploadForm' action={editUser} method='post' encType="multipart/form-data">
+				<form ref='uploadForm' id='uploadForm' action={serverAddress+"editUsers"} method='post' encType="multipart/form-data">
 					<div className="centered">
 							<img className="avatar" src={require('./user_images/' + ReactSession.get('profilePicture')) }alt="blob"/>
 							<br/><br/>

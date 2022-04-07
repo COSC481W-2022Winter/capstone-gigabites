@@ -9,7 +9,7 @@ const IngredientModel = require("./models/Ingredients");
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const cors = require("cors");
-const { port, db, temp, editProfileRedirect } = require('./config.json');
+const { port, db, clientAddress } = require('./config.json');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 const router = express.Router();
@@ -32,7 +32,7 @@ var IDofRecipe;
 // default options for file upload using express-fileupload
 app.use(fileUpload());
 
-app.post('/uploads', async function(req, res) {
+app.post('/uploadRecipe', async function(req, res) {
 
   const recipe = req.body;
   let sampleFile;
@@ -68,10 +68,6 @@ app.post('/uploads', async function(req, res) {
             console.log("Ingredient Upload Error");
         });
       }
-
-      res.writeHead(302, { Location: temp });
-      res.end();
-
     }
     else
     {
@@ -117,11 +113,10 @@ app.post('/uploads', async function(req, res) {
             console.log("Ingredient Upload Error");
         });
       }
-
-      res.writeHead(302, { Location: temp });
-      res.end();
-
     }
+    
+    res.writeHead(302, { Location: clientAddress+"RecipeRedirect" });
+    res.end();
   });
 });
 
@@ -289,7 +284,7 @@ app.post("/editUsers", async function(req,res)
     ).then(post => {});
   });
 
-  res.writeHead(302, { Location: editProfileRedirect });
+  res.writeHead(302, { Location: clientAddress+"editProfileTransition" });
   res.end();
 });
 

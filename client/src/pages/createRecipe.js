@@ -2,7 +2,7 @@ import "../App.css";
 import React from "react";
 import Navbar from '../components/Navbar';
 import { ReactSession } from 'react-client-session';
-const {upload} = require('./config.json');
+const { serverAddress } = require('./config.json');
 
 /* 
   Credit
@@ -14,8 +14,6 @@ const {upload} = require('./config.json');
   Min/Max constraint for text area: https://stackoverflow.com/a/29214886/17413708
   Form submiting on deleting a row fix: https://stackoverflow.com/a/39959351/17413708
 */
-
-
 
 class CreateRecipe extends React.Component {
   constructor(val) {
@@ -112,7 +110,7 @@ class CreateRecipe extends React.Component {
         </div>
 
       <div className="centered">
-        <form ref='uploadForm' id='uploadForm' action={upload} method='post' encType="multipart/form-data">
+        <form ref='uploadForm' id='uploadForm' action={serverAddress+"uploadRecipe"} method='post' encType="multipart/form-data">
           <label className="label-no-align">Upload an Image</label>
 
           <input type="file" 

@@ -4,7 +4,7 @@ import React from "react";
 import axios from "axios";
 import { Navigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-const {createUsers} = require('./config.json');
+const {serverAddress } = require('./config.json');
 
 function checkEmail(email)
 {
@@ -120,7 +120,7 @@ class SignUp extends React.Component{
     else if(checkPassword(this.state.password) && checkEmail(this.state.email))
     {
       //Compares password to the hashed one in the database
-      axios.post((`${createUsers}`), {
+      axios.post((serverAddress+"createUser"), {
         name: this.state.name,
         username: this.state.username,
         email: this.state.email,

@@ -3,13 +3,13 @@ import React,{ useEffect, useState } from "react";
 import { ReactSession } from 'react-client-session';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
-const { getlastRecipe } = require('./config.json');
+const { serverAddress } = require('./config.json');
 
 function RecipeRedirect() {
 	const [isLoading, setLoading] = useState(true);
 
 	  useEffect(() => {
-        axios.post(`${getlastRecipe}`, {
+        axios.post(serverAddress+"getLastRecipes", {
             username: ReactSession.get("username")
         }).then((res) => {
             if(res.data === false)

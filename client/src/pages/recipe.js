@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { ReactSession } from 'react-client-session';
 import "../App.css";
 import axios from 'axios';
-const { getIngredientByRecipeID } = require('./config.json');
+const { serverAddress } = require('./config.json');
 
 
 function Recipe() {
@@ -21,7 +21,7 @@ function Recipe() {
 			]);
 		};
 
-	  	axios.post(`${getIngredientByRecipeID}`, {
+	  	axios.post(serverAddress+"getIngredientsByRecipeID", {
 		recipeID: ReactSession.get("recipeID"+ReactSession.get("Number"))
 		}).then((res) => {
 			for(var i = 0; i <res.data.length; i++)

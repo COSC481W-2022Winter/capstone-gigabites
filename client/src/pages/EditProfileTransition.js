@@ -3,9 +3,9 @@ import React from "react";
 import { ReactSession } from 'react-client-session';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
-const { getUser } = require('./config.json');  
+const { serverAddress } = require('./config.json');  
 
-axios.post(`${getUser}`, {
+axios.post(serverAddress+"getUsers", {
     username: ReactSession.get("username")
 }).then((res) => {
     if(res.data === false)
