@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from '../components/Navbar';
 import axios from "axios";
 
-const { getDeveloper } = require('./config.json');
+const { serverAddress } = require('./config.json');
 
 var developersData = [
 	['name', 'role', 'bio', 'githubURL'],
@@ -16,7 +16,7 @@ var developersData = [
 
 const AboutUs = () => {
 	//Compares password to the hashed one in the database 
-	axios.post(`${getDeveloper}`, {
+	axios.post(serverAddress+"getDevelopers", {
 		anything: "a",
 	  }).then((res) => {
 		if(res.data === false)

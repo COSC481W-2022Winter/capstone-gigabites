@@ -70,13 +70,11 @@ class Profile extends React.Component {
               {(ReactSession.get('length') >= 1) &&
               <tbody>
                 <tr>
-                  <a href={ReactSession.get('recipeName0path')}>
                     <td>
                       <div className="centered">
                         <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage0'))} alt="pic0"/>
                       </div>
                     </td>
-                  </a>
                   <td>
                     <div className="centered">
                       <button className="profilebuttons" onClick={() => this.handleClick(0,ReactSession.get('recipeName0path'))}>{ReactSession.get('recipeName0')}</button>
@@ -88,13 +86,11 @@ class Profile extends React.Component {
                 {(ReactSession.get('length') >= 2) &&
                 <tbody>
                 <tr>
-                  <a href={ReactSession.get('recipeName1path')}>
                     <td>
                       <div className="centered">
                         <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage1'))} alt="pic1"/>
                       </div>
                     </td>
-                  </a>
                   <td>
                     <div className="centered">
                      <button className="profilebuttons" onClick={() => this.handleClick(1,ReactSession.get('recipeName1path'))}>{ReactSession.get('recipeName1')}</button>
@@ -106,13 +102,11 @@ class Profile extends React.Component {
                 {(ReactSession.get('length') >= 3) &&
                 <tbody>
                 <tr>
-                  <a href={ReactSession.get('recipeName2path')}>
                     <td>
                       <div className="centered">
                         <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage2'))}  alt="pic2"/>
                       </div>
                     </td>
-                  </a>
                   <td>
                     <div className="centered">
                       <button className="profilebuttons" onClick={() => this.handleClick(2,ReactSession.get('recipeName2path'))}>{ReactSession.get('recipeName2')}</button>
@@ -124,13 +118,11 @@ class Profile extends React.Component {
                 {(ReactSession.get('length') >= 4) &&
                 <tbody>
                 <tr>
-                  <a href={ReactSession.get('recipeName3path')}>
                     <td>
                       <div className="centered">
                         <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage3'))} alt="pic3"/>
                       </div>
                     </td>
-                  </a>
                   <td>
                     <div className="centered">
                       <button className="profilebuttons"onClick={() => this.handleClick(3,ReactSession.get('recipeName3path'))}>{ReactSession.get('recipeName3')}</button>
@@ -142,13 +134,11 @@ class Profile extends React.Component {
                 {(ReactSession.get('length') >= 5) &&
                 <tbody>
                 <tr>
-                  <a href={ReactSession.get('recipeName0path')}>
                     <td>
                       <div className="centered">
                         <img className="recipeimage" src={require('./recipe_images/' + ReactSession.get('recipeImage4'))} alt="pic4"/>
                       </div>
                     </td>
-                  </a>
                   <td>
                     <div className="centered">
                       <button className="profilebuttons" onClick={() => this.handleClick(4,ReactSession.get('recipeName4path'))}>{ReactSession.get('recipeName4')}</button>

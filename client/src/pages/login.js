@@ -4,12 +4,12 @@ import { ReactSession } from 'react-client-session';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
-const { passwordCompare, getUser, getRecipe } = require('./config.json');
+const { serverAddress } = require('./config.json');
 
 function getUserInfo()
 {
   //Compares password to the hashed one in the database
-  axios.post(`${getUser}`, {
+  axios.post(serverAddress+"getUsers", {
     username: ReactSession.get('username'),
   }).then((res) => {
     if(res.data === false)
@@ -29,7 +29,7 @@ function getUserInfo()
 //Gets a list of recipes from the backend based on the logged in users username
 function getRecipesByUsername()
 {
-  axios.post(`${getRecipe}`, {
+  axios.post(serverAddress+"getRecipes",{
     username: ReactSession.get('username'),
   }).then((res) => {
     if(res.data === false)
@@ -87,7 +87,7 @@ class Login extends React.Component {
     }
 
     //Compares password to the hashed one in the database
-    axios.post(`${passwordCompare}`, {
+    axios.post(serverAddress+"passwordValidation", {
       username: this.state.username,
       password: this.state.password
     }).then((res) => {
