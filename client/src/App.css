@@ -70,11 +70,12 @@ background-color:#ff8552;
 color: white;
 }
 
-body
+body, html
 {
 background-color:#39393a;
+height: 100%;
+margin: 0;
 }
-
 table.centered{
 margin-left:auto;
 margin-right:auto;
@@ -246,6 +247,7 @@ width:10%;
 text-align:center;
 width:10%;
 }
+
 hr{
 background-color:black;
 height:3px; 
@@ -410,7 +412,41 @@ color: black;
 /* ----------------> End of view profile page related material <---------------- */
 
 
+/* ----------------> Start of Home page related material <---------------- */
 
+.borderHome{
+    margin-left:35%;
+    margin-right:35%;
+    background-color:#39393a;
+    height:8%;
+    margin-top:15%;
+}
+    
+.Home-component {
+    /* The image used */
+    background-image: url(./pages/img/home.jpg);
+
+    /* Full height */
+    height: 100vh; 
+    width: 100vw;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+input.homeSearch{
+    position: relative; 
+    margin-left: 25%;
+    width:50%;
+    height:70%;
+    padding:-5%;
+    margin-top:1%;
+    margin-bottom:1%
+}
+
+/* ----------------> End of Home page related material <---------------- */
 
 /* ----------------> Start of Navbar related material <---------------- */
 
@@ -420,6 +456,7 @@ margin: 0;
 padding: 0;
 overflow: hidden;
 background-color: #297373;
+width: 100%;
 }
 
 ul.topnav li {float: left;}
@@ -462,3 +499,26 @@ input.logout:hover:not(.active) {background-color: #ff8552;}
 input.logout.active {background-color: #ff8552;}
 
 /* ----------------> End of Navbar related material <---------------- */
+
+
+
+/* ----------------> Start of AboutUs related material <---------------- */
+
+button.aboutus
+{
+color: #ff8552;
+background-color:#39393a;
+border: 3px solid black;
+padding:2% 4%;
+font-weight: bold;
+text-decoration:none;
+text-align:center;
+margin: 2%;
+}
+
+button.aboutus:hover{
+background-color:#85ffc7;
+color: black;
+}
+
+/* ----------------> End of AboutUs related material <---------------- */
