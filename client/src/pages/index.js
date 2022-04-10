@@ -3,10 +3,12 @@ import Navbar from '../components/Navbar';
 
 const Home = () => {
 	return (
-		<div className="App">
+		<div className='Home-component'>		
 			{/*Imports navbar to the top of the page*/}
 			<Navbar />
-			<h1>Welcome to the home page</h1>
+			<div className="borderHome">
+				<input className="homeSearch" type="text" />
+			</div>
 		</div>
 	);
 };
