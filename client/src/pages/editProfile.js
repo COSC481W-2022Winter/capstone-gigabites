@@ -4,6 +4,15 @@ import { ReactSession } from 'react-client-session';
 import Navbar from '../components/Navbar';
 const { serverAddress } = require('./config.json');
 
+function toggle() {
+	var x = document.getElementById("password");
+	if (x.type === "password") {
+	  x.type = "text";
+	} else {
+	  x.type = "password";
+	}
+}
+
 function checkPassword(password)
 { // eslint-disable-next-line
   const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.\/?~]/;
@@ -189,6 +198,8 @@ function validation()
 										{/*Password*/}
 										<label className="editProf">Password</label>
 										<input className="editProf" name="password" id='password' type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
+										<br/>
+                          				<input type="checkbox" onClick={() => toggle()}/>Show Password
 									</td>
 								</tr>
 							</tbody>
