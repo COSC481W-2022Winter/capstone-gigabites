@@ -38,7 +38,11 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  recoveryCode: {
+    type: String,
   }
+
 });
 
 UserSchema.pre('save', async function (next) {
@@ -46,6 +50,8 @@ UserSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(this.password, salt);
     this.password = hashedPassword;
+
+    this.recoveryCode = (Math.floor(Math.random() * (9999999 - 1000000) + 1000000));
     next();
   } catch (error) {
     next(error);
