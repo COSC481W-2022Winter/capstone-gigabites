@@ -20,6 +20,9 @@ const navbar= () =>{
         <Link to="/ingredientSearch">Ingredient Search</Link>
       </li>
 	  <li>
+        <Link to="/explore">Explore</Link>
+      </li>
+	  <li>
         <Link to="/About-Us">About</Link>
       </li>
 			{/*Makes the navbar dynamic, displays the login and signup buttons if the user is not signed in*/}
