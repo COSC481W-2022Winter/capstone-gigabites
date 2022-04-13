@@ -525,7 +525,7 @@ color: black;
 
 
 
-
+/* ----------------> Start of ForgotPassword and PasswordReset related material <---------------- */
 
 div.centeredForgotPassword
 {
@@ -564,3 +564,5 @@ input.passwordReset{
 margin-top:5%;
 font-size: larger;
 }
+
+/* ----------------> End of ForgotPassword and PasswordReset related material <---------------- */
