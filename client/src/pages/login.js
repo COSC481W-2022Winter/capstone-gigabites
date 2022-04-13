@@ -6,6 +6,15 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 const { serverAddress } = require('./config.json');
 
+function toggle() {
+	var x = document.getElementById("password");
+	if (x.type === "password") {
+	  x.type = "text";
+	} else {
+	  x.type = "password";
+	}
+}
+
 function getUserInfo()
 {
   //Compares password to the hashed one in the database
@@ -149,6 +158,8 @@ class Login extends React.Component {
                           {/*Password*/}
                           <label className="label">Password</label>
                           <input type="password" className="textbox" id='password' value={this.state.password} onChange={this.handlePasswordChange}/>
+                          <br/>
+                          <input type="checkbox" onClick={() => toggle()}/>Show Password
                         </div>
                       </td>
                     </tr>
@@ -156,7 +167,7 @@ class Login extends React.Component {
                 </table>
             
                 <button type="submit" value="Login" className="btn"> Login </button>
-                <Link to="/passwordReset" className="forgotpass">Forgot Password</Link>
+                <Link to="/forgotPassword" className="forgotpass">Forgot Password</Link>
               </form>
           </div>
         </div>
