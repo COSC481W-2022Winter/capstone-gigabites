@@ -3,16 +3,52 @@ import Navbar from '../components/Navbar';
 import { ReactSession } from 'react-client-session';
 import "../App.css";
 import axios from 'axios';
+import {useParams} from "react-router-dom";
 const { serverAddress } = require('./config.json');
 
+//Gets a list of recipes from the backend based on the logged in users username
+function getRecipesByRecipeID()
+{
+  axios.post(serverAddress+"getRecipeByRecipeIDs",{
+    id: ReactSession.get("recipeID")
+  }).then((res) => {
+    if(res.data === false)
+      console.data("False reply from database on recipe page");
+    else{
+		var output = res.data[0];
+		console.log(output);
+	  	ReactSession.set("recipeUsername", output.username);
+        ReactSession.set("recipeName",output.name);
+        ReactSession.set("recipeImage", output.recipePicture+"."+output.recipePictureEXT);
+        ReactSession.set("recipeDescription", output.description);
+        ReactSession.set("recipeDirections",output.directions);
+        ReactSession.set("recipeServingSize",output.servingsize);
+        ReactSession.set("recipeTotalTime",output.totaltime);
+        ReactSession.set("recipePrepTime",output.preptime);
+        ReactSession.set("recipeBakingTime",output.bakingtime);
+        ReactSession.set("recipeCookTime",output.cooktime);
+        ReactSession.set("recipePrepTimeUnits",output.preptimeunit);
+        ReactSession.set("recipeCookTimeUnits",output.cooktimeunit);
+        ReactSession.set("recipeBakingTimeUnits",output.bakingtimeunit);
+        ReactSession.set("amountPerServing",output.amountperserving);
+        ReactSession.set("amountPerServingUnits",output.amountperservingunit);
+    }
+  }).catch(() => {
+    console.log('Error alert! Recipe.js');
+  });
+}
 
-function Recipe() {
+function Recipe() 
+{
 	const ingredientArray = [];
-	
 	const [isLoading, setLoading] = useState(true);
 	const [ingredients, setingredientArray] = useState(ingredientArray);
+	const {RecipeID} = useParams();
+
+	ReactSession.set("recipeID",RecipeID);
 
 	  useEffect(() => {
+		getRecipesByRecipeID();
 
 		const handleAddingredient = () => {
 			setingredientArray(() => [
@@ -21,8 +57,8 @@ function Recipe() {
 			]);
 		};
 
-	  	axios.post(serverAddress+"getIngredientsByRecipeID", {
-		recipeID: ReactSession.get("recipeID"+ReactSession.get("Number"))
+		axios.post(serverAddress+"getIngredientsByRecipeID", {
+		recipeID: ReactSession.get("recipeID")
 		}).then((res) => {
 			for(var i = 0; i <res.data.length; i++)
 			{
@@ -47,14 +83,13 @@ function Recipe() {
 			{/*Imports navbar to the top of the page*/}
 			<Navbar />
 			<br/><br/>
-
 		    <div className="centered">
-				<h1>{ReactSession.get("recipeName"+ReactSession.get("Number"))}</h1>
+				<h1>{ReactSession.get("recipeName")}</h1>
 				<table className="recipePageTableMain">
 					<tbody>
 						<tr>
 							<td className="imageTD">
-								<img className="recipeCenter" src={require("./recipe_images/"+(ReactSession.get("recipeImage"+ReactSession.get("Number"))))} alt="RecipeImage" />
+								<img className="recipeCenter" src={require("./recipe_images/"+(ReactSession.get("recipeImage")))} alt="RecipeImage" />
 							</td>
 							<td>
 								<div className="borderRecipeTop">
@@ -65,7 +100,7 @@ function Recipe() {
 													<h3>Total Time:</h3>
 												</td>
 												<td className="time">
-													<p>{ReactSession.get("recipeTotalTime"+ReactSession.get("Number"))} minutes</p>
+													<p>{ReactSession.get("recipeTotalTime")} minutes</p>
 												</td>
 											</tr>
 											<tr>
@@ -74,7 +109,7 @@ function Recipe() {
 												</td>
 												
 												<td className="time">
-													<p>{ReactSession.get("recipePrepTime"+ReactSession.get("Number"))} {ReactSession.get("recipePrepTimeUnits"+ReactSession.get("Number"))}</p>
+													<p>{ReactSession.get("recipePrepTime")} {ReactSession.get("recipePrepTimeUnits")}</p>
 												</td>
 											</tr>
 
@@ -84,7 +119,7 @@ function Recipe() {
 												</td>
 												
 												<td className="time">
-													<p>{ReactSession.get("recipeCookTime"+ReactSession.get("Number"))} 	{ReactSession.get("recipeCookTimeUnits"+ReactSession.get("Number"))}</p>
+													<p>{ReactSession.get("recipeCookTime")} 	{ReactSession.get("recipeCookTimeUnits")}</p>
 												</td>
 											</tr>
 
@@ -94,7 +129,7 @@ function Recipe() {
 												</td>
 												
 												<td className="time">
-													<p>{ReactSession.get("recipeBakingTime"+ReactSession.get("Number"))} {ReactSession.get("recipeBakingTimeUnits"+ReactSession.get("Number"))}</p>
+													<p>{ReactSession.get("recipeBakingTime")} {ReactSession.get("recipeBakingTimeUnits")}</p>
 												</td>
 											</tr>
 										</tbody>
@@ -120,10 +155,10 @@ function Recipe() {
 						</tr>
 						<tr>
 							<td className="recipeExtra">
-								<p>{ReactSession.get("recipeName"+ReactSession.get("Number"))}</p>
+								<p>{ReactSession.get("recipeName")}</p>
 							</td>
 							<td className="recipeExtra">
-								<p>{ReactSession.get("username")}</p>
+								<p>{ReactSession.get("recipeUsername")}</p>
 							</td>
 						</tr>
 						<tr>
@@ -145,10 +180,10 @@ function Recipe() {
 						</tr>
 						<tr>
 							<td className="recipeExtra">
-								<p>{ReactSession.get("recipeDescription"+ReactSession.get("Number"))}</p>
+								<p>{ReactSession.get("recipeDescription")}</p>
 							</td>
 							<td className="recipeExtra">
-								<p>{ReactSession.get("recipeDirections"+ReactSession.get("Number"))}</p>
+								<p>{ReactSession.get("recipeDirections")}</p>
 							</td>
 						</tr>
 						<tr>
@@ -169,10 +204,10 @@ function Recipe() {
 						</tr>
 						<tr>
 						<td className="recipeExtra">
-								<p>{ReactSession.get("recipeServingSize"+ReactSession.get("Number"))}</p>
+								<p>{ReactSession.get("recipeServingSize")}</p>
 							</td>
 							<td className="recipeExtra">
-								<p>{ReactSession.get("amountPerServing"+ReactSession.get("Number"))} {ReactSession.get("amountPerServingUnits"+ReactSession.get("Number"))}</p>
+								<p>{ReactSession.get("amountPerServing")} {ReactSession.get("amountPerServingUnits")}</p>
 							</td>
 						</tr>
 					</tbody>

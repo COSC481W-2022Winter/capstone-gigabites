@@ -28,12 +28,6 @@ ReactSession.setStoreType('localStorage');
 function User() {
     return ReactSession.get('username');
   }
-
-/*Updates recipe page URL based on the RecipeID of the recipe*/ 
-function RecipeID() {
-    return ReactSession.get('RecipeID');
-}
-
 class App extends Component {
     render () {
         return (
@@ -47,7 +41,7 @@ class App extends Component {
                     <Route path='/forgotPassword' element={<ForgotPassword/>} />
                     <Route path='/searchResults' element={<SearchResults/>} />
                     <Route path='/recipe/create' element={<CreateRecipe/>} />
-                    <Route path='/recipe/:RecipeID' component={RecipeID} element={<Recipe/>} />
+                    <Route path='/recipe/:RecipeID' element={<Recipe/>} />
                     <Route path='/followers' element={<Followers/>} />
                     <Route path='/following' element={<Following/>} />
                     <Route path='/editProfile' element={<EditProfile/>} />
