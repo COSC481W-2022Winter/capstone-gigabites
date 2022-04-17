@@ -314,6 +314,14 @@ app.post("/getLastRecipes", (req, res) => {
     res.send(recipe);
   }).limit(1).sort({$natural:-1})
 });
+
+
+{/*Function to edit user profile*/}
+app.post("/recipeSearch", async function(req,res)
+{
+  res.writeHead(302, { Location: clientAddress+"RecipeSearch" });
+  res.end();
+});
   
 
 {/*Function to get ingredients from collection based on the recipeID of the recipe*/}

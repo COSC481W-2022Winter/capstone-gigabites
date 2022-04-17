@@ -1,12 +1,14 @@
 import React from "react";
 import Navbar from '../components/Navbar';
+const { serverAddress } = require('./config.json');
+
 
 const Home = () => {
 	return (
 		<div className='Home-component'>		
 			{/*Imports navbar to the top of the page*/}
 			<Navbar />
-      <form>
+      <form action={serverAddress+"recipeSearch"} method='post' encType="multipart/form-data">
         <div className="borderHome">
           <table className="centered">
             <tbody>
