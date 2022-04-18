@@ -8,7 +8,9 @@ const Home = () => {
 		<div className='Home-component'>		
 			{/*Imports navbar to the top of the page*/}
 			<Navbar />
-      <form action={serverAddress+"recipeSearch"} method='post' encType="multipart/form-data">
+
+      {/* Recipe search */}
+      <form action={serverAddress+"recipeSearchRedirect"} method='post' encType="multipart/form-data">
         <div className="borderHome">
           <table className="centered">
             <tbody>
@@ -17,7 +19,7 @@ const Home = () => {
                 <td>
                   <select
                     name="searchType" >
-                    <option defaultValue value="recipeName">Recipe Name</option>
+                    <option defaultValue value="name">Recipe Name</option>
                     <option value="username">Username</option>
                   </select> 
                 </td>
@@ -40,9 +42,6 @@ const Home = () => {
               </tr>
             </tbody>
           </table>
-          
-
-          
         </div>
       </form>
 		</div>
