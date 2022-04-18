@@ -8,6 +8,7 @@ import Profile from './pages/profile';
 import SignUp from './pages/signup';
 import Login from './pages/login';
 import PasswordReset from './pages/passwordReset';
+import ForgotPassword from './pages/forgotPassword';
 import EditProfile from './pages/editProfile';
 import EditProfileTransition from './pages/EditProfileTransition';
 import SearchResults from './pages/searchResults';
@@ -37,6 +38,7 @@ class App extends Component {
                     <Route path='/profile/:username' component={User} element={<Profile/>} />
                     <Route path='/login' element={<Login/>} />
                     <Route path='/passwordReset' element={<PasswordReset/>} />
+                    <Route path='/forgotPassword' element={<ForgotPassword/>} />
                     <Route path='/searchResults' element={<SearchResults/>} />
                     <Route path='/recipe/create' element={<CreateRecipe/>} />
                     <Route path='/recipe/:RecipeID' element={<Recipe/>} />
