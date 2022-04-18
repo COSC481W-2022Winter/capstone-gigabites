@@ -83,6 +83,15 @@ function Recipe()
 			{/*Imports navbar to the top of the page*/}
 			<Navbar />
 			<br/><br/>
+
+			{(ReactSession.get('fromCreateRecipe') === true) &&
+				<div>
+				{alert('Recipe successfully added')}
+            	{ReactSession.remove("fromCreateRecipe")}
+				</div>
+			}
+
+
 		    <div className="centered">
 				<h1>{ReactSession.get("recipeName")}</h1>
 				<table className="recipePageTableMain">
