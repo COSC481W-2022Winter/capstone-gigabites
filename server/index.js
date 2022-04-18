@@ -330,7 +330,7 @@ app.post("/recipeSearchRedirect", async function(req,res)
   searchType = req.body.searchType;
   searchText = req.body.searchText;
 
-  res.writeHead(302, { Location: clientAddress+"RecipeSearch" });
+  res.writeHead(302, { Location: clientAddress+"SearchResult" });
   res.end();
 });
 
