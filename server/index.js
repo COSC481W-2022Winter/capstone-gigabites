@@ -145,7 +145,6 @@ app.post("/createUser", async (req, res) => {
   //function to check if username exists 
   const existUsername = await UserModel.findOne({ username: req.body.username })
   if (existUsername) {
-    //console.log(`Username ${user.username} already in use!  Rejecting user entry`)
     res.send(false);
   }
   else {
@@ -311,7 +310,7 @@ app.post("/getLastRecipes", (req, res) => {
   {
     if (err)
       res.send(false);
-    //console.log(JSON.stringify(recipe));
+      
     res.send(recipe);
   }).limit(1).sort({$natural:-1})
 });
@@ -348,7 +347,6 @@ app.post("/emailReset", async (req, res) => {
   const output = req.body;
 
   UserModel.findOne({ username: output.username }, function (err, result) {
-    console.log(result);
     if (err || result == null) 
     {
       //If user entered username does not match any results in the database, return false and do not continue
@@ -378,7 +376,7 @@ app.post("/emailReset", async (req, res) => {
         if (error) {
           console.log(error);
         } else {
-          console.log('Email sent to: '+ result.email);
+          console.log('Password Reset email sent to: '+ result.email);
           console.log('Email sent: ' + info.response);
         }
       });
@@ -392,7 +390,6 @@ app.post("/emailReset", async (req, res) => {
 app.post("/passwordResetBackend", async (req, res) => {
   const output = req.body;
 
-  console.log(output);
   UserModel.findOne({ username: output.username }, async function (err, result) {
     
     if (err || result == null) 
