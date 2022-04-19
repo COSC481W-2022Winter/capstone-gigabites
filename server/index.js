@@ -293,31 +293,31 @@ app.post("/editUsers", async function(req,res)
 {/*Function to get recipes from recipes collection based on username*/}
 app.post("/editRecipe", (req, res) => {
   const output = req.body;
-  console.log(output);
  
-  var calculatedtotaltime = 0;
-  var tempCookTime;
-  var tempPrepTime;
-  var tempBakingTime;
+  let calculatedtotaltime = 0;
+  let tempCookTime, tempPrepTime, tempBakingTime;
 
-  if(output.preptimeunit==='minutes' && output.bakingtimeunit==='minutes' && output.cooktimeunit==='minutes')
-  {
-    tempBakingTime=output.bakingtime;
-    tempCookTime=output.cooktime;
-    tempPrepTime=output.preptime;
-  }
+  if(output.bakingtimeunit==='minutes')
+    tempBakingTime=parseInt(output.bakingtime);
   else
-  {
-    if(output.bakingtimeunit=='hours')
-      tempBakingTime= (output.bakingtime/60);
-    if(output.preptimeunit=='hours')
-      tempPrepTime= (output.preptime/60);
-    if(output.cooktimeunit=='hours')
-      tempCookTime= (output.cooktime/60);
-  }
+    tempBakingTime= (parseInt(output.bakingtime)*60);
 
-  calculatedtotaltime = Number(tempBakingTime) + Number(tempCookTime) + Number(tempPrepTime);
 
+  if(output.preptimeunit==='minutes')
+    tempPrepTime=parseInt(output.preptime);
+  else
+    tempPrepTime= (parseInt(output.preptime)*60);
+
+
+  if(output.cooktimeunit==='minutes')
+    tempCookTime=parseInt(output.cooktime);
+  else
+    tempCookTime= (parseInt(output.cooktime)*60);
+
+
+  calculatedtotaltime += tempBakingTime; 
+  calculatedtotaltime += tempCookTime;  
+  calculatedtotaltime += tempPrepTime;
 
   if (!req.files || Object.keys(req.files).length === 0) 
   {
@@ -334,7 +334,7 @@ app.post("/editRecipe", (req, res) => {
       cooktimeunit:output.cooktimeunit,
       bakingtime: output.bakingtime,
       bakingtimeunit: output.bakingtimeunit,
-      totaltime: Number(calculatedtotaltime)
+      totaltime: calculatedtotaltime
     };
   }
   else
@@ -372,7 +372,7 @@ app.post("/editRecipe", (req, res) => {
       bakingtimeunit: output.bakingtimeunit,
       recipePicture: output._id,
       recipePictureEXT: ext,
-      totaltime: Number(calculatedtotaltime)
+      totaltime: calculatedtotaltime
     };
   }
 

@@ -28,6 +28,7 @@ ReactSession.setStoreType('localStorage');
 function User() {
     return ReactSession.get('username');
   }
+
 class App extends Component {
     render () {
         return (
@@ -49,7 +50,7 @@ class App extends Component {
                     <Route path='/ingredientSearch' element={<IngredientSearch/>} />
                     <Route path='/recipeRedirect' element={<RecipeRedirect/>} />
                     <Route path='/About-Us' element={<AboutUs/>} />
-                    <Route path='/editRecipe' element={<EditRecipe/>} />
+                    <Route path='/recipe/edit/:RecipeID' element={<EditRecipe/>} />
                 </Routes>
             </Router>
         );

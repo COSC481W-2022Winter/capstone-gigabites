@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ReactSession } from 'react-client-session';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
+import {useParams} from "react-router-dom";
 const { serverAddress } = require('./config.json');
 
 function ingredientRemove(e){
@@ -67,6 +68,9 @@ function EditRecipe() {
   var ingredientArray = [];
   const [isLoading, setLoading] = useState(true);
   const [ingredients, setingredientArray] = useState(ingredientArray);
+  const {RecipeID} = useParams();
+  
+  ReactSession.set("recipeID",RecipeID);
 
   useEffect(() => {
 

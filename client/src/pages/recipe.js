@@ -4,7 +4,10 @@ import { ReactSession } from 'react-client-session';
 import "../App.css";
 import axios from 'axios';
 import {useParams} from "react-router-dom";
+import {  Link } from "react-router-dom";
+import Alert from '@mui/material/Alert';
 const { serverAddress } = require('./config.json');
+var temp;
 
 //Gets a list of recipes from the backend based on the logged in users username
 function getRecipesByRecipeID()
@@ -69,6 +72,7 @@ function Recipe()
 				});
 				handleAddingredient();
 			}
+			temp = "/recipe/edit/"+ReactSession.get("recipeID");
 			setLoading(false);
 		})
 		.catch((err) => console.log("Recipe.js error: "+err));// eslint-disable-next-line
@@ -82,9 +86,21 @@ function Recipe()
 		<div className="App">
 			{/*Imports navbar to the top of the page*/}
 			<Navbar />
+			{/*If coming from edit recipe page, display successfully updated in alert!  (Also resets ReactSession fromlogin variable)*/}
+			{(ReactSession.get('fromEditRecipe') === true) &&
+				<div>
+					<Alert severity="success">Successfully updated your recipe!</Alert>
+					{ReactSession.remove("fromEditRecipe")}
+				</div>
+    		}
 			<br/><br/>
 		    <div className="centered">
 				<h1>{ReactSession.get("recipeName")}</h1>
+
+				{(ReactSession.get('username') === ReactSession.get("recipeUsername")) &&
+					<Link to={temp} className="profilebuttons">Edit Recipe</Link>
+				}
+				<br/><br/>
 				<table className="recipePageTableMain">
 					<tbody>
 						<tr>
@@ -229,8 +245,9 @@ function Recipe()
 					</tbody>
 				</table>
 			</div>
-			<br/>
-			<br/>
+			<div className="centered">
+			<br></br>
+			</div>
 		</div>);
 };
 
