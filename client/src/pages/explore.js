@@ -1,7 +1,7 @@
+import "../App.css";
 import React,{ useState, useEffect } from "react";
 import Navbar from '../components/Navbar';
 import axios from 'axios';
-import { ReactSession } from 'react-client-session';
 const { serverAddress } = require('./config.json');
 
 function ExplorePage () {
@@ -13,12 +13,11 @@ function ExplorePage () {
 
         const handleAddRecipe = () => {
 			setRecipeArray(() => [
-				...recipeArray,
-				recipeArray
+				...recipeArray
 			]);
 		};
 
-		axios.post(serverAddress+"ExploreLastRecipes",{
+		axios.post(serverAddress +"ExploreLastRecipes",{
 			num: "A",
 		}).then((res) => {
 			if(res.data === false)
@@ -30,7 +29,8 @@ function ExplorePage () {
 				{
 					recipeArray.push({
 						name: res.data[i].name,
-						image: (res.data[i].recipePicture+"."+res.data[i].recipePictureEXT),
+						image: res.data[i].recipePicture,
+						imageEXT: "."+res.data[i].recipePictureEXT,
 						description: res.data[i].description,
 						username: res.data[i].username
 					});
@@ -41,8 +41,7 @@ function ExplorePage () {
 		}).catch((err) => {
 			console.log(err);
 			console.log('Error alert! explore.js');
-		});
-
+		}); // eslint-disable-next-line
   	}, []);
 
   if (isLoading) {
@@ -54,17 +53,18 @@ function ExplorePage () {
 			{/*Imports navbar to the top of the page*/}
 			<Navbar />
 			<br/><br/><br/><br/>
-			<div className="borderRecipe">
+			<div className="borderExplore">
 				<table>
 					<tbody>
 						<tr>
+							{/*Prints out these 4 items for the most recent 10 recipies*/}
 							<td className="recipeHeaderCenter"><h3>Recipe Name:</h3></td>
 							<td className="recipeHeaderCenter"><h3>Recipe Image</h3></td>
 							<td className="recipeHeaderCenter"><h3>Recipe Description:</h3></td>
 							<td className="recipeHeaderCenter"><h3>Recipe Username:</h3></td>
 						</tr>
 							{recipes.map((recipe, index) => (
-								<tr><td className="recipeExtra">{recipe.name}</td><td className="recipeExtra"><img className="recipeimage" src={require(('./recipe_images/' + recipe.image))} alt="pic4"/></td><td className="recipeExtra">{recipe.description}</td><td className="recipeExtra">{recipe.username}</td></tr>
+								<tr key={index}><td className="recipeExtra">{recipe.name}</td><td className="recipeExtra"><img className="recipeCenter" src={require('./recipe_images/' + recipe.image + recipe.imageEXT)} alt={recipe.name}/></td><td className="recipeExtra">{recipe.description}</td><td className="recipeExtra">{recipe.username}</td></tr>
 							))}
 					</tbody>
 				</table>
