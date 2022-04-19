@@ -47,7 +47,7 @@ function SearchResult() {
         <h1>Search Result</h1>
       </div>
 
-      <div>
+      <div className="borderSearchTable">
 				<table>
 					<tbody>
 						<tr>
