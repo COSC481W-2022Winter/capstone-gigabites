@@ -9,10 +9,12 @@ const IngredientModel = require("./models/Ingredients");
 const UserModel = require("./models/Users");
 const RecipeModel = require("./models/Recipes");
 const cors = require("cors");
-const { port, db, clientAddress } = require('./config.json');
+const { port, db, clientAddress, pass } = require('./config.json');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 const router = express.Router();
+var nodemailer = require('nodemailer');
+
 app.use("/",router);
 
 app.use(express.json());
@@ -27,7 +29,6 @@ mongoose.connect(`${db}`);
 {/*Defines variables for later use*/}
 var compareResult;
 var IDofRecipe;
-
 
 // default options for file upload using express-fileupload
 app.use(fileUpload());
@@ -144,7 +145,6 @@ app.post("/createUser", async (req, res) => {
   //function to check if username exists 
   const existUsername = await UserModel.findOne({ username: req.body.username })
   if (existUsername) {
-    //console.log(`Username ${user.username} already in use!  Rejecting user entry`)
     res.send(false);
   }
   else {
@@ -438,7 +438,7 @@ app.post("/getLastRecipes", (req, res) => {
   {
     if (err)
       res.send(false);
-    //console.log(JSON.stringify(recipe));
+      
     res.send(recipe);
   }).limit(1).sort({$natural:-1})
 });
@@ -465,6 +465,96 @@ app.post("/getDevelopers", (req, res) => {
   DeveloperModel.find({}, function(err, developer) 
   {
     res.send(developer);
+  });
+});
+
+
+{/*Function to connect to email servers, and send user recovery code based on the users username*/}
+{/*PLEASE NOTE THAT THIS FUNCTION WILL ONLY WORK ON THE MAIN SERVER*/}
+app.post("/emailReset", async (req, res) => {
+  const output = req.body;
+
+  UserModel.findOne({ username: output.username }, function (err, result) {
+    if (err || result == null) 
+    {
+      //If user entered username does not match any results in the database, return false and do not continue
+      res.send(false);
+    }
+    else
+    {
+      //Start of connection to email servers and setup credientials to connect to gmail servers
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: ("COSC481GigaBites@gmail.com"),
+          pass: (`${pass}`)
+        }
+      });
+
+      //Sets up mailOptions and parameters before sending email
+      var mailOptions = {
+        from: "COSC481GigaBites@gmail.com",
+        to: result.email,
+        subject: "Password Reset",
+        html: ('<p>Hello '+result.name+', Your recovery code is: '+result.recoveryCode +"</p>Sincerely,<br/>GigaBites.org")
+      };
+
+      //Sends the actual email using the above mailOptions
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Password Reset email sent to: '+ result.email);
+          console.log('Email sent: ' + info.response);
+        }
+      });
+      res.send(true);
+    }
+  });
+});
+
+
+{/*Function to verify username, reset password and change users recoveryCode if emailed code matches stored code*/}
+app.post("/passwordResetBackend", async (req, res) => {
+  const output = req.body;
+
+  UserModel.findOne({ username: output.username }, async function (err, result) {
+    
+    if (err || result == null) 
+    {
+      //If user entered username does not match any results in the database, return false and do not continue
+      res.send(false);
+    }
+    else
+    {
+      //Encrypts new password before entering it into database
+      const salt = await bcrypt.genSalt(10);
+      const newpassword = await bcrypt.hash(output.password, salt);
+      if(output.recoveryCode==result.recoveryCode)
+      {
+        //Updates RecoveryCode with new random number string
+        const newRecoveryCode = (Math.floor(Math.random() * (9999999 - 1000000) + 1000000)); 
+
+        //Creates editUser object similar to when we edit user profiles
+        var editUser = {
+          password: newpassword,
+          recoveryCode: newRecoveryCode
+        };
+
+        //Find user based on unique username, and update the variables set in the editUser object above
+        UserModel.findOneAndUpdate(
+          { username: output.username }, 
+          { $set: editUser },
+        ).then(post => {});
+
+        //Reply back to the frontend that the password was successfully changed and the 
+        res.send(true);
+      }
+      else //If saved recoveryCode does not match entered RecoveryCode, return false (invalid recoveryCode entry)
+      {
+        res.send(false);
+      }
+    }
   });
 });
 

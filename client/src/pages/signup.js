@@ -6,6 +6,15 @@ import { Navigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 const {serverAddress } = require('./config.json');
 
+function toggle() {
+	var x = document.getElementById("password");
+	if (x.type === "password") {
+	  x.type = "text";
+	} else {
+	  x.type = "password";
+	}
+}
+
 function checkEmail(email)
 {
   const at = /[@]/;
@@ -198,6 +207,8 @@ class SignUp extends React.Component{
                         {/*Password*/}
                         <label className="label">Password</label>
                         <input className="textbox" type="password" id='password' value={this.state.password} onChange={this.handlePasswordChange} required/>
+                        <br/>
+                        <input type="checkbox" onClick={() => toggle()}/>Show Password
                       </td>
                     </tr>
                   </tbody>
