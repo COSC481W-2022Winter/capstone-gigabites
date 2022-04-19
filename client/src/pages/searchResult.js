@@ -12,8 +12,7 @@ function SearchResult() {
   useEffect(() => {
     const handleAddRecipe = () => {
 			setRecipeArray(() => [
-				...recipeArray,
-				recipeArray
+				...recipeArray
 			]);
 		};
 
@@ -61,8 +60,7 @@ function SearchResult() {
 					  {recipes.map((recipe, index) => (
 							<tr>
                 <td className="recipeExtra">
-                  {/*<img src={require('./recipe_images/'+recipe.recipePicture + '.' + recipe.recipePictureEXT)} alt="pict"/>*/}
-                  <img className="recipeimage" src={require('./recipe_images/'+'default2.png')} alt="Recipe Image"/>
+                  <img className='profileImage' src={require('./recipe_images/'+recipe.recipePicture + '.' + recipe.recipePictureEXT)} alt="pict"/>
                 </td>
                 <td className="recipeExtra">
                   <a href={"../recipe/"+recipe._id}>
