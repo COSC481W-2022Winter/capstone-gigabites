@@ -314,6 +314,19 @@ app.post("/getLastRecipes", (req, res) => {
     res.send(recipe);
   }).limit(1).sort({$natural:-1})
 });
+
+
+{/*Function to get recipes from recipes collection based on username*/}
+app.post("/ExploreLastRecipes", (req, res) => {
+
+  RecipeModel.find({}, function(err, recipe) 
+  {
+    if (err)
+      res.send(false);
+    console.log(JSON.stringify(recipe));
+    res.send(recipe);
+  }).limit(10).sort({_id:-1})
+});
   
 
 {/*Function to get ingredients from collection based on the recipeID of the recipe*/}

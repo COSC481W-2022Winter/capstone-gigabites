@@ -55,6 +55,10 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     default: "png"
   },
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 //function to calculate total time 
