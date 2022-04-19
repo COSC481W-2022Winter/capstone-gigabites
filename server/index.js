@@ -37,6 +37,7 @@ app.post('/uploadRecipe', async function(req, res) {
   const recipe = req.body;
   let sampleFile;
   let uploadPath;
+  let calculatedtotaltime = 0;
 
   const names = (v) => [].concat(v).map(name => name.toString());
   
@@ -48,6 +49,37 @@ app.post('/uploadRecipe', async function(req, res) {
   await newRecipe.save(function(err, out)
   {
     IDofRecipe = out._id.toString();
+
+    if(out.bakingtimeunit==='minutes')
+      tempBakingTime=parseInt(out.bakingtime);
+    else
+      tempBakingTime= (parseInt(out.bakingtime)*60);
+
+
+    if(out.preptimeunit==='minutes')
+      tempPrepTime=parseInt(out.preptime);
+    else
+      tempPrepTime= (parseInt(out.preptime)*60);
+
+
+    if(out.cooktimeunit==='minutes')
+      tempCookTime=parseInt(out.cooktime);
+    else
+      tempCookTime= (parseInt(out.cooktime)*60);
+
+
+    calculatedtotaltime += tempBakingTime; 
+    calculatedtotaltime += tempCookTime;  
+    calculatedtotaltime += tempPrepTime;
+
+    var editRecipe = {
+      totaltime: calculatedtotaltime
+    };
+
+    RecipeModel.findOneAndUpdate(
+      { _id: IDofRecipe }, 
+      { $set: editRecipe },
+    ).then(post => {console.log('Successfully updated recipe')});
 
 
     if (!req.files || Object.keys(req.files).length === 0) {
