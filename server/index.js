@@ -28,6 +28,10 @@ mongoose.connect(`${db}`);
 var compareResult;
 var IDofRecipe;
 
+// used for recipe searching
+var searchText;
+var searchType;       // can either be recipe name or username.
+
 
 // default options for file upload using express-fileupload
 app.use(fileUpload());
@@ -314,7 +318,68 @@ app.post("/getLastRecipes", (req, res) => {
     res.send(recipe);
   }).limit(1).sort({$natural:-1})
 });
+
+
+/*
+ * Function is called when user submits a recipe search via the home page.
+ * Function gets the search type and search text and redirects to the recipe
+ * search page.
+ */ 
+app.post("/recipeSearchRedirect", async function(req,res)
+{
+  searchType = req.body.searchType;
+  searchText = req.body.searchText;
+
+  res.writeHead(302, { Location: clientAddress+"SearchResult" });
+  res.end();
+});
+
+
+/* 
+ * Called when user is redirected to recipe search page. 
+ * Using the searchText and searchType, search the recipe table
+ * for all recipes that closely match the searchText. Send the
+ * recipe(s) name, description, username, and recipe-picture.ext back to
+ * recipe search page.
+ * 
+ * Credit for how to get approximate search:
+ *  https://stackoverflow.com/a/26814550
+ */
+app.post("/recipeSearch", async function(req,res)
+{
+  console.log("searchText: " + searchText);
+  console.log("searchType: " + searchType);
   
+  if(searchType === "name")
+  {
+    RecipeModel.find (
+      {name: { "$regex": searchText, "$options": "i" }}, 
+      'name description username recipePicture recipePictureEXT',
+      function (err, recipes) {
+        if (err)
+          res.send(false);
+
+        console.log(recipes);
+        res.send(recipes);
+      }
+    );
+  }
+  else  // search type is username.
+  {
+    RecipeModel.find (
+      {username: { "$regex": searchText, "$options": "i" }}, 
+      'name description username recipePicture recipePictureEXT',
+      function (err, recipes) {
+        if (err)
+          res.send(false);
+
+        console.log(recipes);
+        res.send(recipes);
+      }
+    );
+  }
+});
+
 
 {/*Function to get ingredients from collection based on the recipeID of the recipe*/}
 app.post("/getIngredientsByRecipeID", (req, res) => {
