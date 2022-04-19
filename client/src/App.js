@@ -19,6 +19,7 @@ import IngredientSearch from './pages/ingredientSearch';
 import LoggedOut from './pages/loggedout';
 import RecipeRedirect from './pages/recipeRedirect';
 import AboutUs from './pages/About-Us';
+import EditRecipe from './pages/editRecipe';
 
 //Sets storage type for session variables
 ReactSession.setStoreType('localStorage');
@@ -27,6 +28,7 @@ ReactSession.setStoreType('localStorage');
 function User() {
     return ReactSession.get('username');
   }
+
 class App extends Component {
     render () {
         return (
@@ -48,6 +50,7 @@ class App extends Component {
                     <Route path='/ingredientSearch' element={<IngredientSearch/>} />
                     <Route path='/recipeRedirect' element={<RecipeRedirect/>} />
                     <Route path='/About-Us' element={<AboutUs/>} />
+                    <Route path='/recipe/edit/:RecipeID' element={<EditRecipe/>} />
                 </Routes>
             </Router>
         );
