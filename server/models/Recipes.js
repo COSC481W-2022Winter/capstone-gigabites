@@ -56,6 +56,10 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     default: "png"
   },
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 const RecipeModel = mongoose.model("recipes", RecipeSchema);

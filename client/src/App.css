@@ -537,6 +537,19 @@ color: black;
 
 
 
+/* ----------------> Start of Explore related material <---------------- */
+
+.borderExplore{
+    border:4px solid #ff8552;
+    margin-left:10%;
+    margin-right:10%;
+    background-color:#297373;
+}
+
+/* ----------------> End of Explore related material <---------------- */
+
+
+
 /* ----------------> Start of ForgotPassword and PasswordReset related material <---------------- */
 
 div.centeredForgotPassword

@@ -354,6 +354,18 @@ app.post("/getLastRecipes", (req, res) => {
 });
 
 
+{/*Function to get recipes from recipes collection based on username*/}
+app.post("/ExploreLastRecipes", (req, res) => {
+
+  RecipeModel.find({}, function(err, recipe) 
+  {
+    if (err)
+      res.send(false);
+    res.send(recipe);
+  }).limit(10).sort({_id:-1})
+});
+
+
 /*
  * Function is called when user submits a recipe search via the home page.
  * Function gets the search type and search text and redirects to the recipe
@@ -381,7 +393,6 @@ app.post("/recipeSearchRedirect", async function(req,res)
  */
 app.post("/recipeSearch", async function(req,res)
 {
-  
   if(searchType === "name")
   {
     RecipeModel.find (

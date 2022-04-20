@@ -20,6 +20,7 @@ import IngredientSearch from './pages/ingredientSearch';
 import LoggedOut from './pages/loggedout';
 import RecipeRedirect from './pages/recipeRedirect';
 import AboutUs from './pages/About-Us';
+import ExplorePage from './pages/explore';
 import SearchResult from './pages/searchResult';
 
 //Sets storage type for session variables
@@ -51,6 +52,7 @@ class App extends Component {
                     <Route path='/ingredientSearch' element={<IngredientSearch/>} />
                     <Route path='/recipeRedirect' element={<RecipeRedirect/>} />
                     <Route path='/About-Us' element={<AboutUs/>} />
+                    <Route path='/explore' element={<ExplorePage/>} />
                     <Route path='/searchResult' element={<SearchResult/>} />
                 </Routes>
             </Router>
