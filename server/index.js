@@ -45,9 +45,9 @@ app.post('/uploadRecipe', async function(req, res) {
   let sampleFile;
   let uploadPath;
   let calculatedtotaltime = 0;
-
-  const names = (v) => [].concat(v).map(name => name.toString());
   
+  const names = (v) => [].concat(v).map(name => name.toString());
+
   const ingredientsarray = names(recipe.ingredient);
   const measurementarray = names(recipe.measurement);
   const unitsarray = names(recipe.units);
@@ -325,6 +325,134 @@ app.post("/editUsers", async function(req,res)
   res.writeHead(302, { Location: clientAddress+"editProfileTransition" });
   res.end();
 });
+
+
+
+{/*Function to get recipes from recipes collection based on username*/}
+app.post("/editRecipe", (req, res) => {
+  const output = req.body;
+ 
+  let calculatedtotaltime = 0;
+  let tempCookTime, tempPrepTime, tempBakingTime;
+
+  if(output.bakingtimeunit==='minutes')
+    tempBakingTime=parseInt(output.bakingtime);
+  else
+    tempBakingTime= (parseInt(output.bakingtime)*60);
+
+
+  if(output.preptimeunit==='minutes')
+    tempPrepTime=parseInt(output.preptime);
+  else
+    tempPrepTime= (parseInt(output.preptime)*60);
+
+
+  if(output.cooktimeunit==='minutes')
+    tempCookTime=parseInt(output.cooktime);
+  else
+    tempCookTime= (parseInt(output.cooktime)*60);
+
+
+  calculatedtotaltime += tempBakingTime; 
+  calculatedtotaltime += tempCookTime;  
+  calculatedtotaltime += tempPrepTime;
+
+  if (!req.files || Object.keys(req.files).length === 0) 
+  {
+    var editRecipe = {
+      name: output.name,
+      description: output.description,
+      directions: output.directions,
+      servingsize: output.servingsize,
+      amountperserving: output.amountperserving,
+      amountperservingunit: output.amountperservingunit,
+      preptime: output.preptime,
+      preptimeunit: output.preptimeunit,
+      cooktime: output.cooktime,
+      cooktimeunit:output.cooktimeunit,
+      bakingtime: output.bakingtime,
+      bakingtimeunit: output.bakingtimeunit,
+      totaltime: calculatedtotaltime
+    };
+  }
+  else
+  {
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    sampleFile = req.files.sampleFile;
+    
+    let arr = sampleFile.name.split(".");
+    let ext = arr.pop();
+    sampleFile.name = output.id+"."+ext;
+
+    uploadPath = '../client/src/pages/recipe_images/' + sampleFile.name;
+
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv(uploadPath, function(err) {
+      if (err)
+        return res.status(500).send(err);
+        console.log('File '+sampleFile.name+' uploaded!');
+    });
+
+    //At this point file has successfully been renamed with the id of the user, and uploaded to the server.
+
+    var editRecipe = {
+      name: output.name,
+      description: output.description,
+      directions: output.directions,
+      servingsize: output.servingsize,
+      amountperserving: output.amountperserving,
+      amountperservingunit: output.amountperservingunit,
+      preptime: output.preptime,
+      preptimeunit: output.preptimeunit,
+      cooktime: output.cooktime,
+      cooktimeunit:output.cooktimeunit,
+      bakingtime: output.bakingtime,
+      bakingtimeunit: output.bakingtimeunit,
+      recipePicture: output.id,
+      recipePictureEXT: ext,
+      totaltime: calculatedtotaltime
+    };
+  }
+
+  RecipeModel.findOneAndUpdate(
+    { _id: output.id }, 
+    { $set: editRecipe },
+  ).then(post => {console.log('Successfully updated recipe')});
+
+    IngredientModel.deleteMany({recipeID: output.id}, function(err, result) {
+      if(err)
+        res.send(err);
+
+      console.log(result);
+    });
+
+    const names = (v) => [].concat(v).map(name => name.toString());
+
+    const ingredientsarray = names(output.ingredient);
+    const measurementarray = names(output.measurement);
+    const unitsarray = names(output.units);
+
+  for(var j=0; j<ingredientsarray.length; j++)
+  {
+    var ingredientObject = {
+      recipeID: output.id.toString(),
+      name: ingredientsarray[j],
+      measurement: measurementarray[j],
+      units: unitsarray[j]
+    };
+    
+    const newIngredient = new IngredientModel(ingredientObject);
+    newIngredient.save(function(err, result)
+    {
+      if(err)
+        console.log("Ingredient Upload Error");
+    });
+  }
+
+  res.writeHead(302, { Location: clientAddress+"recipe/"+output.id });
+  res.end();
+});
+
 
 
 {/*Function to get recipes from recipes collection based on username*/}

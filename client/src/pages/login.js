@@ -34,6 +34,7 @@ function getUserInfo()
     console.log('Error alert! Login.js');
   });
 }
+
 class Login extends React.Component {
   constructor(val) {
     super(val);

@@ -176,9 +176,9 @@ class CreateRecipe extends React.Component {
                     required />
                 </td>
                 <td>
-                  <select
+                  <select defaultValue="none"
                     name="amountperservingunit" >
-                    <option defaultValue value="none">none</option>
+                    <option value="none">none</option>
                     <option value="g">g</option>
                     <option value="teaspoon">teaspoon</option>
                     <option value="tablespoon">tablespoon</option>
@@ -203,9 +203,9 @@ class CreateRecipe extends React.Component {
                       required />
                   </th>
                   <td>
-                    <select
+                    <select defaultValue="minutes"
                       name="preptimeunit" >
-                      <option defaultValue value="minutes">minutes</option>
+                      <option value="minutes">minutes</option>
                       <option value="hours">hours</option>
                     </select> 
                   </td>
@@ -224,9 +224,9 @@ class CreateRecipe extends React.Component {
                       required />
                   </th>
                   <td>
-                    <select
+                    <select defaultValue="minutes"
                       name="cooktimeunit" >
-                      <option defaultValue value="minutes">minutes</option>
+                      <option value="minutes">minutes</option>
                       <option value="hours">hours</option>
                     </select> 
                   </td>
@@ -245,9 +245,9 @@ class CreateRecipe extends React.Component {
                       required />
                   </th>
                   <td>
-                    <select
+                    <select defaultValue="minutes"
                       name="bakingtimeunit" >
-                      <option defaultValue value="minutes">minutes</option>
+                      <option value="minutes">minutes</option>
                       <option value="hours">hours</option>
                     </select> 
                   </td>
@@ -292,9 +292,9 @@ class CreateRecipe extends React.Component {
                           <td>
                             <select 
                               name="units" 
-                              onChange={e => this.handleChange(idx, e)}>
-                                
-                              <option defaultValue value="none">none</option>
+                              onChange={e => this.handleChange(idx, e)}
+                              defaultValue="none">
+                              <option value="none">none</option>
                               <option value="teaspoon">teaspoon</option>
                               <option value="tablespoon">tablespoon</option>
                               <option value="fluidOz">fl oz</option>
