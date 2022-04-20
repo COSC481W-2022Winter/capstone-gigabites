@@ -30,6 +30,12 @@ mongoose.connect(`${db}`);
 var compareResult;
 var IDofRecipe;
 
+
+// used for recipe searching
+var searchText;
+var searchType;       // can either be recipe name or username.
+
+
 // default options for file upload using express-fileupload
 app.use(fileUpload());
 
@@ -38,6 +44,7 @@ app.post('/uploadRecipe', async function(req, res) {
   const recipe = req.body;
   let sampleFile;
   let uploadPath;
+  let calculatedtotaltime = 0;
 
   const names = (v) => [].concat(v).map(name => name.toString());
   
@@ -49,6 +56,37 @@ app.post('/uploadRecipe', async function(req, res) {
   await newRecipe.save(function(err, out)
   {
     IDofRecipe = out._id.toString();
+
+    if(out.bakingtimeunit==='minutes')
+      tempBakingTime=parseInt(out.bakingtime);
+    else
+      tempBakingTime= (parseInt(out.bakingtime)*60);
+
+
+    if(out.preptimeunit==='minutes')
+      tempPrepTime=parseInt(out.preptime);
+    else
+      tempPrepTime= (parseInt(out.preptime)*60);
+
+
+    if(out.cooktimeunit==='minutes')
+      tempCookTime=parseInt(out.cooktime);
+    else
+      tempCookTime= (parseInt(out.cooktime)*60);
+
+
+    calculatedtotaltime += tempBakingTime; 
+    calculatedtotaltime += tempCookTime;  
+    calculatedtotaltime += tempPrepTime;
+
+    var editRecipe = {
+      totaltime: calculatedtotaltime
+    };
+
+    RecipeModel.findOneAndUpdate(
+      { _id: IDofRecipe }, 
+      { $set: editRecipe },
+    ).then(post => {console.log('Successfully updated recipe')});
 
 
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -326,7 +364,63 @@ app.post("/ExploreLastRecipes", (req, res) => {
     res.send(recipe);
   }).limit(10).sort({_id:-1})
 });
-  
+
+
+/*
+ * Function is called when user submits a recipe search via the home page.
+ * Function gets the search type and search text and redirects to the recipe
+ * search page.
+ */ 
+app.post("/recipeSearchRedirect", async function(req,res)
+{
+  searchType = req.body.searchType;
+  searchText = req.body.searchText;
+
+  res.writeHead(302, { Location: clientAddress+"SearchResult" });
+  res.end();
+});
+
+
+/* 
+ * Called when user is redirected to recipe search page. 
+ * Using the searchText and searchType, search the recipe table
+ * for all recipes that closely match the searchText. Send the
+ * recipe(s) name, description, username, and recipe-picture.ext back to
+ * recipe search page.
+ * 
+ * Credit for how to get approximate search:
+ *  https://stackoverflow.com/a/26814550
+ */
+app.post("/recipeSearch", async function(req,res)
+{
+  if(searchType === "name")
+  {
+    RecipeModel.find (
+      {name: { "$regex": searchText, "$options": "i" }}, 
+      'name description username recipePicture recipePictureEXT',
+      function (err, recipes) {
+        if (err)
+          res.send(false);
+
+        res.send(recipes);
+      }
+    );
+  }
+  else  // search type is username.
+  {
+    RecipeModel.find (
+      {username: { "$regex": searchText, "$options": "i" }}, 
+      'name description username recipePicture recipePictureEXT',
+      function (err, recipes) {
+        if (err)
+          res.send(false);
+
+        res.send(recipes);
+      }
+    );
+  }
+});
+
 
 {/*Function to get ingredients from collection based on the recipeID of the recipe*/}
 app.post("/getIngredientsByRecipeID", (req, res) => {

@@ -22,6 +22,7 @@ const RecipeSchema = new mongoose.Schema({
   },
   totaltime: {
     type: Number,
+    default: 0
   },
   preptime: {
     type: Number,
@@ -58,16 +59,6 @@ const RecipeSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
-});
-
-//function to calculate total time 
-RecipeSchema.pre('save', async function (next) {
-  try{
-      this.totaltime = (this.preptime + this.bakingtime + this.cooktime);
-      next();
-  } catch (error) {
-    next(error);
   }
 });
 
