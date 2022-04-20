@@ -408,7 +408,7 @@ app.post("/editRecipe", (req, res) => {
       cooktimeunit:output.cooktimeunit,
       bakingtime: output.bakingtime,
       bakingtimeunit: output.bakingtimeunit,
-      recipePicture: output._id,
+      recipePicture: output.id,
       recipePictureEXT: ext,
       totaltime: calculatedtotaltime
     };
