@@ -323,7 +323,6 @@ app.post("/ExploreLastRecipes", (req, res) => {
   {
     if (err)
       res.send(false);
-    console.log(JSON.stringify(recipe));
     res.send(recipe);
   }).limit(10).sort({_id:-1})
 });
