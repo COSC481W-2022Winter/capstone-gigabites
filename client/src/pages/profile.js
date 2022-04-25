@@ -69,8 +69,8 @@ function Profile ()
     {(ReactSession.get('username') !== undefined) &&
       <div>
         <br/>
-        <Link to="/following" className="followingfollows">Following: 0</Link>
-        <Link to="/followers" className="followingfollows">Followers: 0</Link>
+        {/* <Link to="/following" className="followingfollows">Following: 0</Link>
+        <Link to="/followers" className="followingfollows">Followers: 0</Link> */}
         <br/><br/>
 
         <h1 className="UsernameHeader">{ReactSession.get('username')}</h1>
