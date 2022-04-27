@@ -154,7 +154,7 @@ class SignUp extends React.Component{
     if(this.state.redirect){
       return(
         <div>
-          <Navigate to='../' />
+          <Navigate to='../login' />
         </div>
       );
     }
