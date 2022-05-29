@@ -23,6 +23,7 @@ import AboutUs from './pages/About-Us';
 import EditRecipe from './pages/editRecipe';
 import ExplorePage from './pages/explore';
 import SearchResult from './pages/searchResult';
+import DeleteRecipe from './pages/deleteRecipe';
 
 
 //Sets storage type for session variables
@@ -58,6 +59,7 @@ class App extends Component {
                     <Route path='/recipe/edit/:RecipeID' element={<EditRecipe/>} />
                     <Route path='/explore' element={<ExplorePage/>} />
                     <Route path='/searchResult' element={<SearchResult/>} />
+                    <Route path='/deleteRecipe/:RecipeID' element={<DeleteRecipe/>} />
                 </Routes>
             </Router>
         );
