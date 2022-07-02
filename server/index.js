@@ -664,6 +664,26 @@ app.post("/passwordResetBackend", async (req, res) => {
   });
 });
 
+{/*Performs a delete of a specific recipe based on the given recipeID from the client from both the recipe and ingredients clusters*/}
+app.post("/performDelete", async (req, res) => {
+
+  const output = req.body.id;
+
+  {/*Deletes any ingredients from the ingredient collection which matches supplied recipeID from client*/}
+  IngredientModel.deleteMany({recipeID: output}, function(err, result) {
+      if(err)
+        res.send(err);
+    });
+    
+  {/*Deletes recipe which matches supplied recipeID from client*/}
+  RecipeModel.findOneAndDelete({ _id: output}, function (err, result) {
+    if (err)
+      res.send(false);
+    else
+      res.send(true);
+    }
+  );
+});
 
 {/*Displays running state of server in console, along with the currently running port number*/}
 app.listen(`${port}`, () => {

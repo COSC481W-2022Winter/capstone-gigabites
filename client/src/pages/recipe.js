@@ -5,9 +5,12 @@ import "../App.css";
 import axios from 'axios';
 import {useParams} from "react-router-dom";
 import {  Link } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 import Alert from '@mui/material/Alert';
+
 const { serverAddress } = require('./config.json');
-var temp;
+var editTemp;
+var deleteTemp;
 
 //Gets a list of recipes from the backend based on the logged in users username
 function getRecipesByRecipeID()
@@ -72,7 +75,9 @@ function Recipe()
 				});
 				handleAddingredient();
 			}
-			temp = "/recipe/edit/"+ReactSession.get("recipeID");
+			// Creates temp path variables for the edit recipe and delete recipe buttons referenced in the render function
+			editTemp = "/recipe/edit/"+ReactSession.get("recipeID");
+			deleteTemp = "../deleteRecipe/"+ReactSession.get("recipeID");
 			setLoading(false);
 		})
 		.catch((err) => console.log("Recipe.js error: "+err));// eslint-disable-next-line
@@ -106,9 +111,16 @@ function Recipe()
 		    <div className="centered">
 				<h1>{ReactSession.get("recipeName")}</h1>
 
+				{/* Edit recipe button will only appear on the recipe page if the logged in user matches the recipe's owner */}
 				{(ReactSession.get('username') === ReactSession.get("recipeUsername")) &&
-					<Link to={temp} className="profilebuttons">Edit Recipe</Link>
+					<Link to={editTemp} className="profilebuttons">Edit Recipe</Link>
 				}
+
+				{/* Delete button will only appear on the recipe page if the logged in user matches the recipe's owner */}
+				{(ReactSession.get('username') === ReactSession.get("recipeUsername")) &&
+					<a href={deleteTemp}> <Button variant="contained" color="secondary">Delete</Button> </a>
+				}
+
 				<br/><br/>
 				<table className="recipePageTableMain">
 					<tbody>

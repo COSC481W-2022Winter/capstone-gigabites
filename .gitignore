@@ -4,3 +4,4 @@ client/src/pages/user_images/*
 client/src/pages/recipe_images/*
 client/src/pages/config.json
 server/config.json
+.vscode/settings.json
