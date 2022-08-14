@@ -17,22 +17,16 @@ const Home = () => {
               <tr>
                 {/* Drop down for search type */}
                 <td>
-                  <select
-                    name="searchType" >
+                  <select name="searchType" >
                     <option defaultValue value="name">Recipe Name</option>
+                    <option defaultValue value="ingredient">Ingredient</option>
                     <option value="username">Username</option>
                   </select> 
                 </td>
 
                 {/* Input for search */}
                 <td>
-                  <input 
-                  className="homeSearch"
-                  name="searchText" 
-                  type="text"
-                  required
-                  minLength="3"
-                  maxLength="100" />
+                  <input className="homeSearch" name="searchText" type="text" requiredminLength="3" maxLength="100" />
                 </td>
                 
                 {/* Search button */}
